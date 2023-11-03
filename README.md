@@ -65,7 +65,7 @@
 
 This is a red team tool that would assist in gathering credentials from different password managers. They are separated into three categories, Windows 10 desktop applications, browsers, and browser plugins. In this release (v0.5), the tool supports 14 password managers, with 18 different implementations (e.g., the tool could extract credentials either from the desktop app, or the browser plugin of the same product). So, the purpose of this tool is to provide an additional attack vector in red team engagements, since many users are using password managers.
 
-This is not a completely new concept. It is well-known for some time that there is no de-facto way for desktop applications to be protected against such attacks. However, and to the best of my knowledge, this is the first time such a tool is presented to the public. Feel free to provide any feedback and/or recommendations/improvements.
+This is not a completely new concept. It has been well-known for some time that there is no de facto way for desktop applications to be protected against such attacks. However, and to the best of my knowledge, this is the first time such a tool has been presented to the public. Feel free to provide any feedback and/or recommendations/improvements.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -108,7 +108,7 @@ Simply, clone the code, and compile it. For the development phase, Visual Studio
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-To use this tool, simply execute the compiled executable in the relevant host. Based on the password manager, there are some requirements for the tool to be able to extract credentials. Although, I kept in most cases password managers that needed basic interaction to store their credentials into the memory of their process. The following table depicts a high level view of the tool capabilities. Note that Firefox and the relevant Firefox plugins of password managers may not work correctly. They need further research for the tool to be able to extract the credentials in every case.
+To use this tool, simply execute the compiled executable in the relevant host. Based on the password manager, there are some requirements for the tool to be able to extract credentials. However, I kept in most cases password managers who needed basic interaction to store their credentials in the memory of their process. The following table depicts a high-level view of the tool's capabilities. Note that Firefox and the relevant Firefox plugins of password managers may not work correctly. They need further research for the tool to be able to extract the credentials in every case.
 
 | Name         | Location   | Credentials               | Browser             | Stability    |
 |--------------|------------|---------------------------|---------------------|--------------|
@@ -128,16 +128,17 @@ To use this tool, simply execute the compiled executable in the relevant host. B
 | Passwordboss | App        | Entries                   | N/A                 | Yes          |
 
 
-Regarding the extraction of credentials, some exploits are based on specific number of bytes, to extract the credentials. So, maybe, in some cases, this number must be increased to extract this information correctly. During the experiments, common usernames and passwords were used. So, in most cases this would be suffice.
+Regarding the extraction of credentials, some exploits are based on a specific number of bytes, to extract the credentials. So, maybe, in some cases, this number must be increased to extract this information correctly. During the experiments, common usernames and passwords were used. So, in most cases, this would be sufficient.
 
-Another note is relevant to the version of each password manager of browser plugin. If a change is made in the code and affect the process, the tool will be unable to identify these credentials. So, keep in mind that there is a possibility to mishandle some credentials if an older/newer version of the tool is used, or a different OS (tested on Windows 10 Pro).
+Another note is relevant to the version of each password manager of a browser plugin. If a change is made in the code and affects the process, the tool will be unable to identify these credentials. So, keep in mind that there is a possibility to mishandle some credentials if an older/newer version of the tool is used, or a different OS (tested on Windows 10 Pro).
 
 In most cases, the following will be needed to extract the credentials:
-1. The relevant app (browser or desktop app) is up, unlocked and running.
+1. The relevant app (browser or desktop app) is up, unlocked, and running.
 2. In some cases, like in Chromium browsers, an interaction needs to be made with either the relevant plugin or the embedded password manager of the browser.
-3. In case of 1Password, high integrity privilege is required. So, execute the .exe with high privileges, or provide the dump file as input.
+3. In other cases, some password managers keep these credentials in memory in cleartext, even after being locked. This behavior was noted in Keeper.
+4. In case of 1Password, high integrity privilege is required. So, execute the .exe with high privileges, or provide the dump file as input.
 
-It is suffice to mention that since user's behavior is to open such tools and leave them be, it would provide an additional attack vector for lateral movement. Another keypoint is that most of these tools will automatically be locked when the user is completely idle. This means that even if the app or browser plugin is idle and the user is using their host for other activities, these apps will not be locked. Also, in some cases, it is possible to completely avoid user's interaction. For instance, some browser plugins remain unlocked for some time. As a result, it is possible to start this process from cmd, without to need the user and extract the credentials. Check Avira's video example to understand this process.
+It is sufficient to mention that since user behavior is to open such tools and leave them be, it would provide an additional attack vector for lateral movement. Another keypoint is that most of these tools will automatically be locked when the user is completely idle. This means that even if the app or browser plugin is idle and the user is using their host for other activities, these apps will not be locked. Also, in some cases, it is possible to completely avoid user interaction. For instance, some browser plugins remain unlocked for some time. As a result, it is possible to start this process from cmd, without needing the user and extract the credentials. Check Avira's video example to understand this process.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
