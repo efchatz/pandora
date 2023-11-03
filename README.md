@@ -64,7 +64,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a red team tool that would assist in gathering credentials from different password managers. They are separated into three categories, Windows 10 desktop applications, browsers, and browser plugins. In this release (v0.5), the tool supports 14 password managers, with 18 different implementations (e.g., the tool could extract credentials either from the desktop app, or the browser plugin of the same product). So, the purpose of this tool is to provide an additional attack vector in red team engagements, since many users are using password managers.
+This is a red team tool that would assist in gathering credentials from different password managers. They are separated into three categories, Windows 10 desktop applications, browsers, and browser plugins. This may work on other OS, like Linux, but it is not tested. In this release (v0.5), the tool supports 14 password managers, with 18 different implementations (e.g., the tool could extract credentials either from the desktop app, or the browser plugin of the same product). So, the purpose of this tool is to provide an additional attack vector in red team engagements, since many users are using password managers.
 
 This is not a completely new concept. It has been well-known for some time that there is no de facto way for desktop applications to be protected against such attacks. However, and to the best of my knowledge, this is the first time such a tool has been presented to the public. Feel free to provide any feedback and/or recommendations/improvements.
 
@@ -109,7 +109,7 @@ Simply, clone the code, and compile it. For the development phase, Visual Studio
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-To use this tool, simply execute the compiled executable in the relevant host. Based on the password manager, there are some requirements for the tool to be able to extract credentials. However, I kept in most cases password managers who needed basic interaction to store their credentials in the memory of their process. The following table depicts a high-level view of the tool's capabilities. Note that Firefox and the relevant Firefox plugins of password managers may not work correctly. They need further research for the tool to be able to extract the credentials in every case.
+To use this tool, simply execute the compiled executable in the relevant host and type the name of the password manager. Based on the password manager, there are some requirements for the tool to be able to extract credentials. However, I kept in most cases password managers who needed basic interaction to store their credentials in the memory of their process. The following table depicts a high-level view of the tool's capabilities. Note that Firefox and the relevant Firefox plugins of password managers may not work correctly. They need further research for the tool to be able to extract the credentials in every case. This is due to the fact that Firefox changes its pattern with each execution.
 
 | Name         | Location   | Credentials               | Browser             | Stability    |
 |--------------|------------|---------------------------|---------------------|--------------|
