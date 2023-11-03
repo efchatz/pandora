@@ -8,7 +8,6 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
 
 
 
@@ -22,10 +21,7 @@
   <h3 align="center">Pandora</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
-    <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
-    <br />
+    A red team tool to extract credentials from password managers.
     <br />
     <a href="https://github.com/efchatz/pandora/videos/passwordboss">View Demo (Passwordboss)</a>
     ·
@@ -66,14 +62,12 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a red team tool that would assist in gathering credentials from different password managers. They are separated into three categories, Windows 10 desktop applications, browsers, and browser plugins. 
+This is a red team tool that would assist in gathering credentials from different password managers. They are separated into three categories, Windows 10 desktop applications, browsers, and browser plugins. In this release (v0.5), the tool supports 14 password managers, and 18 different implementations (e.g., the tool could extract credentials either from the desktop app, or the browser plugin).
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
 ### Built With
-
-This section should list any major frameworks/libraries used to bootstrap your project. Leave any add-ons/plugins for the acknowledgments section. Here are a few examples.
 
 * [![C++][C++]][C-url]
 
@@ -84,34 +78,24 @@ This section should list any major frameworks/libraries used to bootstrap your p
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+Simply, clone the code, and compile it. For the development phase, Visual Studio 2022 was used.
 
-### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
 
 ### Installation
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
+1. Clone the repo.
    ```sh
    git clone https://github.com/your_username_/Project-Name.git
    ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+2. Install Visual Studion 2022, with all C++ dependencies.
+3. Open the project.
+4. In Project->Properties->Linker->Input, choose in the "Configuration" dropdown "All Configurations".
+5. Add in the "Additional Dependencies" the "DbgHelp.lib".
+6. In the same tab, in "Ignore All Default Libraries", choose "No".
+7. Press "OK".
+8. Build this project.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -120,9 +104,34 @@ _Below is an example of how you can instruct your audience on installing and set
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+To use this tool, simply execute the compiled executable in the relevant host. Based on the password manager, there are some requirements for the tool to be able to extract credentials. The following table depicts a high level view of the tool capabilities. Note that Firefox and the relevant Firefox plugins of password managers may not work correctly. They need further research for the tool to be able to extract the credentials in every case.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+| Name         | Location   | Credentials               | Browser             | Stability    |
+|--------------|------------|---------------------------|---------------------|--------------|
+| Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |
+| 1Password    | App/Plugin | Master(Both)/Entries(App) | Chrome/Firefox      | Yes          |
+| Firefox      | Browser    | Entries                   | N/A                 | No           |
+| Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Yes (Chrome) |
+| Keeper       | App        | Entries                   | N/A                 | Yes          |
+| LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |
+| Roboform     | Plugin     | Entries                   | Chrome              | Yes          |
+| Bitwarden    | Plugin     | Master/Entries            | Chrome              | Yes          |
+| Norton       | Plugin     | Entries                   | Chrome              | Yes          |
+| Bitdefender  | Plugin     | Master/Entries            | Chrome              | Yes          |
+| Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |
+| Passwarden   | App        | Entries                   | N/A                 | Yes          |
+| Avira        | Plugin     | Entries                   | Chrome              | Yes          |
+| Passwordboss | App        | Entries                   | N/A                 | Yes          |
+
+
+Regarding the extraction of credentials, some exploits are based on specific number of bytes, to extract the credentials. So, maybe, in some cases, this number must be increased to extract this information correctly. During the experiments, common usernames and passwords were used. So, in most cases this would be suffice.
+
+Another note is relevant to the version of each password manager of browser plugin. If a change is made in the code and affect the process, the tool will be unable to identify these credentials. So, keep in mind that there is a possibility to mishandle some credentials if an older/newer version of the tool is used, or a different OS (tested on Windows 10 Pro).
+
+In most cases, the following will be needed to extract the credentials:
+1. The relevant app (browser or desktop app) is up, unlocked and running.
+2. In some cases, like in Chromium browsers, an interaction needs to be made with either the relevant plugin or the embedded password manager of the browser.
+3. In case of 1Password, high integrity privilege is required. So, execute the .exe with high privileges, or provide the dump file as input.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -132,7 +141,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See `LICENSE.txt` for more information. This tool is provided as is, for educational purposes. Use it only when you have written permission to do so, under a red team assessment.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -141,9 +150,8 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Efstratios Chatzoglou - efchatzoglou@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -156,6 +164,7 @@ Use this space to list resources you find helpful and would like to give credit 
 
 * [Choose an Open Source License](https://choosealicense.com)
 * [Img Shields](https://shields.io)
+* [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
