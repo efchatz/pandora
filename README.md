@@ -145,7 +145,16 @@ It is sufficient to mention that since user behavior is to open such tools and l
 
 <!-- METHODOLOGY -->
 ## Methodology
+The code is structured as follows:
+1. The user chooses the relevant password manager.
+2. Based on the relevant password manager, the tool dumps the process into a file.
+3. The dump file then is analyzed to identify any relevant pattern within it, with the purpose of extracting credentials.
+4. In some cases, some junk data will be presented to the user. These data will be noted as unparsed characters. So, they can be easily recognized.
+5. The user then can identify the credentials.
 
+It should be noted that in some cases password managers store in plaintext other types of data, like credit card details, addresses, etc. Users should be wary of such attacks and do not execute untrusted files.
+
+Regarding the exploits, the methodology is simple, i.e., the purpose is to identify a pattern or a keyword that would pinpoint the relevant credentials within the dump file. Each password manager is different, so, each exploitation method differs. However, the concept is the same, i.e., finding the relevant pattern can pinpoint the credentials within this file. In some cases, the exploit finds when the credentials start and then gathers the next bytes, say 100. I did some extensive testing to identify these values correctly, but they may differ in a real-case scenario.
 
 <!-- LICENSE -->
 ## License
