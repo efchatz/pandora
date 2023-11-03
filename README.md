@@ -91,7 +91,7 @@ Simply, clone the code, and compile it. For the development phase, Visual Studio
 
 1. Clone the repo.
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/efchatz/pandora.git
    ```
 2. Install Visual Studion 2022, with all C++ dependencies.
 3. Open the project.
