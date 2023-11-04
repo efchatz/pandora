@@ -114,22 +114,22 @@ Three videos have been uploaded to assist in how this tool works. The videos dep
 
 The following table depicts a high-level view of the tool's capabilities. Note that Firefox and the relevant Firefox plugins of password managers may not work correctly. They need further research for the tool to be able to extract the credentials in every case. This is due to the fact that Firefox changes its pattern with each execution.
 
-| Name         | Location   | Credentials               | Browser             | Stability    | Version    | Users      |
-|--------------|------------|---------------------------|---------------------|--------------|------------|------------|
-| Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |121.0.6106.0| N/A        |
-| 1Password    | App/Plugin | Master(Both)/Entries(App) | Chrome/Firefox      | Yes          |8.10.18     | +4M        |
-| Firefox      | Browser    | Entries                   | N/A                 | No           |119.0       | N/A        |
-| Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Yes (Chrome) |6.2344.1    | +2M        |
-| Keeper       | App        | Entries                   | N/A                 | Yes          |16.10.9     | N/A        |
-| LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |4.123.0     | +10M       |
-| Roboform     | Plugin     | Entries                   | Chrome              | Yes          |9.5.2.0     | +600K      |
-| Bitwarden    | Plugin     | Master/Entries            | Chrome              | Yes          |2023.10.1   | +3M        |
-| Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.1.0.73    | +4M        |
-| Bitdefender  | Plugin     | Master/Entries            | Chrome              | Yes          |1.3.0       | +90K       |
-| Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.8.15      | +90K       |
-| Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3         | +1K        |
-| Avira        | Plugin     | Entries                   | Chrome              | Yes          |2.19.14.4461| +6M        |
-| Passwordboss | App        | Entries                   | N/A                 | Yes          |5.5.5104    | +20K       |
+| Name         | Location   | Credentials               | Browser             | Stability    | Version    | Users |
+|--------------|------------|---------------------------|---------------------|--------------|------------|-------|
+| Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |121.0.6106.0| N/A   |
+| 1Password    | App/Plugin | Master(Both)/Entries(App) | Chrome/Firefox      | Yes          |8.10.18     | +4M   |
+| Firefox      | Browser    | Entries                   | N/A                 | No           |119.0       | N/A   |
+| Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Yes(Chrome)  |6.2344.1    | +2M   |
+| Keeper       | App        | Entries                   | N/A                 | Yes          |16.10.9     | N/A   |
+| LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |4.123.0     | +10M  |
+| Roboform     | Plugin     | Entries                   | Chrome              | Yes          |9.5.2.0     | +600K |
+| Bitwarden    | Plugin     | Master/Entries            | Chrome              | Yes          |2023.10.1   | +3M   |
+| Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.1.0.73    | +4M   |
+| Bitdefender  | Plugin     | Master/Entries            | Chrome              | Yes          |1.3.0       | +90K  |
+| Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.8.15      | +90K  |
+| Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3         | +1K   |
+| Avira        | Plugin     | Entries                   | Chrome              | Yes          |2.19.14.4461| +6M   |
+| Passwordboss | App        | Entries                   | N/A                 | Yes          |5.5.5104    | +20K  |
 
 
 Regarding the extraction of credentials, some exploits are based on a specific number of bytes, to extract the credentials. So, maybe, in some cases, this number must be increased to extract this information correctly. During the experiments, common usernames and passwords were used. So, in most cases, this would be sufficient.
