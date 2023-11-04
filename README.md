@@ -119,7 +119,7 @@ The following table depicts a high-level view of the tool's capabilities. Note t
 | Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |121.0.6106.0| N/A   |
 | 1Password    | App/Plugin | Master(Both)/Entries(App) | Chrome/Firefox      | Yes          |8.10.18     | +4M   |
 | Firefox      | Browser    | Entries                   | N/A                 | No           |119.0       | N/A   |
-| Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Yes(Chrome)  |6.2344.1    | +2M   |
+| Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Chrome       |6.2344.1    | +2M   |
 | Keeper       | App        | Entries                   | N/A                 | Yes          |16.10.9     | N/A   |
 | LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |4.123.0     | +10M  |
 | Roboform     | Plugin     | Entries                   | Chrome              | Yes          |9.5.2.0     | +600K |
