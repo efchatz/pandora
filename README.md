@@ -109,24 +109,26 @@ Simply, clone the code, and compile it. For the development phase, Visual Studio
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-To use this tool, simply execute the compiled executable in the relevant host and type the name of the password manager. Based on the password manager, there are some requirements for the tool to be able to extract credentials. However, I kept in most cases password managers who needed basic interaction to store their credentials in the memory of their process. The following table depicts a high-level view of the tool's capabilities. Note that Firefox and the relevant Firefox plugins of password managers may not work correctly. They need further research for the tool to be able to extract the credentials in every case. This is due to the fact that Firefox changes its pattern with each execution.
+To use this tool, simply execute the compiled executable in the relevant host and type the name of the password manager. Based on the password manager, there are some requirements for the tool to be able to extract credentials. However, I kept in most cases password managers who needed basic interaction to store their credentials in the memory of their process. After executing the tool, it will automatically dump the relevant process based on the chosen password manager, print the credentials in the cmd, and save them into a file (the location of the file is the current folder of the .exe). Three videos have been uploaded to assist in how this tool works. The videos depict the phase in which an attacker would be able to gather the credentials from a password manager. In the case of Avira and similar password managers, this can be done without any user interaction.
 
-| Name         | Location   | Credentials               | Browser             | Stability    |
-|--------------|------------|---------------------------|---------------------|--------------|
-| Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |
-| 1Password    | App/Plugin | Master(Both)/Entries(App) | Chrome/Firefox      | Yes          |
-| Firefox      | Browser    | Entries                   | N/A                 | No           |
-| Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Yes (Chrome) |
-| Keeper       | App        | Entries                   | N/A                 | Yes          |
-| LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |
-| Roboform     | Plugin     | Entries                   | Chrome              | Yes          |
-| Bitwarden    | Plugin     | Master/Entries            | Chrome              | Yes          |
-| Norton       | Plugin     | Entries                   | Chrome              | Yes          |
-| Bitdefender  | Plugin     | Master/Entries            | Chrome              | Yes          |
-| Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |
-| Passwarden   | App        | Entries                   | N/A                 | Yes          |
-| Avira        | Plugin     | Entries                   | Chrome              | Yes          |
-| Passwordboss | App        | Entries                   | N/A                 | Yes          |
+The following table depicts a high-level view of the tool's capabilities. Note that Firefox and the relevant Firefox plugins of password managers may not work correctly. They need further research for the tool to be able to extract the credentials in every case. This is due to the fact that Firefox changes its pattern with each execution.
+
+| Name         | Location   | Credentials               | Browser             | Stability    | Version    |
+|--------------|------------|---------------------------|---------------------|--------------|------------|
+| Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |121.0.6106.0|
+| 1Password    | App/Plugin | Master(Both)/Entries(App) | Chrome/Firefox      | Yes          |8.10.18     |
+| Firefox      | Browser    | Entries                   | N/A                 | No           |119.0       |
+| Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Yes (Chrome) |6.2344.1    |
+| Keeper       | App        | Entries                   | N/A                 | Yes          |16.10.9     |
+| LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |4.123.0     |
+| Roboform     | Plugin     | Entries                   | Chrome              | Yes          |9.5.2.0     |
+| Bitwarden    | Plugin     | Master/Entries            | Chrome              | Yes          |2023.10.1   |
+| Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.1.0.73    |
+| Bitdefender  | Plugin     | Master/Entries            | Chrome              | Yes          |1.3.0       |
+| Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.8.15      |
+| Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3         |
+| Avira        | Plugin     | Entries                   | Chrome              | Yes          |2.19.14.4461|
+| Passwordboss | App        | Entries                   | N/A                 | Yes          |5.5.5104    |
 
 
 Regarding the extraction of credentials, some exploits are based on a specific number of bytes, to extract the credentials. So, maybe, in some cases, this number must be increased to extract this information correctly. During the experiments, common usernames and passwords were used. So, in most cases, this would be sufficient.
@@ -142,6 +144,8 @@ In most cases, the following will be needed to extract the credentials:
 It is sufficient to mention that since user behavior is to open such tools and leave them be, it would provide an additional attack vector for lateral movement. Another keypoint is that most of these tools will automatically be locked when the user is completely idle. This means that even if the app or browser plugin is idle and the user is using their host for other activities, these apps will not be locked. Also, in some cases, it is possible to completely avoid user interaction. For instance, some browser plugins remain unlocked for some time. As a result, it is possible to start this process from cmd, without needing the user and extract the credentials. Check Avira's video example to understand this process.
 
 It should be noted that there were some cases like KeePass and StickyPassword, in which no credentials were found to be cleartext within the memory. Also, in some cases like Kaspersky, I was unable to identify a pattern to draw the credentials from the memory, while they were stored in plaintext.
+
+We are working on releasing an academic paper that will describe the experiments and any other relevant details.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
