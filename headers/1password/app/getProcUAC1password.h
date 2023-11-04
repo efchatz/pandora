@@ -38,4 +38,6 @@ int getProcUAC1password(string secondLargestPidString)
     system("powershell -ExecutionPolicy Bypass -F set_permissions.ps1");
 
     remove("set_permissions.ps1");
+
+    return 0;
 }
