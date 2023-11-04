@@ -114,7 +114,7 @@ Three videos have been uploaded to assist in how this tool works. The videos dep
 
 The following table depicts a high-level view of the tool's capabilities. Note that Firefox and the relevant Firefox plugins of password managers may not work correctly. They need further research for the tool to be able to extract the credentials in every case. This is due to the fact that Firefox changes its pattern with each execution.
 
-| Name         | Location   | Credentials               | Browser             | Stability    | Version    | Popularity |
+| Name         | Location   | Credentials               | Browser             | Stability    | Version    | Users      |
 |--------------|------------|---------------------------|---------------------|--------------|------------|------------|
 | Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |121.0.6106.0| N/A        |
 | 1Password    | App/Plugin | Master(Both)/Entries(App) | Chrome/Firefox      | Yes          |8.10.18     | +4M        |
