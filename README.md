@@ -64,9 +64,9 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a red team tool that would assist in gathering credentials from different password managers. They are separated into three categories, Windows 10 desktop applications, browsers, and browser plugins. This may work on other OS, like Linux, but it is not tested. In this release (v0.5), the tool supports 14 password managers, with 18 different implementations (e.g., the tool could extract credentials either from the desktop app, or the browser plugin of the same product). So, the purpose of this tool is to provide an additional attack vector in red team engagements, since many users are using password managers.
+This is a red team tool that would assist in gathering credentials from different password managers. They are separated into three categories, Windows 10 desktop applications, browsers, and browser plugins. This may work on other OS, like Linux, but it is not tested. In this release (v0.5), the tool supports 14 password managers, with 18 different implementations (e.g., the tool could extract credentials either from the desktop app, or the browser plugin of the same product). So, the purpose of this tool is to provide an additional attack vector in red team engagements, since many users are using password managers. Three different videos have been uploaded to assist in understanding how this tool works.
 
-This is not a completely new concept. It has been well-known for some time that there is no de facto way for desktop applications to be protected against such attacks. However, and to the best of my knowledge, this is the first time such a tool has been presented to the public. Feel free to provide any feedback and/or recommendations/improvements. Regarding fixing these issues, most vendors responded that this issue is out-of-scope for them since the attacker needs local access. Although, one browser plugin and two desktop apps may provide fixes their exploits will be released at a later date.
+This is not a completely new concept. It has been well-known for some time that there is no de facto way for desktop applications to be protected against such attacks. However, and to the best of my knowledge, this is the first time such a tool has been presented to the public. Feel free to provide any feedback and/or recommendations/improvements. Regarding fixing these issues, most vendors responded that this issue is out-of-scope for them since the attacker needs local access or AV/EDR should protect the user against such attacks. Although one browser plugin and two desktop apps may provide fixes, so their exploits will be released at a later date (they are still under disclosure).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -156,7 +156,7 @@ The code is structured as follows:
 2. Based on the relevant password manager, the tool dumps the process into a file.
 3. The dump file then is analyzed to identify any relevant pattern within it, with the purpose of extracting credentials.
 4. In some cases, some junk data will be presented to the user. These data will be noted as unparsed characters. So, they can be easily recognized.
-5. The user then can identify the credentials.
+5. The user then can identify the credentials (either in cmd or in the relevant txt file).
 
 It should be noted that in some cases password managers store in plaintext other types of data, like credit card details, addresses, etc. Users should be wary of such attacks and do not execute untrusted files.
 
@@ -165,7 +165,7 @@ Regarding the exploits, the methodology is simple, i.e., the purpose is to ident
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information. This tool is provided as is, for educational purposes. Use it only when you have written permission to do so, under a red team assessment.
+Distributed under the MIT License. See `LICENSE.txt` for more information. This tool is provided as is, for educational purposes. Use it only when you have written permission to do so, say in a red team engagement.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
