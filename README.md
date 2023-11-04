@@ -23,7 +23,6 @@
   <p align="center">
     A red team tool to extract credentials from password managers.
     <br />
-    ·
     <a href="https://github.com/efchatz/pandora/issues">Report Bug</a>
   </p>
 </div>
