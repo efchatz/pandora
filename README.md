@@ -23,11 +23,11 @@
   <p align="center">
     A red team tool to extract credentials from password managers.
     <br />
-    <a href="https://github.com/efchatz/pandora/videos/passwordboss">View Demo (Passwordboss)</a>
+    <a href="https://github.com/efchatz/pandora/videos/passwordboss.mp4">View Demo (Passwordboss)</a>
     ·
-    <a href="https://github.com/efchatz/pandora/videos/dashlane">View Demo (Dashlane)</a>
+    <a href="https://github.com/efchatz/pandora/videos/dashlane.mp4">View Demo (Dashlane)</a>
     ·
-    <a href="https://github.com/efchatz/pandora/videos/avira">View Demo (Avira)</a>
+    <a href="https://github.com/efchatz/pandora/videos/avira.mp4">View Demo (Avira)</a>
     ·
     <a href="https://github.com/efchatz/pandora/issues">Report Bug</a>
   </p>
