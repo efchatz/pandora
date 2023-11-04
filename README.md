@@ -85,18 +85,19 @@ Simply, clone the code, and compile it. For the development phase, Visual Studio
 
 ### Installation
 
-
-1. Clone the repo.
+1. Install Visual Studio 2022, with all C++ dependencies.
+2. Clone the repo.
    ```sh
    git clone https://github.com/efchatz/pandora.git
    ```
-2. Install Visual Studio 2022, with all C++ dependencies.
 3. Open the project.
-4. In Project->Properties->Linker->Input, choose in the "Configuration" dropdown "All Configurations".
-5. Add in the "Additional Dependencies" the "DbgHelp.lib".
-6. In the same tab, in "Ignore All Default Libraries", choose "No".
-7. Press "OK".
-8. Build this project as a release.
+4. Build this project as a release.
+
+In case of an issue with "DbgHelp.lib", do the following:
+1. In Project->Properties->Linker->Input, choose in the "Configuration" dropdown "All Configurations".
+2. Add in the "Additional Dependencies" the "DbgHelp.lib".
+3. In the same tab, in "Ignore All Default Libraries", choose "No".
+4. Press "OK".
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -157,7 +158,7 @@ The code is structured as follows:
 4. In some cases, some junk data will be presented to the user. These data will be noted as unparsed characters. So, they can be easily recognized.
 5. The user then can identify the credentials (either in cmd or in the relevant txt file).
 
-It should be noted that in some cases password managers store in plaintext other types of data, like credit card details, addresses, etc. Users should be wary of such attacks and should not execute untrusted files, enable 2FA, etc.
+It should be noted that in some cases password managers store in plaintext other types of data, like credit card details, addresses, Wi-Fi passwords etc. Users should be wary of such attacks and should not execute untrusted files, enable 2FA, etc.
 
 Regarding the exploits, the methodology is simple, i.e., the purpose is to identify a pattern or a keyword that would pinpoint the relevant credentials within the dump file. Each password manager is different, so, each exploitation method differs. However, the concept is the same, i.e., finding the relevant pattern can pinpoint the credentials within this file. In some cases, the exploit finds when the credentials start and then gathers the next bytes, say 100. I did some extensive testing to identify these values correctly, but they may differ in a real-case scenario. Open an issue if you want to propose another password manager to be included in this tool.
 
