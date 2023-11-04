@@ -143,7 +143,7 @@ In most cases, the following will be needed to extract the credentials:
 
 It is sufficient to mention that since user behavior is to open such apps and leave them open, it would provide an additional attack vector for lateral movement. Another keypoint is that most of these tools will automatically be locked when the user is completely idle. This means that even if the app or browser plugin is idle and the user is using their host for other activities, these apps will not be locked. Also, in some cases, it is possible to completely avoid user interaction. For instance, some browser plugins remain unlocked for some time. As a result, it is possible to start this process from cmd, without needing the user and extract the credentials. Check Avira's video example to understand this process.
 
-It should be noted that there were some cases like KeePass and StickyPassword, in which no credentials were found to be cleartext within the memory.
+It should be noted that there were some cases like KeePass, StickyPassword, and Opera in which no credentials were found to be cleartext within the memory.
 
 We are working on releasing an academic paper that will describe the experiments and any other relevant details.
 
