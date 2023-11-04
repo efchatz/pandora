@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\firefox">
+      <UniqueIdentifier>{2f6a1816-f7b5-4a72-8cec-10074786b91d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\1password">
+      <UniqueIdentifier>{fd460d68-f746-427d-bb11-c74a38635e40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\1password\app">
+      <UniqueIdentifier>{c6e88171-2a32-462e-87bb-4545f8fed2fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\1password\plugin">
+      <UniqueIdentifier>{ffaeef24-c19e-44cd-bc5a-fc9fbabf6a7f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\core">
+      <UniqueIdentifier>{b3d93540-9ef6-4bd1-80d2-4bdb471adfe7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\dashlane">
+      <UniqueIdentifier>{5b0e463b-2733-434a-b002-c3dc4b85f9fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\keeper">
+      <UniqueIdentifier>{9d0ea20f-d3d0-45e1-a839-a564a6ca97af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\lastpass">
+      <UniqueIdentifier>{7f7a9ea0-d37e-40c0-8b79-7850d27ded4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\roboform">
+      <UniqueIdentifier>{5ff4984b-e9f3-4166-bea7-c2c40a17c9ae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\chromium">
+      <UniqueIdentifier>{6c4729a8-3a54-4b64-979b-20e0504ebae1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\bitwarden">
+      <UniqueIdentifier>{0f0a3f79-dff8-4abf-80f0-033cc1a5fbd3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\norton">
+      <UniqueIdentifier>{bf23de9b-7d94-4d32-bf65-6cdfa6a2db3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\bitdefender">
+      <UniqueIdentifier>{22c25267-b622-48ca-9e2c-697232fd89a1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\ironvest">
+      <UniqueIdentifier>{bf0237a7-a542-47f7-88ea-a05373aef3b9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\passwarden">
+      <UniqueIdentifier>{5945f8b6-e891-4a7c-b56c-b12667d952b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\passwarden\app">
+      <UniqueIdentifier>{36e9f6a2-64d3-453d-a732-3a8102f9bcd7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\avira">
+      <UniqueIdentifier>{bb63c06d-d330-45ef-928a-d5e106be6678}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\passwordboss">
+      <UniqueIdentifier>{f8d65393-ec6e-48f8-bb83-0c3d56aae636}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\passwordboss\app">
+      <UniqueIdentifier>{2bffb77b-55a6-47e6-bc8d-fc389c3fc442}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="pandora.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="headers\1password\app\getCreds1passwordappEntries1.h">
+      <Filter>Header Files\1password\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\firefox\getCredsfirefox.h">
+      <Filter>Header Files\firefox</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\1password\plugin\getCreds1passwordplugin.h">
+      <Filter>Header Files\1password\plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\core\saveDump.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\core\FindSecondPID.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\core\GetProcessListByName.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\core\FindFirstPID.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\dashlane\getCredsdashlaneMaster.h">
+      <Filter>Header Files\dashlane</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\dashlane\getCredsdashlaneEntries.h">
+      <Filter>Header Files\dashlane</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\keeper\getCredskeeper1.h">
+      <Filter>Header Files\keeper</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\keeper\getCredskeeper2.h">
+      <Filter>Header Files\keeper</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\lastpass\getCredslastpassMasterUsername.h">
+      <Filter>Header Files\lastpass</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\lastpass\getCredslastpassMasterPass.h">
+      <Filter>Header Files\lastpass</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\lastpass\getCredslastpassEntries.h">
+      <Filter>Header Files\lastpass</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\roboform\getCredsroboform.h">
+      <Filter>Header Files\roboform</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\chromium\getCredschromium.h">
+      <Filter>Header Files\chromium</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\1password\app\getProcUAC1password.h">
+      <Filter>Header Files\1password\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\1password\app\FindsecondPID1password.h">
+      <Filter>Header Files\1password\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\1password\app\getCreds1passwordappMaster.h">
+      <Filter>Header Files\1password\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\1password\app\getCreds1passwordappEntries2.h">
+      <Filter>Header Files\1password\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\bitwarden\plugin\getCredsbitwardenPluginChrome.h">
+      <Filter>Header Files\bitwarden</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\core\FindFourthPID.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\core\FindSimpleProcPID.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\norton\getCredsnorton.h">
+      <Filter>Header Files\norton</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\bitdefender\getCredsbitdefender.h">
+      <Filter>Header Files\bitdefender</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\ironvest\getCredsironvest.h">
+      <Filter>Header Files\ironvest</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\passwarden\app\getCredspasswarden.h">
+      <Filter>Header Files\passwarden\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\avira\getCredsavira.h">
+      <Filter>Header Files\avira</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\passwordboss\app\getCredspasswordbossapp1.h">
+      <Filter>Header Files\passwordboss\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\passwordboss\app\getCredspasswordbossapp2.h">
+      <Filter>Header Files\passwordboss\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\core\saveFile.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
