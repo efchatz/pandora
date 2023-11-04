@@ -131,7 +131,7 @@ To use this tool, simply execute the compiled executable in the relevant host an
 
 Regarding the extraction of credentials, some exploits are based on a specific number of bytes, to extract the credentials. So, maybe, in some cases, this number must be increased to extract this information correctly. During the experiments, common usernames and passwords were used. So, in most cases, this would be sufficient.
 
-Another note is relevant to the version of each password manager of a browser plugin. If a change is made in the code and affects the process, the tool will be unable to identify these credentials. So, keep in mind that there is a possibility to mishandle some credentials if an older/newer version of the tool is used, or a different OS (tested on Windows 10 Pro).
+Another note is relevant to the version of each password manager of a browser plugin. If a change is made in the code and affects the process, the tool may be unable to identify these credentials. So, keep in mind that there is a possibility to mishandle some credentials if an older/newer version of the tool is used, or a different OS is running (tested on Windows 10 Pro).
 
 In most cases, the following will be needed to extract the credentials:
 1. The relevant app (browser or desktop app) is up, unlocked, and running.
@@ -140,6 +140,8 @@ In most cases, the following will be needed to extract the credentials:
 4. In case of 1Password, high integrity privilege is required. So, execute the .exe with high privileges, or provide the dump file as input.
 
 It is sufficient to mention that since user behavior is to open such tools and leave them be, it would provide an additional attack vector for lateral movement. Another keypoint is that most of these tools will automatically be locked when the user is completely idle. This means that even if the app or browser plugin is idle and the user is using their host for other activities, these apps will not be locked. Also, in some cases, it is possible to completely avoid user interaction. For instance, some browser plugins remain unlocked for some time. As a result, it is possible to start this process from cmd, without needing the user and extract the credentials. Check Avira's video example to understand this process.
+
+It should be noted that there were some cases like KeePass and StickyPassword, in which no credentials were found to be cleartext within the memory. Also, in some cases like Kaspersky, I was unable to identify a pattern to draw the credentials from the memory, while they were stored in plaintext.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
