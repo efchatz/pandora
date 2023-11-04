@@ -60,7 +60,9 @@
 
 This is a red team tool that would assist in gathering credentials from different password managers. They are separated into three categories, Windows 10 desktop applications, browsers, and browser plugins. This may work on other OS, like Linux, but it is not tested. In this release (v0.5), the tool supports 14 password managers, with 18 different implementations (e.g., the tool could extract credentials either from the desktop app, or the browser plugin of the same product). So, the purpose of this tool is to provide an additional attack vector in red team engagements, since many users are using password managers. Three different videos have been uploaded to assist in understanding how this tool works.
 
-This is not a completely new concept. It has been well-known for some time that there is no de facto way for desktop applications to be protected against such attacks. However, and to the best of my knowledge, this is the first time such a tool has been presented to the public. Feel free to provide any feedback and/or recommendations/improvements. Regarding fixing these issues, most vendors responded that this issue is out-of-scope for them since the attacker needs local access or AV/EDR should protect the user against such attacks. Although one browser plugin and two desktop apps may provide fixes, so their exploits will be released at a later date (they are still under disclosure).
+This is not a completely new concept. It has been well-known for some time that there is no de facto way for desktop applications to be protected against such attacks. However, and to the best of my knowledge, this is the first time such a tool has been presented to the public. Feel free to provide any feedback and/or recommendations/improvements. 
+
+Regarding fixing these issues, most vendors responded that this issue is out-of-scope for them since the attacker needs local access or AV/EDR should protect the user against such attacks. Although one browser plugin and two desktop apps may provide fixes, their exploits will be released at a later date (they are still under disclosure).
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -88,13 +90,13 @@ Simply, clone the code, and compile it. For the development phase, Visual Studio
    ```sh
    git clone https://github.com/efchatz/pandora.git
    ```
-2. Install Visual Studion 2022, with all C++ dependencies.
+2. Install Visual Studio 2022, with all C++ dependencies.
 3. Open the project.
 4. In Project->Properties->Linker->Input, choose in the "Configuration" dropdown "All Configurations".
 5. Add in the "Additional Dependencies" the "DbgHelp.lib".
 6. In the same tab, in "Ignore All Default Libraries", choose "No".
 7. Press "OK".
-8. Build this project.
+8. Build this project as a release.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -103,7 +105,9 @@ Simply, clone the code, and compile it. For the development phase, Visual Studio
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-To use this tool, simply execute the compiled executable in the relevant host and type the name of the password manager. Based on the password manager, there are some requirements for the tool to be able to extract credentials. However, I kept in most cases password managers who needed basic interaction to store their credentials in the memory of their process. After executing the tool, it will automatically dump the relevant process based on the chosen password manager, print the credentials in the cmd, and save them into a file (the location of the file is the current folder of the .exe). Three videos have been uploaded to assist in how this tool works. The videos depict the phase in which an attacker would be able to gather the credentials from a password manager. In the case of Avira and similar password managers, this can be done without any user interaction.
+To use this tool, simply execute the compiled executable in the relevant host and type the name of the password manager. Based on the password manager, there are some requirements for the tool to be able to extract credentials. However, I kept in most cases password managers who needed basic interaction to store their credentials in the memory of their process. After executing the tool, it will automatically dump the relevant process based on the chosen password manager, print the credentials in the cmd, and save them into a file (the location of the file is the current folder of the .exe). 
+
+Three videos have been uploaded to assist in how this tool works. The videos depict the phase in which an attacker would be able to gather the credentials from a password manager. In the case of Avira and similar password managers, this can be done without any user interaction (check relevant video).
 
 The following table depicts a high-level view of the tool's capabilities. Note that Firefox and the relevant Firefox plugins of password managers may not work correctly. They need further research for the tool to be able to extract the credentials in every case. This is due to the fact that Firefox changes its pattern with each execution.
 
@@ -132,12 +136,13 @@ Another note is relevant to the version of each password manager of a browser pl
 In most cases, the following will be needed to extract the credentials:
 1. The relevant app (browser or desktop app) is up, unlocked, and running.
 2. In some cases, like in Chromium browsers, an interaction needs to be made with either the relevant plugin or the embedded password manager of the browser.
-3. In other cases, some password managers keep these credentials in memory in cleartext, even after being locked. This behavior was noted in Keeper.
+3. In other cases, some password managers keep these credentials cleartext in memory, even after being locked. This behavior was noted in Keeper.
 4. In case of 1Password, high integrity privilege is required. So, execute the .exe with high privileges, or provide the dump file as input.
+5. All tests were made with the default settings of each password manager.
 
-It is sufficient to mention that since user behavior is to open such tools and leave them be, it would provide an additional attack vector for lateral movement. Another keypoint is that most of these tools will automatically be locked when the user is completely idle. This means that even if the app or browser plugin is idle and the user is using their host for other activities, these apps will not be locked. Also, in some cases, it is possible to completely avoid user interaction. For instance, some browser plugins remain unlocked for some time. As a result, it is possible to start this process from cmd, without needing the user and extract the credentials. Check Avira's video example to understand this process.
+It is sufficient to mention that since user behavior is to open such apps and leave them open, it would provide an additional attack vector for lateral movement. Another keypoint is that most of these tools will automatically be locked when the user is completely idle. This means that even if the app or browser plugin is idle and the user is using their host for other activities, these apps will not be locked. Also, in some cases, it is possible to completely avoid user interaction. For instance, some browser plugins remain unlocked for some time. As a result, it is possible to start this process from cmd, without needing the user and extract the credentials. Check Avira's video example to understand this process.
 
-It should be noted that there were some cases like KeePass and StickyPassword, in which no credentials were found to be cleartext within the memory. Also, in some cases like Kaspersky, I was unable to identify a pattern to draw the credentials from the memory, while they were stored in plaintext.
+It should be noted that there were some cases like KeePass and StickyPassword, in which no credentials were found to be cleartext within the memory.
 
 We are working on releasing an academic paper that will describe the experiments and any other relevant details.
 
@@ -146,20 +151,20 @@ We are working on releasing an academic paper that will describe the experiments
 <!-- METHODOLOGY -->
 ## Methodology
 The code is structured as follows:
-1. The user chooses the relevant password manager.
+1. The user chooses the relevant password manager or may request for additional input.
 2. Based on the relevant password manager, the tool dumps the process into a file.
 3. The dump file then is analyzed to identify any relevant pattern within it, with the purpose of extracting credentials.
 4. In some cases, some junk data will be presented to the user. These data will be noted as unparsed characters. So, they can be easily recognized.
 5. The user then can identify the credentials (either in cmd or in the relevant txt file).
 
-It should be noted that in some cases password managers store in plaintext other types of data, like credit card details, addresses, etc. Users should be wary of such attacks and do not execute untrusted files.
+It should be noted that in some cases password managers store in plaintext other types of data, like credit card details, addresses, etc. Users should be wary of such attacks and should not execute untrusted files, enable 2FA, etc.
 
-Regarding the exploits, the methodology is simple, i.e., the purpose is to identify a pattern or a keyword that would pinpoint the relevant credentials within the dump file. Each password manager is different, so, each exploitation method differs. However, the concept is the same, i.e., finding the relevant pattern can pinpoint the credentials within this file. In some cases, the exploit finds when the credentials start and then gathers the next bytes, say 100. I did some extensive testing to identify these values correctly, but they may differ in a real-case scenario.
+Regarding the exploits, the methodology is simple, i.e., the purpose is to identify a pattern or a keyword that would pinpoint the relevant credentials within the dump file. Each password manager is different, so, each exploitation method differs. However, the concept is the same, i.e., finding the relevant pattern can pinpoint the credentials within this file. In some cases, the exploit finds when the credentials start and then gathers the next bytes, say 100. I did some extensive testing to identify these values correctly, but they may differ in a real-case scenario. Open an issue if you want to propose another password manager to be included in this tool.
 
 <!-- LICENSE -->
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information. This tool is provided as is, for educational purposes. Use it only when you have written permission to do so, say in a red team engagement.
+Distributed under the MIT License. See `LICENSE.txt` for more information. This tool is provided as is, for educational purposes and/or legitimate assessments.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
