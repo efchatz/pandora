@@ -149,6 +149,92 @@ It should be noted that there were some cases like KeePass, StickyPassword, and 
 
 We are working on releasing an academic paper that will describe the experiments and any other relevant details.
 
+<!-- Prerequisites -->
+## Prerequisites
+This section is devoted to any prerequisites the tool will need to be able to dump the credentials from a password manager.
+
+### Chromium
+
+#### Chrome and Brave 
+
+Both browsers have the same behavior, they keep the username and password of a login form they interact with and they have saved its credentials, but to get all entries, the user must visit the password manager functionality of the browser or the attacker to open the browser and visit this page. Then, the tool can extract all entries as showed in the following screenshot:
+
+![brave](https://github.com/efchatz/pandora/assets/43434138/6e011874-8c04-4034-9b60-17a2a493346d)
+
+Note that the password manager page must be visited once, i.e., even if the password manager is closed and the browser is not terminated and start another process, the credentials will be stored within the memory.
+
+#### MSEdge
+
+MSEdge is different, i.e., only the browser needs to be open. It is not required for someone to visit the password manager page. MSEdge seems to preload the password manager immediatelly when opens. As a result, the tool can extract all entries, having the same output as with the other two browsers.
+
+### 1Password
+
+1Password process needs high integrity privileges for the tool to be able to dump the relevant process and extract the credentials. To extract the credentials, I opened the app, entered the master password and waited for at least 1 min. Then, I executed the tool to dump the credentials. The following screenshot illustrates the execution of the tool, when the relevant app is running. Hidden data are the relevant usernames and passwords.
+
+![1password](https://github.com/efchatz/pandora/assets/43434138/fb18312d-22a4-416f-bde9-3150983d7571)
+
+
+### Firefox
+
+TBA.
+
+### Dashlane 
+
+https://github.com/efchatz/pandora/assets/43434138/3ff4faa8-8a1e-4293-a6ae-48db8ca1bdc1
+
+The video was paused to shorten the size. First, Chrome is being opened, I entered the master password and waited for at least 1 min. After that, I executed pandora and waited to retrieve the credentials. The tool first search for entries and then for master username and password. It will need 2-3 min to find these credentials. As can be observed, all data are available, both master username and password, along with the username and password of three different entries. It should be noted that the relevant data are noted, i.e., the master password is noted as "masterPassword". The same follows the remaining data.
+
+### Keeper
+
+For Keeper, I started the app, entered the master password and executed the tool. The response of the tool was the following:
+
+![keeper](https://github.com/efchatz/pandora/assets/43434138/24f41499-230a-4d6c-92b7-c94cf8678b17)
+
+The tool could have also extract other entries, if a user had used them. For this reason, the second entry search return no credentials.
+
+### LastPass
+
+TBA.
+
+### Roboform
+
+TBA.
+
+### Bitwarden
+
+TBA.
+
+### Norton
+
+TBA.
+
+### Bitdefender
+
+TBA.
+
+### Ironvest
+
+TBA.
+
+### Passwarden
+
+The usual procedure was needed. As can be observed from the following screenshot, all data are noted with different keywords:
+
+![passwarden](https://github.com/efchatz/pandora/assets/43434138/c785f0a4-0cc9-4b91-b1f8-1005dd026853)
+
+
+### Avira
+
+https://github.com/efchatz/pandora/assets/43434138/807d2d87-d240-47f1-8b35-41701cde4a06
+
+The video was paused to shorten the size. First, Chrome is being opened from cmd, then waited for for at least 1 min. This means that an attacker could possibly start Chrome process without any user's interaction since Avira does not request for the user to enter their master password. After that, I executed pandora and waited to retrieve the credentials. The tool search for the relevant entries. As can be observed, every entry is showed in a specific line, i.e., the name of the site, the password and the relevant username. 
+
+### PasswordBoss
+
+https://github.com/efchatz/pandora/assets/43434138/f8f3b7fa-41f7-4182-9845-3430ec33486b
+
+The video was paused to shorten the size. First, the passwordboss app is executed, I entered then the master password and minimized the app. After that, I executed the tool and waited 3-4 min. As can be observed, the tool retrieved all relevant entries. Some of them, like Amazon were empty, but others like Facebook, Google and a custom one named aegean were filled with the username and the password of the user. Usually, entries with data, contain the "[]" symbol. 
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- METHODOLOGY -->
