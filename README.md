@@ -46,6 +46,7 @@
       </ul>
     </li>
     <li><a href="#usage">Usage</a></li>
+    <li><a href="#prerequisites">Prerequisites</a></li>
     <li><a href="#methodology">Methodology</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
@@ -114,7 +115,7 @@ Three videos have been uploaded to assist in how this tool works. The videos dep
 
 The following table depicts a high-level view of the tool's capabilities. Note that Firefox and the relevant Firefox plugins of password managers may not work correctly. They need further research for the tool to be able to extract the credentials in every case. This is due to the fact that Firefox changes its pattern with each execution.
 
-Note: The Users column refers to the number of users mentioned in the Chrome Web Store for each browser plugin. Bitwarden was probably fixed on 3rd November 2023.
+Note: The Users column refers to the number of users mentioned in the Chrome Web Store for each browser plugin.
 
 | Name         | Location   | Credentials               | Browser             | Stability    | Version    | Users |
 |--------------|------------|---------------------------|---------------------|--------------|------------|-------|
@@ -209,7 +210,10 @@ Roboform automatically unlocks the vault when the user opens the Chrome browser.
 
 ### Bitwarden
 
-TBA.
+Bitwarden imports all entries when Chrome interacts with it. Some entries will be shown multiple times, as the tool finds them and dumps them from the dump file. 
+
+![bitwarden](https://github.com/efchatz/pandora/assets/43434138/b3ad4474-fd07-461e-99bd-06f2fd74a1f4)
+
 
 ### Norton
 
