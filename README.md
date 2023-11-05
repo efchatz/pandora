@@ -114,6 +114,8 @@ Three videos have been uploaded to assist in how this tool works. The videos dep
 
 The following table depicts a high-level view of the tool's capabilities. Note that Firefox and the relevant Firefox plugins of password managers may not work correctly. They need further research for the tool to be able to extract the credentials in every case. This is due to the fact that Firefox changes its pattern with each execution.
 
+Note: The Users column refers to the number of users mentioned in the Chrome Web Store for each browser plugin. Bitwarden was probably fixed on 3rd November 2023.
+
 | Name         | Location   | Credentials               | Browser             | Stability    | Version    | Users |
 |--------------|------------|---------------------------|---------------------|--------------|------------|-------|
 | Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |121.0.6106.0| N/A   |
@@ -125,7 +127,7 @@ The following table depicts a high-level view of the tool's capabilities. Note t
 | Roboform     | Plugin     | Entries                   | Chrome              | Yes          |9.5.2.0     | +600K |
 | Bitwarden    | Plugin     | Master/Entries            | Chrome              | Yes          |2023.10.1   | +3M   |
 | Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.1.0.73    | +4M   |
-| Bitdefender  | Plugin     | Master/Entries            | Chrome              | Yes          |1.3.0       | +90K  |
+| Bitdefender  | Plugin     | Master                    | Chrome              | Yes          |1.3.0       | +90K  |
 | Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.8.15      | +90K  |
 | Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3         | +1K   |
 | Avira        | Plugin     | Entries                   | Chrome              | Yes          |2.19.14.4461| +6M   |
@@ -157,19 +159,19 @@ This section is devoted to any prerequisites the tool will need to be able to du
 
 #### Chrome and Brave 
 
-Both browsers have the same behavior, they keep the username and password of a login form they interact with and they have saved its credentials, but to get all entries, the user must visit the password manager functionality of the browser or the attacker to open the browser and visit this page. Then, the tool can extract all entries as showed in the following screenshot:
+Both browsers have the same behavior, they keep the username and password of a login form they interact with and they have saved its credentials, but to get all entries, the user must visit the password manager functionality of the browser or the attacker to open the browser and visit this page. Then, the tool can extract all entries as shown in the following screenshot:
 
 ![brave](https://github.com/efchatz/pandora/assets/43434138/6e011874-8c04-4034-9b60-17a2a493346d)
 
-Note that the password manager page must be visited once, i.e., even if the password manager is closed and the browser is not terminated and start another process, the credentials will be stored within the memory.
+Note that the password manager page must be visited once, i.e., even if the password manager is closed and the browser is not terminated and starts another process, the credentials will be stored within the memory.
 
 #### MSEdge
 
-MSEdge is different, i.e., only the browser needs to be open. It is not required for someone to visit the password manager page. MSEdge seems to preload the password manager immediatelly when opens. As a result, the tool can extract all entries, having the same output as with the other two browsers.
+MSEdge is different, i.e., only the browser needs to be open. It is not required for someone to visit the password manager page. MSEdge seems to preload the password manager immediately when opens. As a result, the tool can extract all entries, having the same output as with the other two browsers.
 
 ### 1Password
 
-1Password process needs high integrity privileges for the tool to be able to dump the relevant process and extract the credentials. To extract the credentials, I opened the app, entered the master password and waited for at least 1 min. Then, I executed the tool to dump the credentials. The following screenshot illustrates the execution of the tool, when the relevant app is running. Hidden data are the relevant usernames and passwords.
+1Password process needs high integrity privileges for the tool to be able to dump the relevant process and extract the credentials. To extract the credentials, I opened the app, entered the master password, and waited for at least 1 min. Then, I executed the tool to dump the credentials. The following screenshot illustrates the execution of the tool when the relevant app is running. Hidden data are the relevant usernames and passwords.
 
 ![1password](https://github.com/efchatz/pandora/assets/43434138/fb18312d-22a4-416f-bde9-3150983d7571)
 
@@ -182,23 +184,28 @@ TBA.
 
 https://github.com/efchatz/pandora/assets/43434138/3ff4faa8-8a1e-4293-a6ae-48db8ca1bdc1
 
-The video was paused to shorten the size. First, Chrome is being opened, I entered the master password and waited for at least 1 min. After that, I executed pandora and waited to retrieve the credentials. The tool first search for entries and then for master username and password. It will need 2-3 min to find these credentials. As can be observed, all data are available, both master username and password, along with the username and password of three different entries. It should be noted that the relevant data are noted, i.e., the master password is noted as "masterPassword". The same follows the remaining data.
+The video was paused to shorten the size. First, Chrome is being opened, I entered the master password and waited for at least 1 min. After that, I executed pandora and waited to retrieve the credentials. The tool first searches for entries and then for the master username and password. It will need 2-3 min to find these credentials. As can be observed, all data are available, both master username and password, along with the username and password of three different entries. It should be noted that the relevant data are noted, i.e., the master password is noted as "masterPassword". The same follows the remaining data.
 
 ### Keeper
 
-For Keeper, I started the app, entered the master password and executed the tool. The response of the tool was the following:
+For Keeper, I started the app, entered the master password, and executed the tool. The response of the tool was the following:
 
 ![keeper](https://github.com/efchatz/pandora/assets/43434138/24f41499-230a-4d6c-92b7-c94cf8678b17)
 
-The tool could have also extract other entries, if a user had used them. For this reason, the second entry search return no credentials.
+The tool could have also extracted other entries if a user had used them. For this reason, the second entry search returns no credentials.
 
 ### LastPass
 
-TBA.
+https://github.com/efchatz/pandora/assets/43434138/69a9e752-0485-428e-b4a8-516ececdf1a1
+
+LastPass automatically logins the user into the vault, when the Chrome browser opens. So, to retrieve the master password, the user must have entered it without terminating the browser. In every other case, all entries and the master username should be retrieved. In the video above, I started LastPass from cmd. The tool dumped all entries, and the master username, along with some junk data at the end that matched the searched pattern. It is suggested to check the .txt file as it is easier to identify the credentials since the console will include multiple junk rows.
 
 ### Roboform
 
-TBA.
+Roboform automatically unlocks the vault when the user opens the Chrome browser. So, it is possible to start the Chrome process from cmd or powershell command. The following screenshot depicts the credentials the tool dumped, after starting the Chrome from cmd. As can be observed, all entries all noted with a keyword. Even an RSA private key can be extracted.
+
+![roboform](https://github.com/efchatz/pandora/assets/43434138/5c563a14-4948-45bb-b18c-81e5be6f2da0)
+
 
 ### Bitwarden
 
@@ -206,15 +213,24 @@ TBA.
 
 ### Norton
 
-TBA.
+Norton uses keywords to store credentials. So, the following screenshot illustrates the credentials the tool dumped. An important fact was that Norton password manager automatically stored the username and password of the user's Norton account within the vault. These credentials were removed. Wait 30 sec after starting the browser to extract the credentials with the tool.
+
+![norton](https://github.com/efchatz/pandora/assets/43434138/d68d1657-d997-4a6f-a8f1-3527468efc7c)
+
 
 ### Bitdefender
 
-TBA.
+Bitdefender stores entries only when they are needed, like when the user is visiting a url that belongs to an entry. However, the master password is being stored for approx. 5 min, after the user enters it. As a result, there is a case in which an attacker could dump the master password. The tool does not check for entries, only for the master password.
+
+![bitdefender](https://github.com/efchatz/pandora/assets/43434138/61637ca4-d368-40a8-b51d-9be44f007340)
+
 
 ### Ironvest
 
-TBA.
+For Ironvest the relevant webapp must be up. Since this password manager does not require the master password from the user when it opens and keeps them auto logged-in, I started the Chrome from cmd, by visiting "ironvest.com/app". Then, I used the tool to extract all entries. The following screenshot illustrates this issue. Since entries are stored multiple times, they are dumped each time the tool identifies them within the dump file.
+
+![ironvest](https://github.com/efchatz/pandora/assets/43434138/4fe31134-66f4-45a0-8356-5d89a99f6a37)
+
 
 ### Passwarden
 
@@ -271,6 +287,8 @@ Efstratios Chatzoglou - efchatzoglou@gmail.com
 
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
+
+I would like to thank Zisis Tsiatsikas and Vyron Kampourakis. They assist me in identifying which process contains cleartext credentials for some password managers.
 
 * [Choose an Open Source License](https://choosealicense.com)
 * [Img Shields](https://shields.io)
