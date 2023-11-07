@@ -14,7 +14,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/efchatz/pandora/images/pandora-logo.PNG">
+  <a href="https://github.com/efchatz/pandora/blob/main/images/pandora-logo.PNG">
     <img src="images/pandora-logo.PNG" alt="Logo" width="700" height="500">
   </a>
 
