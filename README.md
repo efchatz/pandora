@@ -217,7 +217,7 @@ Bitwarden imports all entries when Chrome interacts with it. Some entries will b
 
 ### Norton
 
-Norton uses keywords to store credentials. So, the following screenshot illustrates the credentials the tool dumped. An important fact was that Norton password manager automatically stored the username and password of the user's Norton account within the vault. These credentials were removed. Wait 30 sec after starting the browser to extract the credentials with the tool.
+Norton uses keywords to store credentials. So, the following screenshot illustrates the credentials the tool dumped. An important fact was that Norton password manager automatically stored the username and password of the user's Norton account within the vault. These are the credentials that were removed from the console output. Wait 30 sec after starting the browser to extract the credentials with the tool.
 
 ![norton](https://github.com/efchatz/pandora/assets/43434138/d68d1657-d997-4a6f-a8f1-3527468efc7c)
 
