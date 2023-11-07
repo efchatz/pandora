@@ -679,7 +679,7 @@ int main() {
         std::cout << "Done!\n";
 
         // Step 1: Find PIDs by process name
-        std::vector<DWORD> pids = FindPIDsByProcessName(processName);
+        pids = FindPIDsByProcessName(processName);
 
         if (!pids.empty())
         {
