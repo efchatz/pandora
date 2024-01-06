@@ -5,7 +5,7 @@
 #include <string>
 #include "../core/saveFile.h"
 
-int getCredsfirefox2(const std::string& filename) {
+int getCredsfirefox2(std::string filename) {
     std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
