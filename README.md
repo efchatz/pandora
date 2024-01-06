@@ -110,8 +110,8 @@ In case of an issue with "DbgHelp.lib", do the following:
 <!-- METHODOLOGY -->
 ## Methodology
 The code is structured as follows:
-1. The user chooses the mode (full, fast, local). Full mode will dump all processes from a password manager, fast will dump the most common one that in most cases will contain the credentials. Local mode is done locally while providing the dump file.
-2. The user then has the option to check which password manager is installed (yes/no choice). The code checks if the default installation path of each password manager exists and provides the output. Note that during installation, most password managers do not allow the user to change the default installation path. For instance, Keeper is installed directly from the MS Store. So, this method could assist in identifying which password manager is installed.
+1. The user chooses the mode (full, fast, local). Full mode will dump all processes from a password manager and fast will dump the most common one that in most cases will contain the credentials. Local mode is done locally while providing the dump file.
+2. The user then has the option to check which password manager is installed (yes/no choice). The code checks if the default installation path of each password manager exists and provides the output. Note that during installation, most password managers do not allow the user to change the default installation path. For instance, Keeper is installed directly from the MS Store. So, this method could assist in identifying which password manager is installed. Note that in Full mode, the tool will not validate the actual size of each process file that will be created. So, if the host does not have the required free space, some processes will not be dumped and no error message will be shown.
 
 ![pass-exists](https://github.com/efchatz/pandora/assets/43434138/00834f80-86a6-4f12-be7f-654eeee00cdb)
 
