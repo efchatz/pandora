@@ -6,8 +6,8 @@
 #include "../core/saveFile.h"
 
 //For master password and in case we cannot open the plugin
-int getCredsnorton2() {
-    std::ifstream file("app.dmp", std::ios::binary);
+int getCredsnorton2(std::string filename) {
+    std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
         std::cerr << "Error opening the file." << std::endl;
