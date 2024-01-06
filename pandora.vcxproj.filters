@@ -170,6 +170,42 @@
     <ClInclude Include="headers\core\saveFile.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
+    <ClInclude Include="headers\bitwarden\plugin\getCredsbitwardenPluginChrome2.h">
+      <Filter>Header Files\bitwarden</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\bitdefender\getCredsbitdefender2.h">
+      <Filter>Header Files\bitdefender</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\1password\plugin\getCreds1passwordplugin2.h">
+      <Filter>Header Files\1password\plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\norton\getCredsnorton2.h">
+      <Filter>Header Files\norton</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\core\saveAllProc.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\core\checkApps.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\core\mergeFiles.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\core\createFileFromMultiPIDs.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\core\findPlugin.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\core\assistUser.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\avira\getCredsavira2.h">
+      <Filter>Header Files\avira</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\firefox\getCredsfirefox2.h">
+      <Filter>Header Files\firefox</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
