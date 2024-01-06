@@ -5,8 +5,8 @@
 #include <vector>
 #include "../../core/saveFile.h"
 
-int getCredspasswarden() {
-    std::ifstream file("app.dmp", std::ios::binary);
+int getCredspasswarden(std::string filename) {
+    std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
         std::cerr << "Error opening the file." << std::endl;
