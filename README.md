@@ -279,7 +279,7 @@ The video was paused to shorten the size. First, the passwordboss app is execute
 
 ### Roboform
 
-Roboform automatically unlocks the vault when the user opens the Chrome browser. So, it is possible to start the Chrome process from cmd or powershell command. The following screenshot depicts the credentials the tool dumped, after starting the Chrome from cmd. As can be observed, all entries all noted with a keyword. Even an RSA private key can be extracted.
+Roboform automatically unlocks the vault when the user opens the Chrome browser. Specifically, Roboform needs interaction with any saved entry URL to load all entries or for the user to click the plugin. So, it is possible to start the Chrome process from cmd or powershell command. The following screenshot depicts the credentials the tool dumped, after starting the Chrome from cmd. As can be observed, all entries all noted with a keyword. Even an RSA private key can be extracted. 
 
 ![roboform](https://github.com/efchatz/pandora/assets/43434138/5c563a14-4948-45bb-b18c-81e5be6f2da0)
 
