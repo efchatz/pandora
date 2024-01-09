@@ -253,7 +253,7 @@ The tool could have also extracted other entries if a user had used them. For th
 
 https://github.com/efchatz/pandora/assets/43434138/69a9e752-0485-428e-b4a8-516ececdf1a1
 
-LastPass automatically logins the user into the vault, when the Chrome browser opens. So, to retrieve the master password, the user must have entered it without terminating the browser. In every other case, all entries and the master username should be retrieved. In the video above, I started LastPass from cmd. The tool dumped all entries, and the master username, along with some junk data at the end that matched the searched pattern. It is suggested to check the .txt file as it is easier to identify the credentials since the console will include multiple junk rows.
+LastPass automatically logins the user into the vault, when the Chrome browser opens. So, to retrieve the master password, the user must have logged out and logged in manually (entering the master password), without terminating the browser. In every other case, all entries and the master username should be retrieved. In the video above, I started LastPass from cmd. The tool dumped all entries, and the master username, along with some junk data at the end that matched the searched pattern. It is suggested to check the .txt file as it is easier to identify the credentials since the console will include multiple junk rows.
 
 
 ### Norton
