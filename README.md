@@ -147,7 +147,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Keeper       | App        | Entries                   | N/A                 | Yes          |16.10.9     | N/A   |
 | LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |4.123.0     | +10M  |
 | Roboform     | Plugin     | Entries                   | Chrome              | Yes          |9.5.2.0     | +600K |
-| Bitwarden    | Plugin     | Master/Entries            | Chrome              | Yes          |2023.10.1   | +3M   |
+| Bitwarden    | Plugin     | Entries                   | Chrome              | Yes          |2023.10.1   | +3M   |
 | Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.1.0.73    | +4M   |
 | Bitdefender  | Plugin     | Master                    | Chrome              | Yes          |1.3.0       | +90K  |
 | Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.8.15      | +90K  |
