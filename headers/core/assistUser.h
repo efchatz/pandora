@@ -11,7 +11,7 @@ int assistUser() {
         std::wstring extensionName = L"aeblfdkhhhdcdjpifhhbdiojplfjncoa";
 
         if (findPlugin(username, extensionName)) {
-            std::wcout << L"1Password Directory exists!\n" << std::endl;
+            std::wcout << L"1Password Chrome Plugin Directory exists!\n" << std::endl;
         }
     }
     else {
@@ -25,7 +25,7 @@ int assistUser() {
         std::wstring extensionName = L"ibkoenhablealnikeefmjineccmgegmh";
 
         if (findPlugin(username, extensionName)) {
-            std::wcout << L"Bitdefender Directory exists!\n" << std::endl;
+            std::wcout << L"Bitdefender Chrome Plugin Directory exists!\n" << std::endl;
         }
     }
     else {
@@ -39,7 +39,7 @@ int assistUser() {
         std::wstring extensionName = L"fdjamakpfbbddfjaooikfcpapjohcfmg";
 
         if (findPlugin(username, extensionName)) {
-            std::wcout << L"Dashlane Directory exists!\n" << std::endl;
+            std::wcout << L"Dashlane Chrome Plugin Directory exists!\n" << std::endl;
         }
     }
     else {
@@ -53,7 +53,7 @@ int assistUser() {
         std::wstring extensionName = L"hdokiejnpimakedhajhdlcegeplioahd";
 
         if (findPlugin(username, extensionName)) {
-            std::wcout << L"LastPass Directory exists!\n" << std::endl;
+            std::wcout << L"LastPass Chrome Plugin Directory exists!\n" << std::endl;
         }
     }
     else {
@@ -67,21 +67,7 @@ int assistUser() {
         std::wstring extensionName = L"pnlccmojcmeohlpggmfnbbiapkmbliob";
 
         if (findPlugin(username, extensionName)) {
-            std::wcout << L"Roboform Directory exists!\n" << std::endl;
-        }
-    }
-    else {
-        std::wcerr << L"Failed to get the current user's login name." << std::endl;
-        return 1;
-    }
-
-    //Roboform
-    if (GetUserNameW(username, &usernameSize)) {
-        // Replace this value with the extension name you want to check
-        std::wstring extensionName = L"pnlccmojcmeohlpggmfnbbiapkmbliob";
-
-        if (findPlugin(username, extensionName)) {
-            std::wcout << L"Roboform Directory exists!\n" << std::endl;
+            std::wcout << L"Roboform Chrome Plugin Directory exists!\n" << std::endl;
         }
     }
     else {
@@ -95,7 +81,7 @@ int assistUser() {
         std::wstring extensionName = L"nngceckbapebfimnlniiiahkandclblb";
 
         if (findPlugin(username, extensionName)) {
-            std::wcout << L"Bitwarden Directory exists!\n" << std::endl;
+            std::wcout << L"Bitwarden Chrome Plugin Directory exists!\n" << std::endl;
         }
     }
     else {
@@ -109,7 +95,7 @@ int assistUser() {
         std::wstring extensionName = L"admmjipmmciaobhojoghlmleefbicajg";
 
         if (findPlugin(username, extensionName)) {
-            std::wcout << L"Norton Directory exists!\n" << std::endl;
+            std::wcout << L"Norton Chrome Plugin Directory exists!\n" << std::endl;
         }
     }
     else {
@@ -123,7 +109,7 @@ int assistUser() {
         std::wstring extensionName = L"epanfjkfahimkgomnigadpkobaefekcd";
 
         if (findPlugin(username, extensionName)) {
-            std::wcout << L"Ironvest Directory exists!\n" << std::endl;
+            std::wcout << L"Ironvest Chrome Plugin Directory exists!\n" << std::endl;
         }
     }
     else {
@@ -137,7 +123,7 @@ int assistUser() {
         std::wstring extensionName = L"caljgklbbfbcjjanaijlacgncafpegll";
 
         if (findPlugin(username, extensionName)) {
-            std::wcout << L"Avira Directory exists!\n" << std::endl;
+            std::wcout << L"Avira Chrome Plugin Directory exists!\n" << std::endl;
         }
     }
     else {
@@ -183,7 +169,7 @@ int assistUser() {
 
     //Passwarden
     if (findAppPasswarden()) {
-        std::wcout << L"Passwarden Directory exists!\n" << std::endl;
+        std::wcout << L"Passwarden App Directory exists!\n" << std::endl;
     }
     else {
         std::wcerr << L"Failed to get the current user's login name." << std::endl;
@@ -193,7 +179,7 @@ int assistUser() {
     //1Password
     if (GetUserNameW(username, &usernameSize)) {
         if (findApp1Password(username)) {
-            std::wcout << L"1Password Directory exists!\n" << std::endl;
+            std::wcout << L"1Password App Directory exists!\n" << std::endl;
         }
     }
     else {
@@ -204,7 +190,7 @@ int assistUser() {
     //PasswordBoss
     if (GetUserNameW(username, &usernameSize)) {
         if (findAppPasswordBoss(username)) {
-            std::wcout << L"PasswordBoss Directory exists!\n" << std::endl;
+            std::wcout << L"PasswordBoss App Directory exists!\n" << std::endl;
         }
     }
     else {
