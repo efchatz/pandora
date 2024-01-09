@@ -140,20 +140,20 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 
 | Name         | Location   | Credentials               | Browser             | Stability    | Version    | Users |
 |--------------|------------|---------------------------|---------------------|--------------|------------|-------|
+| 1Password    | App/Plugin | Master(App)/Entries(Plugin) | Chrome/Firefox    | Yes        |8.10.18   | +4M   |
+| Avira        | Plugin     | Entries                   | Chrome              | Yes          |2.19.14.4461| +6M   |
+| Bitdefender  | Plugin     | Master                    | Chrome              | Yes          |1.3.0       | +90K  |
+| Bitwarden    | Plugin     | Entries                   | Chrome              | Yes          |2023.10.1   | +3M   |
 | Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |121.0.6106.0| N/A   |
-| 1Password    | App/Plugin | Master(App)/Entries(Plugin) | Chrome/Firefox      | Yes          |8.10.18     | +4M   |
-| Firefox      | Browser    | Entries                   | N/A                 | Partial      |119.0       | N/A   |
 | Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Chrome       |6.2344.1    | +2M   |
+| Firefox      | Browser    | Entries                   | N/A                 | Partial      |119.0       | N/A   |
+| Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.8.15      | +90K  |
 | Keeper       | App        | Entries                   | N/A                 | Yes          |16.10.9     | N/A   |
 | LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |4.123.0     | +10M  |
-| Roboform     | Plugin     | Entries                   | Chrome              | Yes          |9.5.2.0     | +600K |
-| Bitwarden    | Plugin     | Entries                   | Chrome              | Yes          |2023.10.1   | +3M   |
 | Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.1.0.73    | +4M   |
-| Bitdefender  | Plugin     | Master                    | Chrome              | Yes          |1.3.0       | +90K  |
-| Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.8.15      | +90K  |
 | Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3         | +1K   |
-| Avira        | Plugin     | Entries                   | Chrome              | Yes          |2.19.14.4461| +6M   |
 | Passwordboss | App        | Entries                   | N/A                 | Yes          |5.5.5104    | +20K  |
+| Roboform     | Plugin     | Entries                   | Chrome              | Yes          |9.5.2.0     | +600K |
 
 
 Regarding the extraction of credentials, some exploits are based on a specific number of bytes, to extract the credentials. So, maybe, in some cases, this number must be increased to extract this information correctly. During the experiments, common usernames and passwords were used. So, in most cases, this would be sufficient.
@@ -177,6 +177,34 @@ We are working on releasing an academic paper that will describe the experiments
 ## Prerequisites
 This section is devoted to any prerequisites the tool will need to be able to dump the credentials from a password manager.
 
+### 1Password
+
+1Password process needs high integrity privileges for the tool to be able to dump the relevant process and extract the credentials. To extract the credentials, I opened the app, entered the master password, and waited for at least 1 min. Then, I executed the tool to dump the credentials. The following screenshot illustrates the execution of the tool when the relevant app is running. Hidden data are the relevant usernames and passwords. About app entries, the tool can extract the username of each entry. Regarding 1Password plugin, to store an entry in the browser process, the user must either click the plugin icon or the browser needs to communicate with the plugin to autofill the credentials of a login form. The tool then will only get these credentials.
+
+![1password](https://github.com/efchatz/pandora/assets/43434138/fb18312d-22a4-416f-bde9-3150983d7571)
+
+
+### Avira
+
+https://github.com/efchatz/pandora/assets/43434138/807d2d87-d240-47f1-8b35-41701cde4a06
+
+The video was paused to shorten the size. First, Chrome is opened from cmd, then waited for at least 1 min. This means that an attacker could possibly start Chrome process without any user's interaction since Avira does not request for the user to enter their master password. After that, I executed pandora and waited to retrieve the credentials. The tool searches for the relevant entries. As can be observed, every entry is shown in a specific line, i.e., the name of the site, the password, and the relevant username. Note that headless mode does not start browser plugins. So, for this attack to work Chrome must be visible.
+
+
+### Bitdefender
+
+Bitdefender stores entries only when they are needed, like when the user is visiting a url that belongs to an entry. However, the master password is being stored for approx. 5 min, after the user enters it. As a result, there is a case in which an attacker could dump the master password. The tool does not check for entries, only for the master password.
+
+![bitdefender](https://github.com/efchatz/pandora/assets/43434138/61637ca4-d368-40a8-b51d-9be44f007340)
+
+
+### Bitwarden
+
+Bitwarden imports all entries when Chrome interacts with it. Some entries will be shown multiple times, as the tool finds them and dumps them from the dump file. 
+
+![bitwarden](https://github.com/efchatz/pandora/assets/43434138/b3ad4474-fd07-461e-99bd-06f2fd74a1f4)
+
+
 ### Chromium
 
 #### Chrome and Brave 
@@ -191,11 +219,12 @@ Note that the password manager page must be visited once, i.e., even if the pass
 
 MSEdge is different, i.e., only the browser needs to be open. It is not required for someone to visit the password manager page. MSEdge seems to preload the password manager immediately when opens. As a result, the tool can extract all entries, having the same output as with the other two browsers.
 
-### 1Password
 
-1Password process needs high integrity privileges for the tool to be able to dump the relevant process and extract the credentials. To extract the credentials, I opened the app, entered the master password, and waited for at least 1 min. Then, I executed the tool to dump the credentials. The following screenshot illustrates the execution of the tool when the relevant app is running. Hidden data are the relevant usernames and passwords. About app entries, the tool can extract the username of each entry. Regarding 1Password plugin, to store an entry in the browser process, the user must either click the plugin icon or the browser needs to communicate with the plugin to autofill the credentials of a login form. The tool then will only get these credentials.
+### Dashlane 
 
-![1password](https://github.com/efchatz/pandora/assets/43434138/fb18312d-22a4-416f-bde9-3150983d7571)
+https://github.com/efchatz/pandora/assets/43434138/3ff4faa8-8a1e-4293-a6ae-48db8ca1bdc1
+
+The video was paused to shorten the size. First, Chrome is being opened, I entered the master password and waited for at least 1 min. After that, I executed pandora and waited to retrieve the credentials. The tool first searches for entries and then for the master username and password. It will need 2-3 min to find these credentials. As can be observed, all data are available, both master username and password, along with the username and password of three different entries. It should be noted that the relevant data are noted, i.e., the master password is noted as "masterPassword". The same follows the remaining data.
 
 
 ### Firefox
@@ -205,11 +234,12 @@ Firefox uses a different pattern each time it loads the credentials either from 
 ![firefox-pass](https://github.com/efchatz/pandora/assets/43434138/1e43bd52-ae6d-4b4a-8f41-45b286a70f25)
 
 
-### Dashlane 
+### Ironvest
 
-https://github.com/efchatz/pandora/assets/43434138/3ff4faa8-8a1e-4293-a6ae-48db8ca1bdc1
+For Ironvest the relevant webapp must be up. Since this password manager does not require the master password from the user when it opens and keeps them auto logged-in, I started the Chrome from cmd, by visiting "ironvest.com/app". Then, I used the tool to extract all entries. The following screenshot illustrates this issue. Since entries are stored multiple times, they are dumped each time the tool identifies them within the dump file.
 
-The video was paused to shorten the size. First, Chrome is being opened, I entered the master password and waited for at least 1 min. After that, I executed pandora and waited to retrieve the credentials. The tool first searches for entries and then for the master username and password. It will need 2-3 min to find these credentials. As can be observed, all data are available, both master username and password, along with the username and password of three different entries. It should be noted that the relevant data are noted, i.e., the master password is noted as "masterPassword". The same follows the remaining data.
+![ironvest](https://github.com/efchatz/pandora/assets/43434138/4fe31134-66f4-45a0-8356-5d89a99f6a37)
+
 
 ### Keeper
 
@@ -225,39 +255,12 @@ https://github.com/efchatz/pandora/assets/43434138/69a9e752-0485-428e-b4a8-516ec
 
 LastPass automatically logins the user into the vault, when the Chrome browser opens. So, to retrieve the master password, the user must have entered it without terminating the browser. In every other case, all entries and the master username should be retrieved. In the video above, I started LastPass from cmd. The tool dumped all entries, and the master username, along with some junk data at the end that matched the searched pattern. It is suggested to check the .txt file as it is easier to identify the credentials since the console will include multiple junk rows.
 
-### Roboform
-
-Roboform automatically unlocks the vault when the user opens the Chrome browser. So, it is possible to start the Chrome process from cmd or powershell command. The following screenshot depicts the credentials the tool dumped, after starting the Chrome from cmd. As can be observed, all entries all noted with a keyword. Even an RSA private key can be extracted.
-
-![roboform](https://github.com/efchatz/pandora/assets/43434138/5c563a14-4948-45bb-b18c-81e5be6f2da0)
-
-
-### Bitwarden
-
-Bitwarden imports all entries when Chrome interacts with it. Some entries will be shown multiple times, as the tool finds them and dumps them from the dump file. 
-
-![bitwarden](https://github.com/efchatz/pandora/assets/43434138/b3ad4474-fd07-461e-99bd-06f2fd74a1f4)
-
 
 ### Norton
 
 Norton uses keywords to store credentials. So, the following screenshot illustrates the credentials the tool dumped. An important fact was that Norton password manager automatically stored the username and password of the user's Norton account within the vault. These are the credentials that were removed from the console output. Wait 30 sec after starting the browser to extract the credentials with the tool.
 
 ![norton](https://github.com/efchatz/pandora/assets/43434138/d68d1657-d997-4a6f-a8f1-3527468efc7c)
-
-
-### Bitdefender
-
-Bitdefender stores entries only when they are needed, like when the user is visiting a url that belongs to an entry. However, the master password is being stored for approx. 5 min, after the user enters it. As a result, there is a case in which an attacker could dump the master password. The tool does not check for entries, only for the master password.
-
-![bitdefender](https://github.com/efchatz/pandora/assets/43434138/61637ca4-d368-40a8-b51d-9be44f007340)
-
-
-### Ironvest
-
-For Ironvest the relevant webapp must be up. Since this password manager does not require the master password from the user when it opens and keeps them auto logged-in, I started the Chrome from cmd, by visiting "ironvest.com/app". Then, I used the tool to extract all entries. The following screenshot illustrates this issue. Since entries are stored multiple times, they are dumped each time the tool identifies them within the dump file.
-
-![ironvest](https://github.com/efchatz/pandora/assets/43434138/4fe31134-66f4-45a0-8356-5d89a99f6a37)
 
 
 ### Passwarden
@@ -267,17 +270,19 @@ The usual procedure was needed. As can be observed from the following screenshot
 ![passwarden](https://github.com/efchatz/pandora/assets/43434138/c785f0a4-0cc9-4b91-b1f8-1005dd026853)
 
 
-### Avira
-
-https://github.com/efchatz/pandora/assets/43434138/807d2d87-d240-47f1-8b35-41701cde4a06
-
-The video was paused to shorten the size. First, Chrome is opened from cmd, then waited for at least 1 min. This means that an attacker could possibly start Chrome process without any user's interaction since Avira does not request for the user to enter their master password. After that, I executed pandora and waited to retrieve the credentials. The tool searches for the relevant entries. As can be observed, every entry is shown in a specific line, i.e., the name of the site, the password, and the relevant username. Note that headless mode does not start browser plugins. So, for this attack to work Chrome must be visible.
-
 ### PasswordBoss
 
 https://github.com/efchatz/pandora/assets/43434138/f8f3b7fa-41f7-4182-9845-3430ec33486b
 
 The video was paused to shorten the size. First, the passwordboss app is executed, I entered then the master password and minimized the app. After that, I executed the tool and waited 3-4 min. As can be observed, the tool retrieved all relevant entries. Some of them, like Amazon were empty, but others like Facebook, Google, and a custom one named aegean were filled with the username and password of the user. Usually, entries with data, contain the "[]" symbol. 
+
+
+### Roboform
+
+Roboform automatically unlocks the vault when the user opens the Chrome browser. So, it is possible to start the Chrome process from cmd or powershell command. The following screenshot depicts the credentials the tool dumped, after starting the Chrome from cmd. As can be observed, all entries all noted with a keyword. Even an RSA private key can be extracted.
+
+![roboform](https://github.com/efchatz/pandora/assets/43434138/5c563a14-4948-45bb-b18c-81e5be6f2da0)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
