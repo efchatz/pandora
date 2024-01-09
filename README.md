@@ -141,7 +141,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Name         | Location   | Credentials               | Browser             | Stability    | Version    | Users |
 |--------------|------------|---------------------------|---------------------|--------------|------------|-------|
 | Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |121.0.6106.0| N/A   |
-| 1Password    | App/Plugin | Master(Both)/Entries(App) | Chrome/Firefox      | Yes          |8.10.18     | +4M   |
+| 1Password    | App/Plugin | Master(App)/Entries(Plugin) | Chrome/Firefox      | Yes          |8.10.18     | +4M   |
 | Firefox      | Browser    | Entries                   | N/A                 | Partial      |119.0       | N/A   |
 | Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Chrome       |6.2344.1    | +2M   |
 | Keeper       | App        | Entries                   | N/A                 | Yes          |16.10.9     | N/A   |
@@ -185,7 +185,7 @@ Both browsers have the same behavior, they keep the username and password of a l
 
 ![brave](https://github.com/efchatz/pandora/assets/43434138/6e011874-8c04-4034-9b60-17a2a493346d)
 
-Note that the password manager page must be visited once, i.e., even if the password manager is closed and the browser is not terminated and starts another process, the credentials will be stored within the memory. Another case would be for the user to visit a webpage that the password manager has saved its credentials, then these credentials will be stored in the process.
+Note that the password manager page must be visited once, i.e., even if the password manager is closed and the browser is not terminated and starts another process, the credentials will be stored within the memory. Another case would be for the user to visit a webpage where the password manager has saved its credentials, and then these credentials will be stored in the process.
 
 #### MSEdge
 
@@ -193,7 +193,7 @@ MSEdge is different, i.e., only the browser needs to be open. It is not required
 
 ### 1Password
 
-1Password process needs high integrity privileges for the tool to be able to dump the relevant process and extract the credentials. To extract the credentials, I opened the app, entered the master password, and waited for at least 1 min. Then, I executed the tool to dump the credentials. The following screenshot illustrates the execution of the tool when the relevant app is running. Hidden data are the relevant usernames and passwords.
+1Password process needs high integrity privileges for the tool to be able to dump the relevant process and extract the credentials. To extract the credentials, I opened the app, entered the master password, and waited for at least 1 min. Then, I executed the tool to dump the credentials. The following screenshot illustrates the execution of the tool when the relevant app is running. Hidden data are the relevant usernames and passwords. About app entries, the tool can extract the username of each entry. Regarding 1Password plugin, to store an entry in the browser process, the user must either click the plugin icon or the browser needs to communicate with the plugin to autofill the credentials of a login form. The tool then will only get these credentials.
 
 ![1password](https://github.com/efchatz/pandora/assets/43434138/fb18312d-22a4-416f-bde9-3150983d7571)
 
