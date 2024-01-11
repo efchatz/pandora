@@ -247,7 +247,7 @@ For Keeper, I started the app, entered the master password, and executed the too
 
 ![keeper](https://github.com/efchatz/pandora/assets/43434138/24f41499-230a-4d6c-92b7-c94cf8678b17)
 
-The tool could have also extracted other entries if a user had used them. For this reason, the second entry search returns no credentials.
+The tool will extract all entries of the user. If an entry is empty this means that this user has no other entry in the vault. For example, if the tool prints 5 entries with 4 of them have data and 1 without any data, then the user has stored 4 entries within the password manager.
 
 ### LastPass
 
