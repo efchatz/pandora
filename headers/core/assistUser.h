@@ -140,6 +140,15 @@ int assistUser() {
         return 1;
     }
 
+    //Roboform app
+    if (findAppRoboform()) {
+        std::wcout << L"Roboform App Directory exists!\n" << std::endl;
+    }
+    else {
+        std::wcerr << L"Failed to get the current user's login name." << std::endl;
+        return 1;
+    }
+
     //Firefox
     if (findAppFirefox()) {
         std::wcout << L"Firefox Directory exists!\n" << std::endl;
