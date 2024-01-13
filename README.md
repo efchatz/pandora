@@ -153,7 +153,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.1.0.73    | +4M   |
 | Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3         | +1K   |
 | Passwordboss | App        | Entries                   | N/A                 | Yes          |5.5.5104    | +20K  |
-| Roboform     | Plugin     | Entries                   | Chrome              | Yes          |9.5.2.0     | +600K |
+| Roboform     | App/Plugin | Master(App)/Entries(Both) | Chrome              | Yes          |9.5.2.0     | +600K |
 
 
 Regarding the extraction of credentials, some exploits are based on a specific number of bytes, to extract the credentials. So, maybe, in some cases, this number must be increased to extract this information correctly. During the experiments, common usernames and passwords were used. So, in most cases, this would be sufficient.
@@ -283,6 +283,16 @@ The video was paused to shorten the size. First, the passwordboss app is execute
 Roboform automatically unlocks the vault when the user opens the Chrome browser. Specifically, Roboform needs interaction with any saved entry URL to load all entries or for the user to click the plugin. So, it is possible to start the Chrome process from cmd or powershell command. The following screenshot depicts the credentials the tool dumped, after starting the Chrome from cmd. As can be observed, all entries all noted with a keyword. Even an RSA private key can be extracted. 
 
 ![roboform](https://github.com/efchatz/pandora/assets/43434138/5c563a14-4948-45bb-b18c-81e5be6f2da0)
+
+Regarding Roboform app, things are simpler. If the app is running, both the master username/password and all entries can be extracted. Specifically, entries will be available as being stored in the password manager. This means that all possible entries will be returned, along with the ones the user has saved. In these entries, the master username will also be there, towards the end. About the master password, there is a pattern to identify it. Multiple data will be returned, usually, the master password is presented in the last row.
+
+![robo1](https://github.com/efchatz/pandora/assets/43434138/b355aafc-4567-4880-ba45-f2ab4a38ebba)
+
+![robo2](https://github.com/efchatz/pandora/assets/43434138/4a90e87c-c284-46cc-97b2-a709461514c7)
+
+![robo3](https://github.com/efchatz/pandora/assets/43434138/febf04fc-4a75-4c22-acb1-cc5a2b2727c1)
+
+![robo4](https://github.com/efchatz/pandora/assets/43434138/f41a2881-c5b4-468d-a333-2a45c00f1f5c)
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
