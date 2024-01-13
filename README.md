@@ -148,7 +148,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Chrome       |6.2344.1    | +2M   |
 | Firefox      | Browser    | Entries                   | N/A                 | Partial      |119.0       | N/A   |
 | Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.8.15      | +90K  |
-| Keeper       | App        | Entries                   | N/A                 | Yes          |16.10.9     | N/A   |
+| Keeper       | App        | Master/Entries            | N/A                 | Yes          |16.10.9     | N/A   |
 | LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |4.123.0     | +10M  |
 | Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.1.0.73    | +4M   |
 | Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3         | +1K   |
@@ -245,9 +245,9 @@ For Ironvest the relevant webapp must be up. Since this password manager does no
 
 For Keeper, I started the app, entered the master password, and executed the tool. The response of the tool was the following:
 
-![keeper](https://github.com/efchatz/pandora/assets/43434138/24f41499-230a-4d6c-92b7-c94cf8678b17)
+![kepepep](https://github.com/efchatz/pandora/assets/43434138/145c0c6b-7e08-4617-ae8c-b1b5280fff45)
 
-The tool will extract all entries of the user. If an entry is empty this means that this user has no other entry in the vault. For example, if the tool prints 5 entries with 4 of them have data and 1 without any data, then the user has stored 4 entries within the password manager.
+The tool will extract all entries and the master username and password of the user. If an entry is empty this means that this user has no other entry in the vault. For example, if the tool prints 5 entries with 4 of them having data and 1 without any data, then the user has stored 4 entries within the password manager.
 
 ### LastPass
 
@@ -325,7 +325,7 @@ I would like to thank Zisis Tsiatsikas and Vyron Kampourakis. They assist me in 
 [contributors-url]: https://github.com/efchatz/pandora/graphs/contributors
 [forks-shield]: https://img.shields.io/badge/Forks-53-blue?style=for-the-badge
 [forks-url]: https://github.com/efchatz/pandora/network/members
-[stars-shield]: https://img.shields.io/badge/Stars-395-blue?style=for-the-badge
+[stars-shield]: https://img.shields.io/badge/Stars-401-blue?style=for-the-badge
 [stars-url]: https://github.com/efchatz/pandora/stargazers
 [issues-shield]: https://img.shields.io/badge/Issues-0-lightgrey?style=for-the-badge
 [issues-url]: https://github.com/efchatz/pandora/issues
