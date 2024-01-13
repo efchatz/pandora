@@ -70,6 +70,12 @@
     <Filter Include="Header Files\passwordboss\app">
       <UniqueIdentifier>{2bffb77b-55a6-47e6-bc8d-fc389c3fc442}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\roboform\app">
+      <UniqueIdentifier>{8eb3ae79-fe20-404f-a3d0-313c49025861}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\roboform\plugin">
+      <UniqueIdentifier>{7f9cdf3a-1193-4bcf-900c-41b327c3b939}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pandora.cpp">
@@ -118,9 +124,6 @@
     </ClInclude>
     <ClInclude Include="headers\lastpass\getCredslastpassEntries.h">
       <Filter>Header Files\lastpass</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\roboform\getCredsroboform.h">
-      <Filter>Header Files\roboform</Filter>
     </ClInclude>
     <ClInclude Include="headers\chromium\getCredschromium.h">
       <Filter>Header Files\chromium</Filter>
@@ -205,6 +208,27 @@
     </ClInclude>
     <ClInclude Include="headers\firefox\getCredsfirefox2.h">
       <Filter>Header Files\firefox</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\core\FindThirdPID.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\keeper\getCredskeeper3.h">
+      <Filter>Header Files\keeper</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\passwarden\app\getCredspasswarden2.h">
+      <Filter>Header Files\passwarden\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\roboform\app\getCredsroboformapp.h">
+      <Filter>Header Files\roboform\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\roboform\plugin\getCredsroboformplugin.h">
+      <Filter>Header Files\roboform\plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\roboform\app\getCredsroboformapp2.h">
+      <Filter>Header Files\roboform\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\roboform\app\getCredsroboformapp3.h">
+      <Filter>Header Files\roboform\app</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
