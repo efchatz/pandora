@@ -140,7 +140,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 
 | Name         | Location   | Credentials               | Browser             | Stability    | Version    | Users |
 |--------------|------------|---------------------------|---------------------|--------------|------------|-------|
-| 1Password    | App/Plugin | Master(App)/Entries(Plugin) | Chrome/Firefox    | Yes        |8.10.18   | +4M   |
+| 1Password    | App/Plugin | Master(App)/Entries(Plugin) | Chrome/Firefox    | Yes          |8.10.18     | +4M   |
 | Avira        | Plugin     | Entries                   | Chrome              | Yes          |2.19.14.4461| +6M   |
 | Bitdefender  | Plugin     | Master                    | Chrome              | Yes          |1.3.0       | +90K  |
 | Bitwarden    | Plugin     | Entries                   | Chrome              | Yes          |2023.10.1   | +3M   |
@@ -148,7 +148,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Chrome       |6.2344.1    | +2M   |
 | Firefox      | Browser    | Entries                   | N/A                 | Partial      |119.0       | N/A   |
 | Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.8.15      | +90K  |
-| Keeper       | App        | Master/Entries            | N/A                 | Yes          |16.10.9     | N/A   |
+| Keeper       | App        | Master/Entries            | N/A                 | Yes          |16.10.9     | +1M   |
 | LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |4.123.0     | +10M  |
 | Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.1.0.73    | +4M   |
 | Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3         | +1K   |
