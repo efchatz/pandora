@@ -269,6 +269,7 @@ The usual procedure was needed. As can be observed from the following screenshot
 
 ![passwarden](https://github.com/efchatz/pandora/assets/43434138/c785f0a4-0cc9-4b91-b1f8-1005dd026853)
 
+In the new version of the tool, the master username can be also extracted from the password manager.
 
 ### PasswordBoss
 
