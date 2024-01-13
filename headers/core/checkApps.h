@@ -38,6 +38,7 @@
 #include "../bitdefender/getCredsbitdefender2.h"
 #include "../ironvest/getCredsironvest.h"
 #include "../passwarden/app/getCredspasswarden.h"
+#include "../passwarden/app/getCredspasswarden2.h"
 #include "../avira/getCredsavira.h"
 #include "../avira/getCredsavira2.h"
 #include "../passwordboss/app/getCredspasswordbossapp1.h"
@@ -71,9 +72,9 @@ int checkApps() {
         assistUser();
     }
 
-    std::cout << "Enter the name of the password manager (accepted values, chrome, msedge, \n";
-    std::cout << "brave, 1password, firefox, dashlane, keeper, lastpass, roboform,\n";
-    std::cout << "bitwarden, norton, bitdefender, ironvest, passwarden, avira, passwordboss): ";
+    std::cout << "Enter the name of the password manager (accepted values, 1password, avira, \n";
+    std::cout << "bitdefender, bitwarden, brave, chrome, dashlane, firefox, ironvest, keeper,\n";
+    std::cout << "lastpass, msedge, norton, passwarden, passwordboss, roboform ): ";
     std::cin >> userInput;
     
     wchar_t currentDir[MAX_PATH];
@@ -392,8 +393,11 @@ int checkApps() {
             fileInput = "app.dmp";
         }
 
-        std::cout << "Searching for entries.\n";
+        std::cout << "Searching for entries (1/2).\n";
         getCredspasswarden(fileInput);
+        std::cout << "Done!\n";
+        std::cout << "Searching for master username (2/2).\n";
+        getCredspasswarden2(fileInput);
         std::cout << "Done!\n";
         std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
     }
