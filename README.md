@@ -271,7 +271,7 @@ The usual procedure was needed. As can be observed from the following screenshot
 
 ![passwarden](https://github.com/efchatz/pandora/assets/43434138/c785f0a4-0cc9-4b91-b1f8-1005dd026853)
 
-In the new version of the tool, the master username can be also extracted from the password manager.
+In the new version of the tool, the master username can be also extracted from the password manager. The master password also exists in plaintext format within the process, but there is no stable way of extracting it, yet.
 
 ### PasswordBoss
 
@@ -336,9 +336,9 @@ I would like to thank Zisis Tsiatsikas and Vyron Kampourakis. They assist me in 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/badge/Contributors-1-brightgreen?style=for-the-badge
 [contributors-url]: https://github.com/efchatz/pandora/graphs/contributors
-[forks-shield]: https://img.shields.io/badge/Forks-53-blue?style=for-the-badge
+[forks-shield]: https://img.shields.io/badge/Forks-59-blue?style=for-the-badge
 [forks-url]: https://github.com/efchatz/pandora/network/members
-[stars-shield]: https://img.shields.io/badge/Stars-401-blue?style=for-the-badge
+[stars-shield]: https://img.shields.io/badge/Stars-455-blue?style=for-the-badge
 [stars-url]: https://github.com/efchatz/pandora/stargazers
 [issues-shield]: https://img.shields.io/badge/Issues-0-lightgrey?style=for-the-badge
 [issues-url]: https://github.com/efchatz/pandora/issues
