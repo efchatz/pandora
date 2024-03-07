@@ -59,11 +59,13 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This is a red team tool that assists in gathering credentials from different password managers. They are separated into three categories, Windows 10 desktop applications, browsers, and browser plugins. This may work on other OS, like Linux, but it is not tested yet. In this release (v0.5), the tool supports 14 password managers, with 18 different implementations (e.g., the tool could dump credentials either from the desktop app, or the browser plugin of the same product). Specifically, in most cases, password managers must be up and unlocked for the tool to work. 
+This is a red team tool that assists in gathering credentials from different password managers. They are separated into three categories, Windows 10 desktop applications, browsers, and browser plugins. This may work on other OS, like Linux, but it is not tested yet. In this release (v1.0), the tool supports 14 password managers, with 18 different implementations (e.g., the tool could dump credentials either from the desktop app, or the browser plugin of the same product). Specifically, in most cases, password managers must be up and unlocked for the tool to work. 
+
+The tool can be executed in Full, Fast, and Local modes. Full mode dumps and checks all processes of this password manager. Fast mode checks the most common process that usually contains the credentials. Local mode checks the dump file locally. Also, local mode has the "merge" option that can assist in merging multiple dump files into one, before doing the analysis. Additionally, the tool can check if a directory of a password manager exists to assist the user in identifying which password manager can be used in this host. The tool will only need common **user's permissions** to be able to dump a process from a password manager. Only the 1Password desktop app requires high integrity privileges for the user to be able to dump the process.
 
 So, the purpose of this tool is to provide an additional attack vector in red team engagements, since many users are using password managers. Three different videos have been uploaded to assist in understanding how this tool works.
 
-Regarding fixing these issues, most vendors responded that such issues are out-of-scope for them since the attacker needs local access or AV/EDR should protect the user against such attacks. Although some products may provide fixes, their exploits will be released at a later date (they are still under disclosure).
+Regarding fixing these issues, most vendors responded that such issues are out-of-scope for them since the attacker needs local access or AV/EDR should protect the user against such attacks. Although some products may provide fixes, their exploits will be released at a later date (they are still under disclosure). Two vendors so far have acknowledged this issue and one of them will provide a fix with **CVE-2023-23349**. The second vendor CVE ID will be released at a later date. Also, each exploit will be released after the relevant patch is live.
 
 This is not a completely new concept. It has been well-known for some time that there is no de facto way for desktop applications to be protected against such attacks. However, and to the best of my knowledge, this is the first time such a tool has been presented to the public. Feel free to provide any feedback and/or recommendations/improvements.
 
@@ -105,6 +107,27 @@ In case of an issue with "DbgHelp.lib", do the following:
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+<!-- METHODOLOGY -->
+## Methodology
+The code is structured as follows:
+1. The user chooses the mode (full, fast, local). Full mode will dump all processes from a password manager and fast will dump the most common one that in most cases will contain the credentials. Local mode is done locally while providing the dump file.
+2. The user then has the option to check which password manager is installed for either an app or a plugin with a yes/no choice. The code checks if the default installation path of each password manager exists and provides the output. Note that during installation, most password managers do not allow the user to change the default installation path. For instance, Keeper is installed directly from the MS Store. So, this method could assist in identifying which password manager is installed. Note that in Full mode, the tool will not validate the actual size of each process file that will be created. So, if the host does not have the required free space, some processes will not be dumped and no error message will be shown.
+
+![pass-exists](https://github.com/efchatz/pandora/assets/43434138/00834f80-86a6-4f12-be7f-654eeee00cdb)
+
+4. The user chooses the relevant password manager.
+5. If the user chooses the "local" mode, then they will be asked if they want to merge different dump files. If yes, they must provide their filenames, each one per line, and enter "done" at the end. Otherwise, they will only have to provide their dump filename.
+6. Based on the relevant password manager, the tool dumps the process into a file.
+7. The dump file then is analyzed to identify any relevant pattern within it, to extract credentials.
+8. In some cases, some junk data will be presented to the user. These data will be noted as unparsed characters. So, they can be easily recognized.
+9. The user then can identify the credentials (either in the cmd output or in the relevant txt file).
+
+It should be noted that in some cases password managers store in plaintext other types of data, like credit card details, addresses, Wi-Fi passwords etc. Users should be wary of such attacks and should not execute untrusted files, enable 2FA, etc.
+
+Regarding the exploits, the methodology is simple, i.e., the purpose is to identify a pattern or a keyword that would pinpoint the relevant credentials within the dump file. Each password manager is different, so, each exploitation method differs. However, the concept is the same, i.e., finding the relevant pattern can pinpoint the credentials within this file. In some cases, the exploit finds when the credentials start and then gathers the next bytes, say 100. I did some extensive testing to identify these values correctly, but they may differ in a real-case scenario. Open an issue if you want to propose another password manager to be included in this tool which contains credentials in plaintext format within the process. 
+
+Note that the tool will delete the relevant 'app.dmp' file at the end of execution. Consider commenting out this line in the code 'remove("app.dmp");', in case you want to keep the relevant dump file. Generally, it is advised to first execute the code in a constrained environment in which the master/entry credentials will be known, observe the relevant output, and then execute it in another host. 
+
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -113,26 +136,26 @@ To use this tool, simply execute the compiled executable in the relevant host an
 
 Three videos have been uploaded to assist in how this tool works. The videos depict the phase in which an attacker would be able to gather the credentials from a password manager. In the case of Avira and similar password managers, this can be done without any user interaction (check relevant video).
 
-The following table depicts a high-level view of the tool's capabilities. Note that Firefox and the relevant Firefox plugins of password managers may not work correctly. They need further research for the tool to be able to extract the credentials in every case. This is due to the fact that Firefox changes its pattern with each execution.
+The following table depicts a high-level view of the tool's capabilities. Note that Firefox and the relevant Firefox plugins of password managers may not work correctly. They need further research for the tool to be able to extract the credentials in every case. This is because Firefox changes its pattern with each execution.
 
 Note: The Users column refers to the number of users mentioned in the Chrome Web Store for each browser plugin.
 
 | Name         | Location   | Credentials               | Browser             | Stability    | Version    | Users |
 |--------------|------------|---------------------------|---------------------|--------------|------------|-------|
-| Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |121.0.6106.0| N/A   |
-| 1Password    | App/Plugin | Master(Both)/Entries(App) | Chrome/Firefox      | Yes          |8.10.18     | +4M   |
-| Firefox      | Browser    | Entries                   | N/A                 | No           |119.0       | N/A   |
-| Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Chrome       |6.2344.1    | +2M   |
-| Keeper       | App        | Entries                   | N/A                 | Yes          |16.10.9     | N/A   |
-| LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |4.123.0     | +10M  |
-| Roboform     | Plugin     | Entries                   | Chrome              | Yes          |9.5.2.0     | +600K |
-| Bitwarden    | Plugin     | Master/Entries            | Chrome              | Yes          |2023.10.1   | +3M   |
-| Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.1.0.73    | +4M   |
-| Bitdefender  | Plugin     | Master                    | Chrome              | Yes          |1.3.0       | +90K  |
-| Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.8.15      | +90K  |
-| Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3         | +1K   |
+| 1Password    | App/Plugin | Master(App)/Entries(Plugin) | Chrome/Firefox    | Yes          |8.10.18     | +4M   |
 | Avira        | Plugin     | Entries                   | Chrome              | Yes          |2.19.14.4461| +6M   |
+| Bitdefender  | Plugin     | Master                    | Chrome              | Yes          |1.3.0       | +90K  |
+| Bitwarden    | Plugin     | Entries                   | Chrome              | Yes          |2023.10.1   | +3M   |
+| Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |121.0.6106.0| N/A   |
+| Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Chrome       |6.2344.1    | +2M   |
+| Firefox      | Browser    | Entries                   | N/A                 | Partial      |119.0       | N/A   |
+| Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.8.15      | +90K  |
+| Keeper       | App        | Master/Entries            | N/A                 | Yes          |16.10.9     | +1M   |
+| LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |4.123.0     | +10M  |
+| Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.1.0.73    | +4M   |
+| Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3         | +1K   |
 | Passwordboss | App        | Entries                   | N/A                 | Yes          |5.5.5104    | +20K  |
+| Roboform     | App/Plugin | Master(App)/Entries(Both) | Chrome              | Yes          |9.5.2.0     | +600K |
 
 
 Regarding the extraction of credentials, some exploits are based on a specific number of bytes, to extract the credentials. So, maybe, in some cases, this number must be increased to extract this information correctly. During the experiments, common usernames and passwords were used. So, in most cases, this would be sufficient.
@@ -156,70 +179,18 @@ We are working on releasing an academic paper that will describe the experiments
 ## Prerequisites
 This section is devoted to any prerequisites the tool will need to be able to dump the credentials from a password manager.
 
-### Chromium
-
-#### Chrome and Brave 
-
-Both browsers have the same behavior, they keep the username and password of a login form they interact with and they have saved its credentials, but to get all entries, the user must visit the password manager functionality of the browser or the attacker to open the browser and visit this page. Then, the tool can extract all entries as shown in the following screenshot:
-
-![brave](https://github.com/efchatz/pandora/assets/43434138/6e011874-8c04-4034-9b60-17a2a493346d)
-
-Note that the password manager page must be visited once, i.e., even if the password manager is closed and the browser is not terminated and starts another process, the credentials will be stored within the memory.
-
-#### MSEdge
-
-MSEdge is different, i.e., only the browser needs to be open. It is not required for someone to visit the password manager page. MSEdge seems to preload the password manager immediately when opens. As a result, the tool can extract all entries, having the same output as with the other two browsers.
-
 ### 1Password
 
-1Password process needs high integrity privileges for the tool to be able to dump the relevant process and extract the credentials. To extract the credentials, I opened the app, entered the master password, and waited for at least 1 min. Then, I executed the tool to dump the credentials. The following screenshot illustrates the execution of the tool when the relevant app is running. Hidden data are the relevant usernames and passwords.
+1Password process needs high integrity privileges for the tool to be able to dump the relevant process and extract the credentials. To extract the credentials, I opened the app, entered the master password, and waited for at least 1 min. Then, I executed the tool to dump the credentials. The following screenshot illustrates the execution of the tool when the relevant app is running. Hidden data are the relevant usernames and passwords. About app entries, the tool can extract the username of each entry. Regarding 1Password plugin, to store an entry in the browser process, the user must either click the plugin icon or the browser needs to communicate with the plugin to autofill the credentials of a login form. The tool then will only get these credentials.
 
 ![1password](https://github.com/efchatz/pandora/assets/43434138/fb18312d-22a4-416f-bde9-3150983d7571)
 
 
-### Firefox
+### Avira
 
-TBA.
+https://github.com/efchatz/pandora/assets/43434138/807d2d87-d240-47f1-8b35-41701cde4a06
 
-### Dashlane 
-
-https://github.com/efchatz/pandora/assets/43434138/3ff4faa8-8a1e-4293-a6ae-48db8ca1bdc1
-
-The video was paused to shorten the size. First, Chrome is being opened, I entered the master password and waited for at least 1 min. After that, I executed pandora and waited to retrieve the credentials. The tool first searches for entries and then for the master username and password. It will need 2-3 min to find these credentials. As can be observed, all data are available, both master username and password, along with the username and password of three different entries. It should be noted that the relevant data are noted, i.e., the master password is noted as "masterPassword". The same follows the remaining data.
-
-### Keeper
-
-For Keeper, I started the app, entered the master password, and executed the tool. The response of the tool was the following:
-
-![keeper](https://github.com/efchatz/pandora/assets/43434138/24f41499-230a-4d6c-92b7-c94cf8678b17)
-
-The tool could have also extracted other entries if a user had used them. For this reason, the second entry search returns no credentials.
-
-### LastPass
-
-https://github.com/efchatz/pandora/assets/43434138/69a9e752-0485-428e-b4a8-516ececdf1a1
-
-LastPass automatically logins the user into the vault, when the Chrome browser opens. So, to retrieve the master password, the user must have entered it without terminating the browser. In every other case, all entries and the master username should be retrieved. In the video above, I started LastPass from cmd. The tool dumped all entries, and the master username, along with some junk data at the end that matched the searched pattern. It is suggested to check the .txt file as it is easier to identify the credentials since the console will include multiple junk rows.
-
-### Roboform
-
-Roboform automatically unlocks the vault when the user opens the Chrome browser. So, it is possible to start the Chrome process from cmd or powershell command. The following screenshot depicts the credentials the tool dumped, after starting the Chrome from cmd. As can be observed, all entries all noted with a keyword. Even an RSA private key can be extracted.
-
-![roboform](https://github.com/efchatz/pandora/assets/43434138/5c563a14-4948-45bb-b18c-81e5be6f2da0)
-
-
-### Bitwarden
-
-Bitwarden imports all entries when Chrome interacts with it. Some entries will be shown multiple times, as the tool finds them and dumps them from the dump file. 
-
-![bitwarden](https://github.com/efchatz/pandora/assets/43434138/b3ad4474-fd07-461e-99bd-06f2fd74a1f4)
-
-
-### Norton
-
-Norton uses keywords to store credentials. So, the following screenshot illustrates the credentials the tool dumped. An important fact was that Norton password manager automatically stored the username and password of the user's Norton account within the vault. These are the credentials that were removed from the console output. Wait 30 sec after starting the browser to extract the credentials with the tool.
-
-![norton](https://github.com/efchatz/pandora/assets/43434138/d68d1657-d997-4a6f-a8f1-3527468efc7c)
+The video was paused to shorten the size. First, Chrome is opened from cmd, then waited for at least 1 min. This means that an attacker could possibly start Chrome process without any user's interaction since Avira does not request for the user to enter their master password. After that, I executed pandora and waited to retrieve the credentials. The tool searches for the relevant entries. As can be observed, every entry is shown in a specific line, i.e., the name of the site, the password, and the relevant username. Note that headless mode does not start browser plugins. So, for this attack to work Chrome must be visible.
 
 
 ### Bitdefender
@@ -229,11 +200,69 @@ Bitdefender stores entries only when they are needed, like when the user is visi
 ![bitdefender](https://github.com/efchatz/pandora/assets/43434138/61637ca4-d368-40a8-b51d-9be44f007340)
 
 
+### Bitwarden
+
+Bitwarden imports all entries when Chrome interacts with it. Some entries will be shown multiple times, as the tool finds them and dumps them from the dump file. 
+
+![bitwarden](https://github.com/efchatz/pandora/assets/43434138/b3ad4474-fd07-461e-99bd-06f2fd74a1f4)
+
+
+### Chromium
+
+#### Chrome and Brave 
+
+Both browsers have the same behavior, they keep the username and password of a login form they interact with and they have saved its credentials, but to get all entries, the user must visit the password manager functionality of the browser or the attacker to open the browser and visit this page. Then, the tool can extract all entries as shown in the following screenshot:
+
+![brave](https://github.com/efchatz/pandora/assets/43434138/6e011874-8c04-4034-9b60-17a2a493346d)
+
+Note that the password manager page must be visited once, i.e., even if the password manager is closed and the browser is not terminated and starts another process, the credentials will be stored within the memory. Another case would be for the user to visit a webpage where the password manager has saved its credentials, and then these credentials will be stored in the process.
+
+#### MSEdge
+
+MSEdge is different, i.e., only the browser needs to be open. It is not required for someone to visit the password manager page. MSEdge seems to preload the password manager immediately when opens. As a result, the tool can extract all entries, having the same output as with the other two browsers.
+
+
+### Dashlane 
+
+https://github.com/efchatz/pandora/assets/43434138/3ff4faa8-8a1e-4293-a6ae-48db8ca1bdc1
+
+The video was paused to shorten the size. First, Chrome is being opened, I entered the master password and waited for at least 1 min. After that, I executed pandora and waited to retrieve the credentials. The tool first searches for entries and then for the master username and password. It will need 2-3 min to find these credentials. As can be observed, all data are available, both master username and password, along with the username and password of three different entries. It should be noted that the relevant data are noted, i.e., the master password is noted as "masterPassword". The same follows the remaining data.
+
+
+### Firefox
+
+Firefox uses a different pattern each time it loads the credentials either from the embedded password manager or from another browser plugin. For this reason, the search is being made based on common email addresses that are used as usernames too, like "@gmail.com". The code will search for this string and print some relevant data before and after that. It should be noted that the user can include additional strings (check file getCredsfirefox2.h), but the output will be huge (especially, if a user dumps all processes). So, I suggest using different strings for each analysis, say first with "@gmail.com", identify any set of credentials within it, and then use another string, like "@yahoo.com" to identify any possible password within the process. Generally, to gain access to the stored credentials, the user must visit the password manager page or visit a stored webpage in which the password manager has stored a set of credentials. In the latter case, the process will only contain the credentials of this entry. For instance, if a user has saved the credentials of "Facebook" and visits this webpage, the process will only contain the "Facebook" credentials.
+
+![firefox-pass](https://github.com/efchatz/pandora/assets/43434138/1e43bd52-ae6d-4b4a-8f41-45b286a70f25)
+
+
 ### Ironvest
 
-For Ironvest the relevant webapp must be up. Since this password manager does not require the master password from the user when it opens and keeps them auto logged-in, I started the Chrome from cmd, by visiting "ironvest.com/app". Then, I used the tool to extract all entries. The following screenshot illustrates this issue. Since entries are stored multiple times, they are dumped each time the tool identifies them within the dump file.
+For Ironvest the relevant webapp must be up. Since this password manager does not require the master password from the user when it opens and keeps them auto logged-in, I started the Chrome from cmd, by visiting "ironvest.com/app". Then, I used the tool to extract all entries. The following screenshot illustrates this issue. Since entries are stored multiple times, they are dumped each time the tool identifies them within the dump file. Note that if the user or the attacker does not visit the Ironvest dashboard page, the entries are not loaded in the process. Another way of getting an entry is when the user visits the URL of a stored entry. Autofill feature will get these credentials in the process, but only of that entry.
 
 ![ironvest](https://github.com/efchatz/pandora/assets/43434138/4fe31134-66f4-45a0-8356-5d89a99f6a37)
+
+
+### Keeper
+
+For Keeper, I started the app, entered the master password, and executed the tool. The response of the tool was the following:
+
+![kepepep](https://github.com/efchatz/pandora/assets/43434138/145c0c6b-7e08-4617-ae8c-b1b5280fff45)
+
+The tool will extract all entries and the master username and password of the user. If an entry is empty this means that this user has no other entry in the vault. For example, if the tool prints 5 entries with 4 of them having data and 1 without any data, then the user has stored 4 entries within the password manager.
+
+### LastPass
+
+https://github.com/efchatz/pandora/assets/43434138/69a9e752-0485-428e-b4a8-516ececdf1a1
+
+LastPass automatically logins the user into the vault, when the Chrome browser opens. So, to retrieve the master password, the user must have logged out and logged in manually (entering the master password), without terminating the browser. In every other case, all entries and the master username should be retrieved. In the video above, I started LastPass from cmd. The tool dumped all entries, and the master username, along with some junk data at the end that matched the searched pattern. It is suggested to check the .txt file as it is easier to identify the credentials since the console will include multiple junk rows.
+
+
+### Norton
+
+Norton uses keywords to store credentials. So, the following screenshot illustrates the credentials the tool dumped. An important fact was that Norton password manager automatically stored the username and password of the user's Norton account within the vault. So, since all relevant entries are available, if the user did not delete the entry with their Norton account username/password, then the tool will extract them too. These are the credentials that were removed from the console output. Wait 30 sec after starting the browser to extract the credentials with the tool. Norton will store the vault (master) password in the process only when the user manually locks the vault and tries to unlock it. The master password will remain in the process for as long as the browser is running.
+
+![norton](https://github.com/efchatz/pandora/assets/43434138/d68d1657-d997-4a6f-a8f1-3527468efc7c)
 
 
 ### Passwarden
@@ -242,33 +271,34 @@ The usual procedure was needed. As can be observed from the following screenshot
 
 ![passwarden](https://github.com/efchatz/pandora/assets/43434138/c785f0a4-0cc9-4b91-b1f8-1005dd026853)
 
-
-### Avira
-
-https://github.com/efchatz/pandora/assets/43434138/807d2d87-d240-47f1-8b35-41701cde4a06
-
-The video was paused to shorten the size. First, Chrome is being opened from cmd, then waited for for at least 1 min. This means that an attacker could possibly start Chrome process without any user's interaction since Avira does not request for the user to enter their master password. After that, I executed pandora and waited to retrieve the credentials. The tool search for the relevant entries. As can be observed, every entry is showed in a specific line, i.e., the name of the site, the password and the relevant username. 
+In the new version of the tool, the master username can be also extracted from the password manager. The master password also exists in plaintext format within the process, but there is no stable way of extracting it, yet.
 
 ### PasswordBoss
 
 https://github.com/efchatz/pandora/assets/43434138/f8f3b7fa-41f7-4182-9845-3430ec33486b
 
-The video was paused to shorten the size. First, the passwordboss app is executed, I entered then the master password and minimized the app. After that, I executed the tool and waited 3-4 min. As can be observed, the tool retrieved all relevant entries. Some of them, like Amazon were empty, but others like Facebook, Google and a custom one named aegean were filled with the username and the password of the user. Usually, entries with data, contain the "[]" symbol. 
+The video was paused to shorten the size. First, the passwordboss app is executed, I entered then the master password and minimized the app. After that, I executed the tool and waited 3-4 min. As can be observed, the tool retrieved all relevant entries. Some of them, like Amazon were empty, but others like Facebook, Google, and a custom one named aegean were filled with the username and password of the user. Usually, entries with data, contain the "[]" symbol. 
+
+
+### Roboform
+
+Roboform automatically unlocks the vault when the user opens the Chrome browser. Specifically, Roboform needs interaction with any saved entry URL to load all entries or for the user to click the plugin. So, it is possible to start the Chrome process from cmd or powershell command. The following screenshot depicts the credentials the tool dumped, after starting the Chrome from cmd. As can be observed, all entries all noted with a keyword. Even an RSA private key can be extracted. 
+
+![roboform](https://github.com/efchatz/pandora/assets/43434138/5c563a14-4948-45bb-b18c-81e5be6f2da0)
+
+Regarding Roboform app, things are simpler. If the app is running, both the master username/password and all entries can be extracted. Specifically, entries will be available as being stored in the password manager. This means that all possible entries will be returned, along with the ones the user has saved. In these entries, the master username will also be there, towards the end. About the master password, there is a pattern to identify it. Multiple data will be returned, usually, the master password is presented in the last row.
+
+![robo1](https://github.com/efchatz/pandora/assets/43434138/b355aafc-4567-4880-ba45-f2ab4a38ebba)
+
+![robo2](https://github.com/efchatz/pandora/assets/43434138/4a90e87c-c284-46cc-97b2-a709461514c7)
+
+![robo3](https://github.com/efchatz/pandora/assets/43434138/febf04fc-4a75-4c22-acb1-cc5a2b2727c1)
+
+![robo4](https://github.com/efchatz/pandora/assets/43434138/f41a2881-c5b4-468d-a333-2a45c00f1f5c)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- METHODOLOGY -->
-## Methodology
-The code is structured as follows:
-1. The user chooses the relevant password manager or may request for additional input.
-2. Based on the relevant password manager, the tool dumps the process into a file.
-3. The dump file then is analyzed to identify any relevant pattern within it, with the purpose of extracting credentials.
-4. In some cases, some junk data will be presented to the user. These data will be noted as unparsed characters. So, they can be easily recognized.
-5. The user then can identify the credentials (either in cmd or in the relevant txt file).
-
-It should be noted that in some cases password managers store in plaintext other types of data, like credit card details, addresses, Wi-Fi passwords etc. Users should be wary of such attacks and should not execute untrusted files, enable 2FA, etc.
-
-Regarding the exploits, the methodology is simple, i.e., the purpose is to identify a pattern or a keyword that would pinpoint the relevant credentials within the dump file. Each password manager is different, so, each exploitation method differs. However, the concept is the same, i.e., finding the relevant pattern can pinpoint the credentials within this file. In some cases, the exploit finds when the credentials start and then gathers the next bytes, say 100. I did some extensive testing to identify these values correctly, but they may differ in a real-case scenario. Open an issue if you want to propose another password manager to be included in this tool.
 
 <!-- LICENSE -->
 ## License
@@ -306,9 +336,9 @@ I would like to thank Zisis Tsiatsikas and Vyron Kampourakis. They assist me in 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/badge/Contributors-1-brightgreen?style=for-the-badge
 [contributors-url]: https://github.com/efchatz/pandora/graphs/contributors
-[forks-shield]: https://img.shields.io/badge/Forks-0-blue?style=for-the-badge
+[forks-shield]: https://img.shields.io/badge/Forks-59-blue?style=for-the-badge
 [forks-url]: https://github.com/efchatz/pandora/network/members
-[stars-shield]: https://img.shields.io/badge/Stars-1-blue?style=for-the-badge
+[stars-shield]: https://img.shields.io/badge/Stars-455-blue?style=for-the-badge
 [stars-url]: https://github.com/efchatz/pandora/stargazers
 [issues-shield]: https://img.shields.io/badge/Issues-0-lightgrey?style=for-the-badge
 [issues-url]: https://github.com/efchatz/pandora/issues

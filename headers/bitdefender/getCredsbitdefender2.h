@@ -6,8 +6,8 @@
 #include "../core/saveFile.h"
 
 //Check when the vault is first unlocked and then locked
-int getCredsbitdefender2() {
-    std::ifstream file("app.dmp", std::ios::binary);
+int getCredsbitdefender2(std::string filename) {
+    std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
         std::cerr << "Error opening the file." << std::endl;

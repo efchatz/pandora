@@ -5,8 +5,8 @@
 #include <string>
 #include "../../core/saveFile.h"
 
-int getCredspasswordbossapp1() {
-    std::ifstream file("app.dmp", std::ios::binary);
+int getCredspasswordbossapp1(std::string filename) {
+    std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
         std::cerr << "Error opening the file." << std::endl;

