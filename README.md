@@ -336,9 +336,9 @@ I would like to thank Zisis Tsiatsikas and Vyron Kampourakis. They assist me in 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/badge/Contributors-1-brightgreen?style=for-the-badge
 [contributors-url]: https://github.com/efchatz/pandora/graphs/contributors
-[forks-shield]: https://img.shields.io/badge/Forks-59-blue?style=for-the-badge
+[forks-shield]: https://img.shields.io/badge/Forks-70-blue?style=for-the-badge
 [forks-url]: https://github.com/efchatz/pandora/network/members
-[stars-shield]: https://img.shields.io/badge/Stars-455-blue?style=for-the-badge
+[stars-shield]: https://img.shields.io/badge/Stars-509-blue?style=for-the-badge
 [stars-url]: https://github.com/efchatz/pandora/stargazers
 [issues-shield]: https://img.shields.io/badge/Issues-0-lightgrey?style=for-the-badge
 [issues-url]: https://github.com/efchatz/pandora/issues
