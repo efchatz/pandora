@@ -6,8 +6,8 @@
 
 /*CVE-2023-23349*/
 
-int getCredsEntrieskasperskyPlugin() {
-    std::ifstream file("app.dmp", std::ios::binary);
+int getCredsEntrieskasperskyPlugin(std::string filename) {
+    std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
         std::cerr << "Error opening the file." << std::endl;
