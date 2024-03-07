@@ -150,6 +150,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Chrome       |6.2344.1    | +2M   |
 | Firefox      | Browser    | Entries                   | N/A                 | Partial      |119.0       | N/A   |
 | Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.8.15      | +90K  |
+| Kaspersky    | Plugin     | Entries (fixed)           | Chrome              | Yes          |24.0.0.427 (patched) | +2M |
 | Keeper       | App        | Master/Entries            | N/A                 | Yes          |16.10.9     | +1M   |
 | LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |4.123.0     | +10M  |
 | Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.1.0.73    | +4M   |
@@ -241,6 +242,11 @@ Firefox uses a different pattern each time it loads the credentials either from 
 For Ironvest the relevant webapp must be up. Since this password manager does not require the master password from the user when it opens and keeps them auto logged-in, I started the Chrome from cmd, by visiting "ironvest.com/app". Then, I used the tool to extract all entries. The following screenshot illustrates this issue. Since entries are stored multiple times, they are dumped each time the tool identifies them within the dump file. Note that if the user or the attacker does not visit the Ironvest dashboard page, the entries are not loaded in the process. Another way of getting an entry is when the user visits the URL of a stored entry. Autofill feature will get these credentials in the process, but only of that entry.
 
 ![ironvest](https://github.com/efchatz/pandora/assets/43434138/4fe31134-66f4-45a0-8356-5d89a99f6a37)
+
+
+### Kaspersky
+
+For Kaspersky the exploit worked only for the Chrome browser. When a user opened their browser and the autofill option was enabled, the Native Messaging Server process of the password manager kept each entry in plaintext format and did not clear the process. So, if an attacker has access to this host and waited at least 1 min, they could exploit this issue and retrieved any stored entry from this process.
 
 
 ### Keeper
