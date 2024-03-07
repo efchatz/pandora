@@ -65,7 +65,7 @@ The tool can be executed in Full, Fast, and Local modes. Full mode dumps and che
 
 So, the purpose of this tool is to provide an additional attack vector in red team engagements, since many users are using password managers. Three different videos have been uploaded to assist in understanding how this tool works.
 
-Regarding fixing these issues, most vendors responded that such issues are out-of-scope for them since the attacker needs local access or AV/EDR should protect the user against such attacks. Although some products may provide fixes, their exploits will be released at a later date (they are still under disclosure). Only one vendor acknowledged this issue and will provide a fix with **CVE-2023-23349**. Their exploit will be released after the relevant patch is live.
+Regarding fixing these issues, most vendors responded that such issues are out-of-scope for them since the attacker needs local access or AV/EDR should protect the user against such attacks. Although some products may provide fixes, their exploits will be released at a later date (they are still under disclosure). Two vendors so far have acknowledged this issue and one of them will provide a fix with **CVE-2023-23349**. The second vendor CVE ID will be released at a later date. Also, each exploit will be released after the relevant patch is live.
 
 This is not a completely new concept. It has been well-known for some time that there is no de facto way for desktop applications to be protected against such attacks. However, and to the best of my knowledge, this is the first time such a tool has been presented to the public. Feel free to provide any feedback and/or recommendations/improvements.
 
