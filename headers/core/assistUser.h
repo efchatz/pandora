@@ -47,6 +47,20 @@ int assistUser() {
         return 1;
     }
 
+    //Kaspersky
+    if (GetUserNameW(username, &usernameSize)) {
+        // Replace this value with the extension name you want to check
+        std::wstring extensionName = L"dhnkblpjbkfklfloegejegedcafpliaa";
+
+        if (findPlugin(username, extensionName)) {
+            std::wcout << L"Kaspersky Chrome Plugin Directory exists!\n" << std::endl;
+        }
+    }
+    else {
+        std::wcerr << L"Failed to get the current user's login name." << std::endl;
+        return 1;
+    }
+
     //LastPass
     if (GetUserNameW(username, &usernameSize)) {
         // Replace this value with the extension name you want to check
