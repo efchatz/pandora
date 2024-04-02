@@ -128,6 +128,8 @@ Regarding the exploits, the methodology is simple, i.e., the purpose is to ident
 
 Note that the tool will delete the relevant 'app.dmp' file at the end of execution. Consider commenting out this line in the code 'remove("app.dmp");', in case you want to keep the relevant dump file. Generally, it is advised to first execute the code in a constrained environment in which the master/entry credentials will be known, observe the relevant output, and then execute it in another host. 
 
+Any further details can be found in our research work titled ["Keep your memory dump shut: Unveiling data leaks in password managers"](https://arxiv.org/abs/2404.00423)
+
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -328,7 +330,7 @@ Efstratios Chatzoglou - efchatzoglou@gmail.com
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-I would like to thank Zisis Tsiatsikas and Vyron Kampourakis. They assist me in identifying which process contains cleartext credentials for some password managers.
+I would like to thank Zisis Tsiatsikas and Vyron Kampourakis. They assist me in identifying which process contains cleartext credentials for some password managers. Kaspersky team for assigning [CVE-2023-23349](https://nvd.nist.gov/vuln/detail/CVE-2023-23349#) and for the [security advisory.](https://support.kaspersky.com/vulnerability/list-of-advisories/12430#180324)
 
 * [Choose an Open Source License](https://choosealicense.com)
 * [Img Shields](https://shields.io)
@@ -342,9 +344,9 @@ I would like to thank Zisis Tsiatsikas and Vyron Kampourakis. They assist me in 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/badge/Contributors-1-brightgreen?style=for-the-badge
 [contributors-url]: https://github.com/efchatz/pandora/graphs/contributors
-[forks-shield]: https://img.shields.io/badge/Forks-70-blue?style=for-the-badge
+[forks-shield]: https://img.shields.io/badge/Forks-72-blue?style=for-the-badge
 [forks-url]: https://github.com/efchatz/pandora/network/members
-[stars-shield]: https://img.shields.io/badge/Stars-509-blue?style=for-the-badge
+[stars-shield]: https://img.shields.io/badge/Stars-518-blue?style=for-the-badge
 [stars-url]: https://github.com/efchatz/pandora/stargazers
 [issues-shield]: https://img.shields.io/badge/Issues-0-lightgrey?style=for-the-badge
 [issues-url]: https://github.com/efchatz/pandora/issues
