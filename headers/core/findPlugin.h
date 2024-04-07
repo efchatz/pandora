@@ -80,6 +80,24 @@ bool findAppPasswordBoss(const std::wstring& username) {
     return (attributes != INVALID_FILE_ATTRIBUTES && (attributes & FILE_ATTRIBUTE_DIRECTORY));
 }
 
+//Bitwarden
+bool findAppBitwarden(const std::wstring& username) {
+    std::wstring extensionPath = L"C:\\Users\\" + username + L"\\AppData\\Local\\Programs\\Bitwarden";
+
+    DWORD attributes = GetFileAttributesW(extensionPath.c_str());
+
+    return (attributes != INVALID_FILE_ATTRIBUTES && (attributes & FILE_ATTRIBUTE_DIRECTORY));
+}
+
+//NordPass
+bool findAppNordPass(const std::wstring& username) {
+    std::wstring extensionPath = L"C:\\Users\\" + username + L"\\AppData\\Local\\Programs\\nordpass";
+
+    DWORD attributes = GetFileAttributesW(extensionPath.c_str());
+
+    return (attributes != INVALID_FILE_ATTRIBUTES && (attributes & FILE_ATTRIBUTE_DIRECTORY));
+}
+
 
 //Keeper is usually installed from MS Store
 bool DirectoryContainsKeeperSecurityInc()
