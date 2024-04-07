@@ -220,4 +220,26 @@ int assistUser() {
         std::wcerr << L"Failed to get the current user's login name." << std::endl;
         return 1;
     }
+
+    //Bitwarden
+    if (GetUserNameW(username, &usernameSize)) {
+        if (findAppBitwarden(username)) {
+            std::wcout << L"Bitwarden App Directory exists!\n" << std::endl;
+        }
+    }
+    else {
+        std::wcerr << L"Failed to get the current user's login name." << std::endl;
+        return 1;
+    }
+
+    //NordPass
+    if (GetUserNameW(username, &usernameSize)) {
+        if (findAppNordPass(username)) {
+            std::wcout << L"NordPass App Directory exists!\n" << std::endl;
+        }
+    }
+    else {
+        std::wcerr << L"Failed to get the current user's login name." << std::endl;
+        return 1;
+    }
 }
