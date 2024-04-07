@@ -148,6 +148,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Avira        | Plugin     | Entries                   | Chrome              | Yes          |2.19.14.4461| +6M   |
 | Bitdefender  | Plugin     | Master                    | Chrome              | Yes          |1.3.0       | +90K  |
 | Bitwarden    | Plugin     | Entries                   | Chrome              | Yes          |2023.10.1   | +3M   |
+| Bitwarden    | App        | Master                    | N/A                 | Yes          |2024.3.0    | N/A   |
 | Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |121.0.6106.0| N/A   |
 | Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Chrome       |6.2344.1    | +2M   |
 | Firefox      | Browser    | Entries                   | N/A                 | Partial      |119.0       | N/A   |
@@ -155,6 +156,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Kaspersky    | Plugin     | Entries (fixed)           | Chrome              | Yes          |24.0.0.427 (patched) | +2M |
 | Keeper       | App        | Master/Entries            | N/A                 | Yes          |16.10.9     | +1M   |
 | LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |4.123.0     | +10M  |
+| NordPass     | App        | Master                    | N/A                 | Yes          |5.14.23     | N/A   |
 | Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.1.0.73    | +4M   |
 | Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3         | +1K   |
 | Passwordboss | App        | Entries                   | N/A                 | Yes          |5.5.5104    | +20K  |
@@ -208,6 +210,19 @@ Bitdefender stores entries only when they are needed, like when the user is visi
 Bitwarden imports all entries when Chrome interacts with it. Some entries will be shown multiple times, as the tool finds them and dumps them from the dump file. 
 
 ![bitwarden](https://github.com/efchatz/pandora/assets/43434138/b3ad4474-fd07-461e-99bd-06f2fd74a1f4)
+
+For the app, only the master password and username are available. It should be noted that the app clear the master password from the memory after some time (appox. 10 min). The following screenshots illustrate the data retrieval of the master password (returned two times) and the username.
+
+![bitwarden](https://github.com/efchatz/pandora/assets/43434138/8effb234-de22-4489-9810-4d1d71993795)
+
+![bitwarden2](https://github.com/efchatz/pandora/assets/43434138/69a4dea0-995c-49b6-9404-2787ad48a44d)
+
+
+### NordPass
+
+NordPass stores the master username and password. So, both of them can be retrieved from the relevant process memory. Regarding master password, only one pattern will be returned. For the username, the following screenshot illustrates the output.
+
+![nordpass](https://github.com/efchatz/pandora/assets/43434138/cf7f91ca-5669-4b1c-bcc5-499e741600e6)
 
 
 ### Chromium
@@ -344,9 +359,9 @@ I would like to thank Zisis Tsiatsikas and Vyron Kampourakis. They assist me in 
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 [contributors-shield]: https://img.shields.io/badge/Contributors-1-brightgreen?style=for-the-badge
 [contributors-url]: https://github.com/efchatz/pandora/graphs/contributors
-[forks-shield]: https://img.shields.io/badge/Forks-72-blue?style=for-the-badge
+[forks-shield]: https://img.shields.io/badge/Forks-73-blue?style=for-the-badge
 [forks-url]: https://github.com/efchatz/pandora/network/members
-[stars-shield]: https://img.shields.io/badge/Stars-518-blue?style=for-the-badge
+[stars-shield]: https://img.shields.io/badge/Stars-523-blue?style=for-the-badge
 [stars-url]: https://github.com/efchatz/pandora/stargazers
 [issues-shield]: https://img.shields.io/badge/Issues-0-lightgrey?style=for-the-badge
 [issues-url]: https://github.com/efchatz/pandora/issues
