@@ -22,7 +22,8 @@ int countOccurrences(const std::vector<unsigned char>& data, const std::vector<u
 }
 
 int getCredsroboformapp4(std::string filename) {
-    std::ifstream sequencesFile("output.txt");
+    //Due to using saveFile2 in getCredsroboformapp2.h
+    std::ifstream sequencesFile("credentials2.txt");
     std::ifstream dataFile(filename, std::ios::binary);
 
     if (!sequencesFile.is_open()) {
@@ -50,11 +51,11 @@ int getCredsroboformapp4(std::string filename) {
         // Print and save the results only if found exactly once
         if (occurrences == 1) {
             std::cout << "Sequence: " << line << " found " << occurrences << " time." << std::endl;
-            saveFile("Sequence: " << line << " found " << occurrences << " time.");
+            saveFile(line + "\n");
         }
     }
 
     sequencesFile.close();
-  
+
     return 0;
 }
