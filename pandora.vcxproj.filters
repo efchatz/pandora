@@ -260,6 +260,12 @@
     <ClInclude Include="headers\nordpass\app\getCredsnordpass2.h">
       <Filter>Header Files\nordpass\app</Filter>
     </ClInclude>
+    <ClInclude Include="headers\roboform\app\getCredsroboformapp4.h">
+      <Filter>Header Files\roboform\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\core\saveFile2.h">
+      <Filter>Header Files\core</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
