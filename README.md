@@ -319,6 +319,10 @@ Regarding Roboform app, things are simpler. If the app is running, both the mast
 
 ![robo4](https://github.com/efchatz/pandora/assets/43434138/f41a2881-c5b4-468d-a333-2a45c00f1f5c)
 
+Also, an example of Repetitiveness has been added to assist in finding the master password of the Roboform app quickly. Specifically, the tool evaluates all possible master password credentials it gathered due to the relevant pattern (136 entries) and then checks which of these entries exist exactly 1 time within the dump. Since only the master password exists exactly 1 time in the dump, the tool prints only the relevant entry.
+
+![tool1-1](https://github.com/efchatz/pandora/assets/43434138/0ac2bc79-2ebf-4a5c-a035-936db4108fea)
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
