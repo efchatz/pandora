@@ -37,7 +37,7 @@ int getCredsroboformapp3(std::string filename) {
                 std::cout << "Pattern Data: " + utf8ExtractedData << std::endl;  // Add a newline
 
                 //Save data into a file
-                saveFile(utf8ExtractedData);
+                saveFile(utf8ExtractedData + "\n");
 
                 // Clear the foundData vector to search for the next occurrence
                 foundData.clear();
