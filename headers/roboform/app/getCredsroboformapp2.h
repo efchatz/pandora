@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include "../../core/saveFile.h"
+#include "../../core/saveFile2.h"
 
 int getCredsroboformapp2(std::string filename) {
     std::ifstream file(filename, std::ios::binary);
@@ -30,7 +30,7 @@ int getCredsroboformapp2(std::string filename) {
                     file.read(reinterpret_cast<char*>(&c), sizeof(c));
                     if (c == 0x00) {
                         consecutiveSpaces++;
-                        if (consecutiveSpaces == 4) {
+                        if (consecutiveSpaces == 2) {
                             break; // (00) found
                         }
                     }
@@ -47,7 +47,7 @@ int getCredsroboformapp2(std::string filename) {
                 std::cout << "Pattern Data: " + utf8ExtractedData << std::endl;
 
                 //Save into file
-                saveFile(utf8ExtractedData);
+                saveFile2(utf8ExtractedData + "\n");
 
                 foundData.clear();
             }
