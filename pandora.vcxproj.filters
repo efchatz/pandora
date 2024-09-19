@@ -91,6 +91,9 @@
     <Filter Include="Header Files\nordpass\app">
       <UniqueIdentifier>{b28971a2-433c-4f83-98fd-da806bfb6085}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\enpass">
+      <UniqueIdentifier>{9aad90aa-6f5e-4318-8d71-f7939bd91b3e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pandora.cpp">
@@ -265,6 +268,9 @@
     </ClInclude>
     <ClInclude Include="headers\core\saveFile2.h">
       <Filter>Header Files\core</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\enpass\getCredsenpassEntries.h">
+      <Filter>Header Files\enpass</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
