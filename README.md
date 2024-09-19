@@ -371,7 +371,7 @@ I would like to thank Zisis Tsiatsikas and Vyron Kampourakis. They assist me in 
 [contributors-url]: https://github.com/efchatz/pandora/graphs/contributors
 [forks-shield]: https://img.shields.io/badge/Forks-77-blue?style=for-the-badge
 [forks-url]: https://github.com/efchatz/pandora/network/members
-[stars-shield]: https://img.shields.io/badge/Stars-538-blue?style=for-the-badge
+[stars-shield]: https://img.shields.io/badge/Stars-566-blue?style=for-the-badge
 [stars-url]: https://github.com/efchatz/pandora/stargazers
 [issues-shield]: https://img.shields.io/badge/Issues-0-lightgrey?style=for-the-badge
 [issues-url]: https://github.com/efchatz/pandora/issues
