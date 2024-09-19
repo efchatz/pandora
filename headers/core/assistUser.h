@@ -150,7 +150,7 @@ int assistUser() {
         std::wcout << L"Brave Directory exists!\n" << std::endl;
     }
     else {
-        std::wcerr << L"Failed to get the current user's login name." << std::endl;
+        std::wcerr << L"An error occured." << std::endl;
         return 1;
     }
 
@@ -159,7 +159,7 @@ int assistUser() {
         std::wcout << L"Roboform App Directory exists!\n" << std::endl;
     }
     else {
-        std::wcerr << L"Failed to get the current user's login name." << std::endl;
+        std::wcerr << L"An error occured." << std::endl;
         return 1;
     }
 
@@ -168,7 +168,7 @@ int assistUser() {
         std::wcout << L"Firefox Directory exists!\n" << std::endl;
     }
     else {
-        std::wcerr << L"Failed to get the current user's login name." << std::endl;
+        std::wcerr << L"An error occured." << std::endl;
         return 1;
     }
 
@@ -177,7 +177,7 @@ int assistUser() {
         std::wcout << L"MSEdge Directory exists!\n" << std::endl;
     }
     else {
-        std::wcerr << L"Failed to get the current user's login name." << std::endl;
+        std::wcerr << L"An error occured." << std::endl;
         return 1;
     }
 
@@ -186,7 +186,16 @@ int assistUser() {
         std::wcout << L"Chrome Directory exists!\n" << std::endl;
     }
     else {
-        std::wcerr << L"Failed to get the current user's login name." << std::endl;
+        std::wcerr << L"An error occured." << std::endl;
+        return 1;
+    }
+
+    //Enpass
+    if (findAppEnpass()) {
+        std::wcout << L"Enpass Directory exists!\n" << std::endl;
+    }
+    else {
+        std::wcerr << L"An error occured." << std::endl;
         return 1;
     }
 
@@ -195,7 +204,7 @@ int assistUser() {
         std::wcout << L"Passwarden App Directory exists!\n" << std::endl;
     }
     else {
-        std::wcerr << L"Failed to get the current user's login name." << std::endl;
+        std::wcerr << L"An error occured." << std::endl;
         return 1;
     }
 
