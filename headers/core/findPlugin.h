@@ -53,6 +53,15 @@ bool findAppChrome() {
     return (attributes != INVALID_FILE_ATTRIBUTES && (attributes & FILE_ATTRIBUTE_DIRECTORY));
 }
 
+//Enpass
+bool findAppEnpass() {
+    std::wstring extensionPath = L"C:\\Program Files (x86)\\Enpass";
+
+    DWORD attributes = GetFileAttributesW(extensionPath.c_str());
+
+    return (attributes != INVALID_FILE_ATTRIBUTES && (attributes & FILE_ATTRIBUTE_DIRECTORY));
+}
+
 //Passwarden
 bool findAppPasswarden() {
     std::wstring extensionPath = L"C:\\Program Files (x86)\\Passwarden";
