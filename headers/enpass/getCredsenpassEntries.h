@@ -5,6 +5,8 @@
 #include <string>
 #include "../core/saveFile.h"
 
+/* CVE-2024-9203 */
+
 int getCredsenpassEntries(std::string filename) {
     std::ifstream file(filename, std::ios::binary);
 
