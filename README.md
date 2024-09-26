@@ -65,7 +65,7 @@ The tool can be executed in Full, Fast, and Local modes. Full mode dumps and che
 
 So, the purpose of this tool is to provide an additional attack vector in red team engagements, since many users are using password managers. Three different videos have been uploaded to assist in understanding how this tool works.
 
-Regarding fixing these issues, most vendors responded that such issues are out-of-scope for them since the attacker needs local access or AV/EDR should protect the user against such attacks. Although some products may provide fixes, their exploits will be released at a later date (they are still under disclosure). Two vendors so far have acknowledged this issue and one of them will provide a fix with **CVE-2023-23349 (Kaspersky)**. The second vendor CVE ID will be released at a later date. Also, each exploit will be released after the relevant patch is live.
+Regarding fixing these issues, most vendors responded that such issues are out-of-scope for them since the attacker needs local access or AV/EDR should protect the user against such attacks. Although some products may provide fixes, their exploits will be released at a later date (they are still under disclosure). Two vendors so far have acknowledged this issue and provided fixes with **CVE-2023-23349 (Kaspersky)** and **CVE-2024-9203 (Enpass)**.
 
 This is not a completely new concept. It has been well-known for some time that there is no de facto way for desktop applications to be protected against such attacks. However, and to the best of my knowledge, this is the first time such a tool has been presented to the public. Feel free to provide any feedback and/or recommendations/improvements.
 
@@ -355,8 +355,8 @@ Efstratios Chatzoglou - efchatzoglou@gmail.com
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-I would like to thank Zisis Tsiatsikas and Vyron Kampourakis. They assist me in identifying which process contains cleartext credentials for some password managers. Kaspersky team for assigning [CVE-2023-23349](https://nvd.nist.gov/vuln/detail/CVE-2023-23349#) and for the [security advisory.](https://support.kaspersky.com/vulnerability/list-of-advisories/12430#180324)
-
+I would like to thank Zisis Tsiatsikas and Vyron Kampourakis. They assist me in identifying which process contains cleartext credentials for some password managers. Kaspersky team for assigning [CVE-2023-23349](https://nvd.nist.gov/vuln/detail/CVE-2023-23349#) and for the [security advisory.](https://support.kaspersky.com/vulnerability/list-of-advisories/12430#180324). Also, I would like to thank VulnDB team, for assigning [CVE-2024-9203](https://vuldb.com/?id.278561) for Enpass.
+ 
 * [Choose an Open Source License](https://choosealicense.com)
 * [Img Shields](https://shields.io)
 * [Best-README-Template](https://github.com/othneildrew/Best-README-Template)
