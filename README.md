@@ -147,7 +147,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | 1Password    | App/Plugin | Master(App)/Master(Plugin) | Chrome             | Yes          |8.10.44.34  | +5M   |
 | Avira        | Plugin     | Entries                   | Chrome              | Yes          |2.21.0.4971 | +6M   |
 | Bitdefender  | Plugin     | Master                    | Chrome              | Yes          |1.3.1       | +100K |
-| Bitwarden    | Plugin     | Entries                   | Chrome              | Yes          |2023.10.1   | +3M   |
+| Bitwarden    | Plugin     | Entries                   | Chrome              | Yes          |2024.10.1   | +4M   |
 | Bitwarden    | App        | Master                    | N/A                 | Yes          |2024.3.0    | N/A   |
 | Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |121.0.6106.0| N/A   |
 | Enpass       | App        | Entries                   | N/A                 | Yes          |6.9.3 (patched) | N/A |
@@ -208,7 +208,7 @@ Bitdefender stores entries only when they are needed, like when the user is visi
 
 ### Bitwarden
 
-Bitwarden imports all entries when Chrome interacts with it. Some entries will be shown multiple times, as the tool finds them and dumps them from the dump file. 
+Bitwarden imports all entries immediately when the vault is unlocked. Some entries will be shown multiple times, as the tool finds them and dumps them from the dump file. 
 
 ![bitwarden](https://github.com/efchatz/pandora/assets/43434138/b3ad4474-fd07-461e-99bd-06f2fd74a1f4)
 
