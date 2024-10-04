@@ -161,7 +161,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.2.1.388   | +4M   |
 | Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3         | +1K   |
 | Passwordboss | App        | Entries                   | N/A                 | Yes          |5.5.5104    | +20K  |
-| Roboform     | App/Plugin | Master(App)/Entries(Both) | Chrome              | Yes          |9.5.2.0     | +600K |
+| Roboform     | App/Plugin | Master(App)/Entries(Both) | Chrome              | Yes          |9.6.8.0     | +600K |
 
 
 Regarding the extraction of credentials, some exploits are based on a specific number of bytes, to extract the credentials. So, maybe, in some cases, this number must be increased to extract this information correctly. During the experiments, common usernames and passwords were used. So, in most cases, this would be sufficient.
@@ -313,7 +313,7 @@ The video was paused to shorten the size. First, the passwordboss app is execute
 
 ### Roboform
 
-Roboform automatically unlocks the vault when the user opens the Chrome browser. Specifically, Roboform needs interaction with any saved entry URL to load all entries or for the user to click the plugin. So, it is possible to start the Chrome process from cmd or powershell command. The following screenshot depicts the credentials the tool dumped, after starting the Chrome from cmd. As can be observed, all entries all noted with a keyword. Even an RSA private key can be extracted. 
+Roboform automatically unlocks the vault when the user opens the Chrome browser. Specifically, Roboform needs interaction with any saved entry URL or for the user to click the plugin to load the entries. So, it is possible to start the Chrome process from cmd or powershell command and then execute the tool to extract the credentials. Additionally, the master password is available by simply opening the browser. The following screenshot depicts the credentials the tool dumped, after starting the Chrome from cmd. 
 
 ![roboform](https://github.com/efchatz/pandora/assets/43434138/5c563a14-4948-45bb-b18c-81e5be6f2da0)
 
