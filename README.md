@@ -151,7 +151,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Bitwarden    | App        | Master                    | N/A                 | Yes          |2024.3.0    | N/A   |
 | Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |121.0.6106.0| N/A   |
 | Enpass       | App        | Entries                   | N/A                 | Yes          |6.9.3 (patched) | N/A |
-| Dashlane     | Plugin     | Master/Entries            | Chrome/Firefox      | Chrome       |6.2344.1    | +2M   |
+| Dashlane     | Plugin     | Master/Entries            | Chrome              | Yes          |6.2440.1    | +2M   |
 | Firefox      | Browser    | Entries                   | N/A                 | Partial      |119.0       | N/A   |
 | Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.8.15      | +90K  |
 | Kaspersky    | Plugin     | Entries (fixed)           | Chrome              | Yes          |24.0.0.427 (patched) | +2M |
@@ -245,7 +245,7 @@ MSEdge is different, i.e., only the browser needs to be open. It is not required
 
 https://github.com/efchatz/pandora/assets/43434138/3ff4faa8-8a1e-4293-a6ae-48db8ca1bdc1
 
-The video was paused to shorten the size. First, Chrome is being opened, I entered the master password and waited for at least 1 min. After that, I executed pandora and waited to retrieve the credentials. The tool first searches for entries and then for the master username and password. It will need 2-3 min to find these credentials. As can be observed, all data are available, both master username and password, along with the username and password of three different entries. It should be noted that the relevant data are noted, i.e., the master password is noted as "masterPassword". The same follows the remaining data.
+The video was paused to shorten the size. First, Chrome is being opened, I entered the master password and waited for at least 1 min. After that, I executed pandora and waited to retrieve the credentials. The tool first searches for entries and then for the master username and password. It will need 2-3 min to find these credentials. As can be observed, all data are available, both master username and password, along with the username and password of three different entries.
 
 ### Enpass
 
