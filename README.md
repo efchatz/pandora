@@ -158,7 +158,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Keeper       | App        | Master/Entries            | N/A                 | Yes          |16.10.9     | +1M   |
 | LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |4.134.0     | +9M  |
 | NordPass     | App        | Master                    | N/A                 | Yes          |5.14.23     | N/A   |
-| Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.1.0.73    | +4M   |
+| Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.2.1.388   | +4M   |
 | Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3         | +1K   |
 | Passwordboss | App        | Entries                   | N/A                 | Yes          |5.5.5104    | +20K  |
 | Roboform     | App/Plugin | Master(App)/Entries(Both) | Chrome              | Yes          |9.5.2.0     | +600K |
