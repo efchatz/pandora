@@ -313,9 +313,11 @@ The video was paused to shorten the size. First, the passwordboss app is execute
 
 ### Roboform
 
-Roboform automatically unlocks the vault when the user opens the Chrome browser. Specifically, Roboform needs interaction with any saved entry URL or for the user to click the plugin to load the entries. So, it is possible to start the Chrome process from cmd or powershell command and then execute the tool to extract the credentials. Additionally, the master password is available by simply opening the browser. The following screenshot depicts the credentials the tool dumped, after starting the Chrome from cmd. 
+Roboform automatically unlocks the vault when the user opens the Chrome browser. Specifically, Roboform needs interaction with any saved entry URL or for the user to click the plugin to load the entries. So, it is possible to start the Chrome process from cmd or powershell command and then execute the tool to extract the credentials. Additionally, the master password is available by simply opening the browser. The following screenshot depicts the credentials the tool dumped, after starting the Chrome from cmd. The first screenshot illustrates the output of the extracted entries, while the second one demonstrates the extraction of the master password.
 
-![roboform](https://github.com/efchatz/pandora/assets/43434138/5c563a14-4948-45bb-b18c-81e5be6f2da0)
+![123121](https://github.com/user-attachments/assets/5041d189-4a18-4d5d-a961-29c6507fab1a)
+
+![1221](https://github.com/user-attachments/assets/24875302-10e8-4b05-9a4c-cc76fb76b2d7)
 
 Regarding Roboform app, things are simpler. If the app is running, both the master username/password and all entries can be extracted. Specifically, entries will be available as being stored in the password manager. This means that all possible entries will be returned, along with the ones the user has saved. In these entries, the master username will also be there, towards the end. About the master password, there is a pattern to identify it. Multiple data will be returned, usually, the master password is presented in the last row.
 
