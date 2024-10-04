@@ -243,9 +243,11 @@ MSEdge is different, i.e., only the browser needs to be open. It is not required
 
 ### Dashlane 
 
-https://github.com/efchatz/pandora/assets/43434138/3ff4faa8-8a1e-4293-a6ae-48db8ca1bdc1
+When Dashlane is unlocked and interacted in any way, for the next 1 minute, entries will be available. After that, only the master password remains in the process. Depending on the case, the tool will gather the relevant credentials as depicted in the following screenshots. The first screenshot illustrates the case when the master password is available and the second screenshot when entries are.
 
-The video was paused to shorten the size. First, Chrome is being opened, I entered the master password and waited for at least 1 min. After that, I executed pandora and waited to retrieve the credentials. The tool first searches for entries and then for the master username and password. It will need 2-3 min to find these credentials. As can be observed, all data are available, both master username and password, along with the username and password of three different entries.
+![1231](https://github.com/user-attachments/assets/bd017386-1ac4-4b61-a2c8-029f600a604d)
+
+![12312](https://github.com/user-attachments/assets/3280be3d-8515-4f24-a004-c11881b6a954)
 
 ### Enpass
 
