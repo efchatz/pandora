@@ -67,7 +67,7 @@ So, the purpose of this tool is to provide an additional attack vector in red te
 
 Regarding fixing these issues, most vendors responded that such issues are out-of-scope for them since the attacker needs local access or AV/EDR should protect the user against such attacks. Although some products may provide fixes, their exploits will be released at a later date (they are still under disclosure). Two vendors so far have acknowledged this issue and provided fixes with **CVE-2023-23349 (Kaspersky)** and **CVE-2024-9203 (Enpass)**.
 
-This is not a completely new concept. It has been well-known for some time that there is no de facto way for desktop applications to be protected against such attacks. However, and to the best of my knowledge, this is the first time such a tool has been presented to the public. Feel free to provide any feedback and/or recommendations/improvements.
+This is not a completely new concept. It has been well-known for some time that there is no de facto way for desktop applications to be protected against such attacks. However, and to the best of my knowledge, this is the first time such a tool has been presented to the public. Feel free to provide any feedback and/or recommendations/improvements. **The tool only handles the relevant versions. A password manager update could potentially change the pattern that the tool uses to identify the credentials.**
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
