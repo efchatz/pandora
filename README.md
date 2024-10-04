@@ -145,8 +145,8 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Name         | Location   | Credentials               | Browser             | Stability    | Version    | Users |
 |--------------|------------|---------------------------|---------------------|--------------|------------|-------|
 | 1Password    | App/Plugin | Master(App)/Master(Plugin) | Chrome             | Yes          |8.10.44.34  | +5M   |
-| Avira        | Plugin     | Entries                   | Chrome              | Yes          |2.19.14.4461| +6M   |
-| Bitdefender  | Plugin     | Master                    | Chrome              | Yes          |1.3.0       | +90K  |
+| Avira        | Plugin     | Entries                   | Chrome              | Yes          |2.21.0.4971 | +6M   |
+| Bitdefender  | Plugin     | Master                    | Chrome              | Yes          |1.3.1       | +100K |
 | Bitwarden    | Plugin     | Entries                   | Chrome              | Yes          |2023.10.1   | +3M   |
 | Bitwarden    | App        | Master                    | N/A                 | Yes          |2024.3.0    | N/A   |
 | Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |121.0.6106.0| N/A   |
@@ -201,7 +201,7 @@ The video was paused to shorten the size. First, Chrome is opened from cmd, then
 
 ### Bitdefender
 
-Bitdefender stores entries only when they are needed, like when the user is visiting a url that belongs to an entry. However, the master password is being stored for approx. 5 min, after the user enters it. As a result, there is a case in which an attacker could dump the master password. The tool does not check for entries, only for the master password.
+Bitdefender stores entries only when they are needed, like when the user is visiting a url that belongs to an entry. However, the master password is being stored after the user enters it. As a result, there is a case in which an attacker could dump the master password. The tool does not check for entries, only for the master password.
 
 ![bitdefender](https://github.com/efchatz/pandora/assets/43434138/61637ca4-d368-40a8-b51d-9be44f007340)
 
