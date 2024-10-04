@@ -161,7 +161,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.2.1.388   | +4M   |
 | Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3         | +1K   |
 | Passwordboss | App        | Entries                   | N/A                 | Yes          |5.5.5104    | +20K  |
-| Roboform     | App/Plugin | Master(App)/Entries(Both) | Chrome              | Yes          |9.6.8.0     | +600K |
+| Roboform     | App/Plugin | Master(Both)/Entries(Both) | Chrome              | Yes          |9.6.8.0     | +600K |
 
 
 Regarding the extraction of credentials, some exploits are based on a specific number of bytes, to extract the credentials. So, maybe, in some cases, this number must be increased to extract this information correctly. During the experiments, common usernames and passwords were used. So, in most cases, this would be sufficient.
