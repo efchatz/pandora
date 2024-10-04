@@ -291,9 +291,9 @@ LastPass automatically logins the user into the vault, when the Chrome browser o
 
 ### Norton
 
-Norton uses keywords to store credentials. So, the following screenshot illustrates the credentials the tool dumped. An important fact was that Norton password manager automatically stored the username and password of the user's Norton account within the vault. So, since all relevant entries are available, if the user did not delete the entry with their Norton account username/password, then the tool will extract them too. These are the credentials that were removed from the console output. Wait 30 sec after starting the browser to extract the credentials with the tool. Norton will store the vault (master) password in the process only when the user manually locks the vault and tries to unlock it. The master password will remain in the process for as long as the browser is running.
+Norton uses keywords to store credentials. So, the following screenshot illustrates the credentials the tool dumped. An important fact was that Norton password manager automatically stored the username and password of the user's Norton account within the vault. So, since all relevant entries are available, if the user did not delete the entry with their Norton account username/password, then the tool will extract them too. These are the credentials that were removed from the console output. Wait 30 sec after starting the browser to extract the credentials with the tool. This relevant version asks the user to enter the master password every time they open the browser. 
 
-![norton](https://github.com/efchatz/pandora/assets/43434138/d68d1657-d997-4a6f-a8f1-3527468efc7c)
+![123123](https://github.com/user-attachments/assets/e9923364-23af-497d-95a8-3fad9d2d3617)
 
 
 ### Passwarden
