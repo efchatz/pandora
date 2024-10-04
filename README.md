@@ -156,7 +156,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.8.15      | +90K  |
 | Kaspersky    | Plugin     | Entries (fixed)           | Chrome              | Yes          |24.0.0.427 (patched) | +2M |
 | Keeper       | App        | Master/Entries            | N/A                 | Yes          |16.10.9     | +1M   |
-| LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |4.123.0     | +10M  |
+| LastPass     | Plugin     | Master/Entries            | Chrome              | Yes          |4.134.0     | +9M  |
 | NordPass     | App        | Master                    | N/A                 | Yes          |5.14.23     | N/A   |
 | Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.1.0.73    | +4M   |
 | Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3         | +1K   |
