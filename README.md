@@ -230,7 +230,7 @@ NordPass stores the master username and password. So, both of them can be retrie
 
 #### Chrome and Brave 
 
-Both browsers have the same behavior, they keep the username and password of a login form they interact with and they have saved its credentials, but to get all entries, the user must visit the password manager functionality of the browser or the attacker to open the browser and visit this page. Consider changing the keyword to look for a specific website or email address within the process. Then, the tool can extract all entries as shown in the following screenshot:
+Both browsers have the same behavior, they keep the username and password of a login form they interact with and they have saved its credentials, but to get all entries, the user must visit the password manager functionality of the browser or the attacker to open the browser and visit this page. Consider changing the keyword to look for a specific website or email address within the process. Additionally, all chromium browsers can start without needing user interaction. For example, a VBS script (not so OPSEC) could be used to start the browser and visit "chrome://password-manager/passwords". Then, the tool can extract all entries as shown in the following screenshot:
 
 ![11121](https://github.com/user-attachments/assets/ac438e9e-de37-4e9c-814c-0fdf4bcf55ad)
 
