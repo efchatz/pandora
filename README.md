@@ -152,7 +152,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |129.0.6668.90| N/A   |
 | Enpass       | App        | Entries                   | N/A                 | Yes          |6.9.3 (patched) | N/A |
 | Dashlane     | Plugin     | Master/Entries            | Chrome              | Yes          |6.2440.1    | +2M   |
-| Firefox      | Browser    | Entries                   | N/A                 | Partial      |119.0       | N/A   |
+| Firefox      | Browser    | Entries                   | N/A                 | Partial      |131.0       | N/A   |
 | Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.8.15      | +90K  |
 | Kaspersky    | Plugin     | Entries (fixed)           | Chrome              | Yes          |24.0.0.427 (patched) | +2M |
 | Keeper       | App        | Master/Entries            | N/A                 | Yes          |16.10.9     | +1M   |
