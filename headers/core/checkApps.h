@@ -1202,7 +1202,7 @@ int checkApps() {
         if (userInput2 == "1") {
 
             std::cout << "For this app, the first largest process is needed.\n";
-            std::cout << "The master password and entries should be available.\n";
+            std::cout << "The master password and username (email address) should be available.\n";
             std::cout << "It should be noted that the app clears master password from the memory after some time (appox. 10 min).\n";
             const char* processName = "Bitwarden.exe";
 
@@ -1252,7 +1252,7 @@ int checkApps() {
             std::cout << "Searching for master password (1/2).\n";
             getCredsbitwardenApp1(fileInput);
             std::cout << "Done!\n";
-            std::cout << "Searching for entry password (2/2).\n";
+            std::cout << "Searching for master username (2/2).\n";
             getCredsbitwardenApp2(fileInput);
             std::cout << "Done!\n";
             std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
