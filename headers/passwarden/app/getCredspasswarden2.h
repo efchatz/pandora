@@ -23,9 +23,9 @@ int getCredspasswarden2(std::string filename) {
         if (c == searchPattern[foundData.size()]) {
             foundData.push_back(c);
             if (foundData.size() == searchPattern.size()) {
-                // We found the search sequence, now collect the next 50 binary characters
+                // We found the search sequence, now collect the next 30 binary characters
                 std::vector<char> extractedData;
-                for (int i = 0; i < 50; i++) {
+                for (int i = 0; i < 30; i++) {
                     file.get(c);
                     if (file.eof()) {
                         break;
