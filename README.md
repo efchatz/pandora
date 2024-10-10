@@ -187,9 +187,10 @@ This section is devoted to any prerequisites the tool will need to be able to du
 
 ### 1Password
 
-1Password process needs high integrity privileges for the tool to be able to dump the relevant process and extract the credentials. To extract the credentials, I opened the app, entered the master password, and waited for at least 1 min. Then, I executed the tool to dump the credentials. The following screenshot illustrates the execution of the tool when the relevant app is running. Hidden data are the relevant usernames and passwords. It should be noted that the tool cannot extract the master password if the user pasted in the relevant field. For some reason, 1password does not store the master password in the process, if the user pasted it. Regarding 1Password plugin, master credentials are available. 
+1Password process needs high integrity privileges for the tool to be able to dump the relevant process and extract the credentials. To extract the credentials, I opened the app, entered the master password, and waited for at least 1 min. Then, I executed the tool to dump the credentials. The following screenshot illustrates the execution of the tool when the relevant app is running. Hidden data refers to the master password. Note that the output data may contain redudant characters at the end of the returned string; in the screenshot only the last character is not included in the master password. It should also be noted that the tool cannot extract the master password if the user pasted in the relevant field. For some reason, 1password does not store the master password in the process, if the user pasted it. Regarding 1Password plugin, master credentials are available. 
 
-![1password](https://github.com/efchatz/pandora/assets/43434138/fb18312d-22a4-416f-bde9-3150983d7571)
+![1password](https://github.com/user-attachments/assets/9821e913-db58-4bde-b01f-34e529a42e69)
+
 
 
 ### Avira
@@ -319,19 +320,15 @@ Roboform automatically unlocks the vault when the user opens the Chrome browser.
 
 ![1221](https://github.com/user-attachments/assets/24875302-10e8-4b05-9a4c-cc76fb76b2d7)
 
-Regarding Roboform app, things are simpler. If the app is running, both the master username/password and all entries can be extracted. Specifically, entries will be available as being stored in the password manager. This means that all possible entries will be returned, along with the ones the user has saved. In these entries, the master username will also be there, towards the end. About the master password, there is a pattern to identify it. Multiple data will be returned, usually, the master password is presented in the last row.
+Regarding Roboform app, things are simpler. If the app is running, all entries can be extracted. Specifically, entries will be available as being stored in the password manager. This means that all possible entries will be returned, along with the ones the user has saved. Below there is an example of the extracted entry passwords.
 
-![robo1](https://github.com/efchatz/pandora/assets/43434138/b355aafc-4567-4880-ba45-f2ab4a38ebba)
 
-![robo2](https://github.com/efchatz/pandora/assets/43434138/4a90e87c-c284-46cc-97b2-a709461514c7)
+![roboform_screen_entries](https://github.com/user-attachments/assets/2b041d10-d261-4973-8bfd-9d90fc120c6b)
 
-![robo3](https://github.com/efchatz/pandora/assets/43434138/febf04fc-4a75-4c22-acb1-cc5a2b2727c1)
 
-![robo4](https://github.com/efchatz/pandora/assets/43434138/f41a2881-c5b4-468d-a333-2a45c00f1f5c)
+<!-- Also, an example of Repetitiveness has been added to assist in finding the master password of the Roboform app quickly. Specifically, the tool evaluates all possible master password credentials it gathered due to the relevant pattern (136 entries) and then checks which of these entries exist exactly 1 time within the dump. Since only the master password exists exactly 1 time in the dump, the tool prints only the relevant entry.
 
-Also, an example of Repetitiveness has been added to assist in finding the master password of the Roboform app quickly. Specifically, the tool evaluates all possible master password credentials it gathered due to the relevant pattern (136 entries) and then checks which of these entries exist exactly 1 time within the dump. Since only the master password exists exactly 1 time in the dump, the tool prints only the relevant entry.
-
-![tool1-1](https://github.com/efchatz/pandora/assets/43434138/0ac2bc79-2ebf-4a5c-a035-936db4108fea)
+![tool1-1](https://github.com/efchatz/pandora/assets/43434138/0ac2bc79-2ebf-4a5c-a035-936db4108fea) -->
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
