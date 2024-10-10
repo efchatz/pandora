@@ -3,7 +3,7 @@
 
 using namespace std;
 
-string FindsecondPID1password()
+string FindthirdPID1password()
 {
     ofstream file;
     file.open("1password.ps1");
@@ -11,8 +11,8 @@ string FindsecondPID1password()
     string powershell;
     powershell = "$processes = Get-Process -Name \"1Password\" | Select-Object Id, @{Name=\"PrivateWorkingSet (MB)\"; Expression={[math]::Round($_.PrivateMemorySize64 / 1MB, 2)}}\n";
     powershell += "$sortedProcesses = $processes | Sort-Object \"PrivateWorkingSet (MB)\" -Descending\n";
-    powershell += "$secondLargest = $sortedProcesses[1]\n";
-    powershell += "$secondLargest.Id\n";
+    powershell += "$thirdLargest = $sortedProcesses[2]\n";
+    powershell += "$thirdLargest.Id\n";
     file << powershell << endl;
     file.close();
 
