@@ -25,7 +25,10 @@ int main() {
     std::cout << std::endl;
     
     checkApps();
-    
+
+    cout << "Pandora finished. Press Enter to exit...";
+    cin.ignore();
+    cin.get();
 
     return 0;
 }
