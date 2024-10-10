@@ -37,6 +37,8 @@
 #include "../roboform/app/getCredsroboformapp2.h"
 #include "../roboform/app/getCredsroboformapp3.h"
 #include "../roboform/app/getCredsroboformapp4.h"
+#include "../roboform/app/getCredsroboformappentries.h"
+#include "../roboform/app/getCredsroboformappentries1.h"
 #include "../bitwarden/plugin/getCredsbitwardenPluginChrome.h"
 #include "../bitwarden/plugin/getCredsbitwardenPluginChrome2.h"
 #include "../bitwarden/app/getCredsbitwardenApp1.h"
@@ -979,17 +981,23 @@ int checkApps() {
             std::cout << "Roboform contains all relevant credentials (master pass, entries, etc.).\n";
 
             if (mode == "local") {
-                std::cout << "Searching for entries (1/4).\n";
-                getCredsroboformapp(fileInput);
+                //std::cout << "Searching for entries (1/4).\n";
+                //getCredsroboformapp(fileInput);
+                //std::cout << "Done!\n";
+                //std::cout << "Searching for master username (2/4).\n";
+                //getCredsroboformapp3(fileInput);
+                //std::cout << "Done!\n";
+                //std::cout << "Searching for master password (3/4).\n";
+                //getCredsroboformapp2(fileInput);
+                //std::cout << "Done!\n";
+                //std::cout << "Cleaning master password (4/4).\n";
+                //getCredsroboformapp4(fileInput);
+                //std::cout << "Done!\n";
+                std::cout << "Searching for entries (1/2).\n";
+                getCredsroboformappentries(fileInput);
                 std::cout << "Done!\n";
-                std::cout << "Searching for master username (2/4).\n";
-                getCredsroboformapp3(fileInput);
-                std::cout << "Done!\n";
-                std::cout << "Searching for master password (3/4).\n";
-                getCredsroboformapp2(fileInput);
-                std::cout << "Done!\n";
-                std::cout << "Cleaning master password (4/4).\n";
-                getCredsroboformapp4(fileInput);
+                std::cout << "Searching for entries (2/2).\n";
+                getCredsroboformappentries1(fileInput);
                 std::cout << "Done!\n";
             }
             else if (mode == "fast" || mode == "full") {
@@ -1009,17 +1017,23 @@ int checkApps() {
                 {
                     std::cerr << "No process with this PID found." << std::endl;
                 }
-                std::cout << "Searching for entries (1/4).\n";
-                getCredsroboformapp(fileInput);
+                //std::cout << "Searching for entries (1/4).\n";
+                //getCredsroboformapp(fileInput);
+                //std::cout << "Done!\n";
+                //std::cout << "Searching for master username (2/4).\n";
+                //getCredsroboformapp3(fileInput);
+                //std::cout << "Done!\n";
+                //std::cout << "Searching for master password (3/4).\n";
+                //getCredsroboformapp2(fileInput);
+                //std::cout << "Done!\n";
+                //std::cout << "Cleaning master password (4/4).\n";
+                //getCredsroboformapp4(fileInput);
+                //std::cout << "Done!\n";
+                std::cout << "Searching for entries (1/2).\n";
+                getCredsroboformappentries(fileInput);
                 std::cout << "Done!\n";
-                std::cout << "Searching for master username (2/4).\n";
-                getCredsroboformapp3(fileInput);
-                std::cout << "Done!\n";
-                std::cout << "Searching for master password (3/4).\n";
-                getCredsroboformapp2(fileInput);
-                std::cout << "Done!\n";
-                std::cout << "Cleaning master password (4/4).\n";
-                getCredsroboformapp4(fileInput);
+                std::cout << "Searching for entries (2/2).\n";
+                getCredsroboformappentries1(fileInput);
                 std::cout << "Done!\n";
 
             }
