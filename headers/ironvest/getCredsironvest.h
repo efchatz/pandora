@@ -17,17 +17,17 @@ int getCredsironvest(std::string filename) {
     // Specify your search pattern here
     std::vector<unsigned char> searchPattern = { 0x00, 0x03, 0x00, 0x00, 0x00, 0x10, 0x00};
 
-    int consecutiveSpaces = 0;  // To track how many bytes matched so far
+    int consecutiveBytes = 0;  // To track how many bytes matched so far
 
     while (!file.eof()) {
         unsigned char c;
         file.read(reinterpret_cast<char*>(&c), sizeof(c));
 
         // Check if the character matches the search pattern
-        if (c == searchPattern[consecutiveSpaces]) {
-            consecutiveSpaces++;
+        if (c == searchPattern[consecutiveBytes]) {
+            consecutiveBytes++;
 
-            if (consecutiveSpaces == searchPattern.size()) {
+            if (consecutiveBytes == searchPattern.size()) {
                 // Pattern found, now read the next 600 characters after the pattern
                 std::vector<unsigned char> buffer(600, 0);  // Adjust size for 600 characters
                 file.read(reinterpret_cast<char*>(buffer.data()), buffer.size());
@@ -41,11 +41,11 @@ int getCredsironvest(std::string filename) {
                 // Save into file
                 saveFile(utf8Data);
 
-                consecutiveSpaces = 0;
+                consecutiveBytes = 0;
             }
         }
         else {
-            consecutiveSpaces = 0;  // Reset if the current character doesn't match the pattern
+            consecutiveBytes = 0;  // Reset if the current character doesn't match the pattern
         }
     }
 
