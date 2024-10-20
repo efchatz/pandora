@@ -136,15 +136,11 @@
     <ClCompile Include="pandora.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers\1password\app\FindsecondPID1password.h" />
-    <ClInclude Include="headers\1password\app\getCreds1passwordappEntries1.h" />
-    <ClInclude Include="headers\1password\app\getCreds1passwordappEntries2.h" />
+    <ClInclude Include="headers\1password\app\FindthirdPID1password.h" />
     <ClInclude Include="headers\1password\app\getCreds1passwordappMaster.h" />
     <ClInclude Include="headers\1password\app\getProcUAC1password.h" />
     <ClInclude Include="headers\1password\plugin\getCreds1passwordplugin.h" />
-    <ClInclude Include="headers\1password\plugin\getCreds1passwordplugin2.h" />
     <ClInclude Include="headers\avira\getCredsavira.h" />
-    <ClInclude Include="headers\avira\getCredsavira2.h" />
     <ClInclude Include="headers\bitdefender\getCredsbitdefender.h" />
     <ClInclude Include="headers\bitdefender\getCredsbitdefender2.h" />
     <ClInclude Include="headers\bitwarden\app\getCredsbitwardenApp1.h" />
@@ -168,6 +164,7 @@
     <ClInclude Include="headers\core\saveFile.h" />
     <ClInclude Include="headers\core\saveFile2.h" />
     <ClInclude Include="headers\dashlane\getCredsdashlaneEntries.h" />
+    <ClInclude Include="headers\dashlane\getCredsdashlaneEntries2.h" />
     <ClInclude Include="headers\dashlane\getCredsdashlaneMaster.h" />
     <ClInclude Include="headers\enpass\getCredsenpassEntries.h" />
     <ClInclude Include="headers\firefox\getCredsfirefox.h" />
@@ -183,16 +180,14 @@
     <ClInclude Include="headers\nordpass\app\getCredsnordpass1.h" />
     <ClInclude Include="headers\nordpass\app\getCredsnordpass2.h" />
     <ClInclude Include="headers\norton\getCredsnorton.h" />
-    <ClInclude Include="headers\norton\getCredsnorton2.h" />
     <ClInclude Include="headers\passwarden\app\getCredspasswarden.h" />
     <ClInclude Include="headers\passwarden\app\getCredspasswarden2.h" />
     <ClInclude Include="headers\passwordboss\app\getCredspasswordbossapp1.h" />
     <ClInclude Include="headers\passwordboss\app\getCredspasswordbossapp2.h" />
-    <ClInclude Include="headers\roboform\app\getCredsroboformapp3.h" />
-    <ClInclude Include="headers\roboform\app\getCredsroboformapp.h" />
-    <ClInclude Include="headers\roboform\app\getCredsroboformapp2.h" />
-    <ClInclude Include="headers\roboform\app\getCredsroboformapp4.h" />
+    <ClInclude Include="headers\roboform\app\getCredsroboformappentries.h" />
+    <ClInclude Include="headers\roboform\app\getCredsroboformappentries1.h" />
     <ClInclude Include="headers\roboform\plugin\getCredsroboformplugin.h" />
+    <ClInclude Include="headers\roboform\plugin\getCredsroboformpluginMaster.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
