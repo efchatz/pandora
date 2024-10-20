@@ -145,7 +145,6 @@ int assistUser() {
         return 1;
     }
 
-
     //Brave
     if (findAppBrave()) {
         std::wcout << L"Brave Directory exists!\n" << std::endl;
@@ -180,7 +179,7 @@ int assistUser() {
     else {
         std::wcerr << L"An error occured." << std::endl;
         return 1;
-   
+    }
 
     //Chrome
     if (findAppChrome()) {
@@ -252,7 +251,6 @@ int assistUser() {
         std::wcerr << L"Failed to get the current user's login name." << std::endl;
         return 1;
     }
-
 
     //NordPass
     if (GetUserNameW(username, &usernameSize)) {
