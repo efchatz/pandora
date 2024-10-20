@@ -245,9 +245,6 @@
     <ClInclude Include="headers\enpass\getCredsenpassEntries.h">
       <Filter>Header Files\enpass</Filter>
     </ClInclude>
-    <ClInclude Include="headers\dashlane\getCredsdashlaneEntries2.h">
-      <Filter>Header Files\dashlane</Filter>
-    </ClInclude>
     <ClInclude Include="headers\roboform\plugin\getCredsroboformpluginMaster.h">
       <Filter>Header Files\roboform\plugin</Filter>
     </ClInclude>
