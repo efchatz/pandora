@@ -149,7 +149,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Bitdefender  | Plugin     | Master                    | Chrome              | Yes          |1.3.1       | +100K |
 | Bitwarden    | Plugin     | Entries                   | Chrome              | Yes          |2024.10.1   | +4M   |
 | Bitwarden    | App        | Master                    | N/A                 | Yes          |2024.9.0    | N/A   |
-| Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave | Yes          |129.0.6668.90| N/A   |
+| Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave/Opera | Yes          |130.0.6723.59| N/A   |
 | Enpass       | App        | Entries                   | N/A                 | Yes          |6.9.3 (patched) | N/A |
 | Dashlane     | Plugin     | Master/Entries            | Chrome              | Yes          |6.2440.1    | +2M   |
 | Firefox      | Browser    | Entries                   | N/A                 | Partial      |131.0       | N/A   |
@@ -229,7 +229,7 @@ NordPass stores the master username and password. So, both of them can be retrie
 
 ### Chromium
 
-#### Chrome and Brave 
+#### Chrome, Brave, and Opera
 
 Both browsers have the same behavior, they keep the username and password of a login form they interact with and they have saved its credentials, but to get all entries, the user must visit the password manager functionality of the browser or the attacker to open the browser and visit this page. Consider changing the keyword to look for a specific website or email address within the process. Additionally, all chromium browsers can start without needing user interaction. For example, a VBS script (not so OPSEC) could be used to start the browser and visit "chrome://password-manager/passwords". Then, the tool can extract all entries as shown in the following screenshot:
 
