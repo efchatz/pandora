@@ -164,7 +164,6 @@
     <ClInclude Include="headers\core\saveFile.h" />
     <ClInclude Include="headers\core\saveFile2.h" />
     <ClInclude Include="headers\dashlane\getCredsdashlaneEntries.h" />
-    <ClInclude Include="headers\dashlane\getCredsdashlaneEntries2.h" />
     <ClInclude Include="headers\dashlane\getCredsdashlaneMaster.h" />
     <ClInclude Include="headers\enpass\getCredsenpassEntries.h" />
     <ClInclude Include="headers\firefox\getCredsfirefox.h" />
