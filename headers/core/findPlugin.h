@@ -98,6 +98,15 @@ bool findAppBitwarden(const std::wstring& username) {
     return (attributes != INVALID_FILE_ATTRIBUTES && (attributes & FILE_ATTRIBUTE_DIRECTORY));
 }
 
+//Opera
+bool findAppOpera(const std::wstring& username) {
+    std::wstring extensionPath = L"C:\\Users\\" + username + L"\\AppData\\Local\\Programs\\Opera";
+
+    DWORD attributes = GetFileAttributesW(extensionPath.c_str());
+
+    return (attributes != INVALID_FILE_ATTRIBUTES && (attributes & FILE_ATTRIBUTE_DIRECTORY));
+}
+
 //NordPass
 bool findAppNordPass(const std::wstring& username) {
     std::wstring extensionPath = L"C:\\Users\\" + username + L"\\AppData\\Local\\Programs\\nordpass";
