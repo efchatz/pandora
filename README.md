@@ -160,7 +160,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | NordPass     | App        | Master                    | N/A                 | Yes          |5.23.10     | N/A   |
 | Norton       | Plugin     | Entries                   | Chrome              | Yes          |8.2.1.388   | +4M   |
 | Passwarden   | App        | Entries                   | N/A                 | Yes          |3.3.0       | +1K   |
-| Passwordboss | App        | Entries                   | N/A                 | Yes          |5.5.5104    | +20K  |
+| Passwordboss | App        | Entries                   | N/A                 | No           |5.5.5220.0  | +20K  |
 | Roboform     | App/Plugin | Master(Plugin)/Entries(Both) | Chrome              | Yes          |9.6.8.0     | +600K |
 
 
