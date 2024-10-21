@@ -150,7 +150,7 @@ Note: The Users column refers to the number of users mentioned in the Chrome Web
 | Bitwarden    | Plugin     | Entries                   | Chrome              | Yes          |2024.10.1   | +4M   |
 | Bitwarden    | App        | Master                    | N/A                 | Yes          |2024.9.0    | N/A   |
 | Chromium     | Browser    | Entries                   | Chrome/MSEdge/Brave/Opera | Yes          |130.0.6723.59| N/A   |
-| Enpass       | App        | Entries                   | N/A                 | Yes          |6.9.3 (patched) | N/A |
+| Enpass       | App        | Entries (fixed)           | N/A                 | Yes          |6.9.3 (patched) | N/A |
 | Dashlane     | Plugin     | Master/Entries            | Chrome              | Yes          |6.2440.1    | +2M   |
 | Firefox      | Browser    | Entries                   | N/A                 | Partial      |131.0       | N/A   |
 | Ironvest     | Plugin     | Entries                   | Chrome              | Yes          |9.9.12      | +90K  |
