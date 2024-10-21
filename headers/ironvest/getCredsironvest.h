@@ -1,8 +1,9 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-#include <string>
 #include <vector>
+#include <string>
+#include <sstream>
 #include "../core/saveFile.h"
 
 int getCredsironvest(std::string filename) {
@@ -13,50 +14,38 @@ int getCredsironvest(std::string filename) {
         return 1;
     }
 
-    //std::string searchKeyword = "{\"eventName\":\"response:logins:domain:";
-    std::string searchKeyword = "\"domain\":\"ironvest.com\"";
-    std::string foundData;
+    // Specify your search pattern here
+    std::vector<unsigned char> searchPattern = { 0x00, 0x03, 0x00, 0x00, 0x00, 0x10, 0x00};
+
+    int consecutiveBytes = 0;  // To track how many bytes matched so far
 
     while (!file.eof()) {
-        char c;
-        file.get(c);
+        unsigned char c;
+        file.read(reinterpret_cast<char*>(&c), sizeof(c));
 
-        if (c == searchKeyword[foundData.size()]) {
-            foundData += c;
-            if (foundData == searchKeyword) {
-                // We found the search keyword, now collect data until 2 binary spaces (00) are found
-                std::vector<unsigned char> extractedData;
-                int consecutiveSpaces = 0;
+        // Check if the character matches the search pattern
+        if (c == searchPattern[consecutiveBytes]) {
+            consecutiveBytes++;
 
-                while (!file.eof()) {
-                    file.read(reinterpret_cast<char*>(&c), sizeof(c));
-                    if (c == 0x00) {
-                        consecutiveSpaces++;
-                        if (consecutiveSpaces == 2) {
-                            break; // 2 consecutive binary spaces found
-                            // We can check for more spaces if we want
-                        }
-                    }
-                    else {
-                        consecutiveSpaces = 0;
-                    }
-                    extractedData.push_back(c);
-                }
+            if (consecutiveBytes == searchPattern.size()) {
+                // Pattern found, now read the next 600 characters after the pattern
+                std::vector<unsigned char> buffer(600, 0);  // Adjust size for 600 characters
+                file.read(reinterpret_cast<char*>(buffer.data()), buffer.size());
 
-                // Convert the binary data to a UTF-8 string
-                std::string utf8ExtractedData(extractedData.begin(), extractedData.end());
+                // Convert the buffer to a UTF-8 string
+                std::string utf8Data(buffer.begin(), buffer.end());
 
-                // Print the extracted UTF-8 string
-                std::cout << "Pattern Data: " + utf8ExtractedData << std::endl;
+                // Print the UTF-8 string
+                std::cout << "Data after pattern: " + utf8Data << std::endl;
 
-                //Save into file
-                saveFile(utf8ExtractedData);
+                // Save into file
+                saveFile(utf8Data);
 
-                foundData.clear();
+                consecutiveBytes = 0;
             }
         }
         else {
-            foundData.clear();
+            consecutiveBytes = 0;  // Reset if the current character doesn't match the pattern
         }
     }
 

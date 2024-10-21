@@ -12,7 +12,7 @@ int getCredsroboformplugin(std::string filename) {
         return 1;
     }
 
-    std::string searchSequence = "\"Main\\";
+    std::string searchSequence = "{\"response\":{\"data\":";
     std::vector<char> foundData;
 
     while (!file.eof()) {
@@ -22,9 +22,9 @@ int getCredsroboformplugin(std::string filename) {
         if (c == searchSequence[foundData.size()]) {
             foundData.push_back(c);
             if (foundData.size() == searchSequence.size()) {
-                // We found the search sequence, now collect the next 4000 binary characters
+                // We found the search sequence, now collect the next 600 binary characters
                 std::vector<char> extractedData;
-                for (int i = 0; i < 4000; i++) {
+                for (int i = 0; i < 600; i++) {
                     file.get(c);
                     if (file.eof()) {
                         break;

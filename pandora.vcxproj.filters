@@ -101,9 +101,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers\1password\app\getCreds1passwordappEntries1.h">
-      <Filter>Header Files\1password\app</Filter>
-    </ClInclude>
     <ClInclude Include="headers\firefox\getCredsfirefox.h">
       <Filter>Header Files\firefox</Filter>
     </ClInclude>
@@ -149,13 +146,10 @@
     <ClInclude Include="headers\1password\app\getProcUAC1password.h">
       <Filter>Header Files\1password\app</Filter>
     </ClInclude>
-    <ClInclude Include="headers\1password\app\FindsecondPID1password.h">
+    <ClInclude Include="headers\1password\app\FindthirdPID1password.h">
       <Filter>Header Files\1password\app</Filter>
     </ClInclude>
     <ClInclude Include="headers\1password\app\getCreds1passwordappMaster.h">
-      <Filter>Header Files\1password\app</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\1password\app\getCreds1passwordappEntries2.h">
       <Filter>Header Files\1password\app</Filter>
     </ClInclude>
     <ClInclude Include="headers\core\FindFourthPID.h">
@@ -191,12 +185,6 @@
     <ClInclude Include="headers\bitdefender\getCredsbitdefender2.h">
       <Filter>Header Files\bitdefender</Filter>
     </ClInclude>
-    <ClInclude Include="headers\1password\plugin\getCreds1passwordplugin2.h">
-      <Filter>Header Files\1password\plugin</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\norton\getCredsnorton2.h">
-      <Filter>Header Files\norton</Filter>
-    </ClInclude>
     <ClInclude Include="headers\core\saveAllProc.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
@@ -215,9 +203,6 @@
     <ClInclude Include="headers\core\assistUser.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
-    <ClInclude Include="headers\avira\getCredsavira2.h">
-      <Filter>Header Files\avira</Filter>
-    </ClInclude>
     <ClInclude Include="headers\firefox\getCredsfirefox2.h">
       <Filter>Header Files\firefox</Filter>
     </ClInclude>
@@ -230,17 +215,8 @@
     <ClInclude Include="headers\passwarden\app\getCredspasswarden2.h">
       <Filter>Header Files\passwarden\app</Filter>
     </ClInclude>
-    <ClInclude Include="headers\roboform\app\getCredsroboformapp.h">
-      <Filter>Header Files\roboform\app</Filter>
-    </ClInclude>
     <ClInclude Include="headers\roboform\plugin\getCredsroboformplugin.h">
       <Filter>Header Files\roboform\plugin</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\roboform\app\getCredsroboformapp2.h">
-      <Filter>Header Files\roboform\app</Filter>
-    </ClInclude>
-    <ClInclude Include="headers\roboform\app\getCredsroboformapp3.h">
-      <Filter>Header Files\roboform\app</Filter>
     </ClInclude>
     <ClInclude Include="headers\kaspersky\getCredsKasperskyEntries.h">
       <Filter>Header Files\kaspersky</Filter>
@@ -263,14 +239,20 @@
     <ClInclude Include="headers\nordpass\app\getCredsnordpass2.h">
       <Filter>Header Files\nordpass\app</Filter>
     </ClInclude>
-    <ClInclude Include="headers\roboform\app\getCredsroboformapp4.h">
-      <Filter>Header Files\roboform\app</Filter>
-    </ClInclude>
     <ClInclude Include="headers\core\saveFile2.h">
       <Filter>Header Files\core</Filter>
     </ClInclude>
     <ClInclude Include="headers\enpass\getCredsenpassEntries.h">
       <Filter>Header Files\enpass</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\roboform\plugin\getCredsroboformpluginMaster.h">
+      <Filter>Header Files\roboform\plugin</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\roboform\app\getCredsroboformappentries.h">
+      <Filter>Header Files\roboform\app</Filter>
+    </ClInclude>
+    <ClInclude Include="headers\roboform\app\getCredsroboformappentries1.h">
+      <Filter>Header Files\roboform\app</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

