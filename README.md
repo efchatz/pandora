@@ -331,6 +331,74 @@ Regarding Roboform app, things are simpler. If the app is running, all entries c
 ![tool1-1](https://github.com/efchatz/pandora/assets/43434138/0ac2bc79-2ebf-4a5c-a035-936db4108fea) -->
 
 
+## Repetitiveness
+
+Regarding Repetitiveness, current application editions do not need any additional adjustments. As a result, only pattern-based extraction can assist in identifying and extracting the necessary information. However, for the sake of completeness, the following code demonstrates the usage of Repetitiveness in Roboform app v9.5.2.0. First, we must count the number of times a set of credentials is shown in plaintext format within the process of the application. Then, we can use the `countOccurrences` function to count the number of times a given set of data is stored within the process. After that, we can use `getCredsroboformapp4` function to open a file with the extracted data, and check how many times each line of text exists in the process. If the number of times from `countOccurrences` is equal to the number of times the occurrence is shown in the process, then we can print this line of text. The purpose here is to shorten the output of the extracted text and identify a set of credentials with ease. In the current example, the output text of the pattern extraction was 136 lines. After using the repetitiveness, only the master password was kept.
+
+```C++
+#pragma once
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <string>
+#include <algorithm>
+#include "../../core/saveFile.h"
+
+//Repetitiveness for Roboform
+// Helper function to find occurrences of a sequence in the file data
+int countOccurrences(const std::vector<unsigned char>& data, const std::vector<unsigned char>& sequence) {
+    int count = 0;
+    auto it = data.begin();
+    while (it != data.end()) {
+        it = std::search(it, data.end(), sequence.begin(), sequence.end());
+        if (it != data.end()) {
+            ++count;
+            ++it; // Move iterator to continue search after this match
+        }
+    }
+    return count;
+}
+
+int getCredsroboformapp4(std::string filename) {
+    //Due to using saveFile2 in getCredsroboformapp2.h
+    std::ifstream sequencesFile("credentials2.txt");
+    std::ifstream dataFile(filename, std::ios::binary);
+
+    if (!sequencesFile.is_open()) {
+        std::cerr << "Error opening the sequences file." << std::endl;
+        return 1;
+    }
+
+    if (!dataFile.is_open()) {
+        std::cerr << "Error opening the data file." << std::endl;
+        return 1;
+    }
+
+    // Read the entire data file into memory
+    std::vector<unsigned char> fileData((std::istreambuf_iterator<char>(dataFile)), std::istreambuf_iterator<char>());
+    dataFile.close();
+
+    std::string line;
+    while (std::getline(sequencesFile, line)) {
+        // Convert the line to a sequence of unsigned char
+        std::vector<unsigned char> sequence(line.begin(), line.end());
+
+        // Count occurrences of the sequence in the file data
+        int occurrences = countOccurrences(fileData, sequence);
+
+        // Print and save the results only if found exactly once
+        if (occurrences == 1) {
+            std::cout << "Sequence: " << line << " found " << occurrences << " time." << std::endl;
+            saveFile(line + "\n");
+        }
+    }
+
+    sequencesFile.close();
+
+    return 0;
+}
+```
+
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
