@@ -150,8 +150,7 @@ int assistUser() {
         std::wcout << L"Brave Directory exists!\n" << std::endl;
     }
     else {
-        std::wcerr << L"An error occured." << std::endl;
-        return 1;
+        std::wcerr << L"No Brave directory exists.\n" << std::endl;
     }
 
     //Roboform app
@@ -159,8 +158,7 @@ int assistUser() {
         std::wcout << L"Roboform App Directory exists!\n" << std::endl;
     }
     else {
-        std::wcerr << L"An error occured." << std::endl;
-        return 1;
+        std::wcerr << L"No Roboform directory exists.\n" << std::endl;
     }
 
     //Firefox
@@ -168,8 +166,7 @@ int assistUser() {
         std::wcout << L"Firefox Directory exists!\n" << std::endl;
     }
     else {
-        std::wcerr << L"An error occured." << std::endl;
-        return 1;
+        std::wcerr << L"No Firefox directory exists.\n" << std::endl;
     }
 
     //MSEdge
@@ -177,8 +174,7 @@ int assistUser() {
         std::wcout << L"MSEdge Directory exists!\n" << std::endl;
     }
     else {
-        std::wcerr << L"An error occured." << std::endl;
-        return 1;
+        std::wcerr << L"No MSEdge directory exists.\n" << std::endl;
     }
 
     //Chrome
@@ -186,8 +182,7 @@ int assistUser() {
         std::wcout << L"Chrome Directory exists!\n" << std::endl;
     }
     else {
-        std::wcerr << L"An error occured." << std::endl;
-        return 1;
+        std::wcerr << L"No Chrome directory exists.\n" << std::endl;
     }
 
     //Enpass
@@ -195,8 +190,7 @@ int assistUser() {
         std::wcout << L"Enpass Directory exists!\n" << std::endl;
     }
     else {
-        std::wcerr << L"An error occured." << std::endl;
-        return 1;
+        std::wcerr << L"No Enpass directory exists.\n" << std::endl;
     }
 
     //Passwarden
@@ -204,8 +198,7 @@ int assistUser() {
         std::wcout << L"Passwarden App Directory exists!\n" << std::endl;
     }
     else {
-        std::wcerr << L"An error occured." << std::endl;
-        return 1;
+        std::wcerr << L"No Passwarden directory exists.\n" << std::endl;
     }
 
     //1Password
