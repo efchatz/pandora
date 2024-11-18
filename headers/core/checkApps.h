@@ -1476,10 +1476,7 @@ int checkApps() {
         std::cout << "User input matches 'avira'.\n";
         std::cout << "In this browser plugin, the second largest process is needed.\n";
         std::cout << "This works by simply having the browser open. No interaction is needed.\n";
-        std::cout << "Wait 1 min for the pattern to stabilize.\n";
         std::cout << "Only entries remains in this process.\n";
-        std::cout << "The exploit was tested with 2 entries. In case the user has more entries, the relevant value (300) should be change in the exploit.\n";
-        std::cout << "A hard guess is that approx 150 bytes will be needed per entry.\n";
         std::cout << "For now, this only works with Chrome.\n";
         const char* processName = "chrome.exe";
 
