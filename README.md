@@ -140,7 +140,7 @@ Three videos have been uploaded to assist in how this tool works. The videos dep
 
 The following table depicts a high-level view of the tool's capabilities. Note that Firefox and the relevant Firefox plugins of password managers may not work correctly. They need further research for the tool to be able to extract the credentials in every case. This is because Firefox changes its pattern with each execution.
 
-Note: The Users column refers to the number of users mentioned in the Chrome Web Store for each browser plugin.
+Note: The Users column refers to the number of users mentioned in the Chrome Web Store for each browser plugin. **The browser plugins were examined with Chrome v129.0.6668.89/.90. Later versions of Chrome may interfere and alter the pattern of each browser plugin.**
 
 | Name         | Location   | Credentials               | Browser             | Stability    | Version    | Users |
 |--------------|------------|---------------------------|---------------------|--------------|------------|-------|
