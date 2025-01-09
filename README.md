@@ -8,6 +8,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 [![MIT License][license-shield]][license-url]
+[![Arsenal][arsenal-shield]][arsenal-url]
 
 
 
@@ -436,16 +437,18 @@ I would like to thank Zisis Tsiatsikas and Vyron Kampourakis. They assist me in 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/badge/Contributors-3-brightgreen?style=for-the-badge
+[contributors-shield]:https://img.shields.io/github/contributors/efchatz/pandora?style=for-the-badge
 [contributors-url]: https://github.com/efchatz/pandora/graphs/contributors
-[forks-shield]: https://img.shields.io/badge/Forks-82-blue?style=for-the-badge
+[forks-shield]: https://img.shields.io/github/forks/efchatz/pandora?style=for-the-badge
 [forks-url]: https://github.com/efchatz/pandora/network/members
-[stars-shield]: https://img.shields.io/badge/Stars-619-blue?style=for-the-badge
+[stars-shield]: https://img.shields.io/github/stars/efchatz/pandora?style=for-the-badge
 [stars-url]: https://github.com/efchatz/pandora/stargazers
-[issues-shield]: https://img.shields.io/badge/Issues-0-lightgrey?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/efchatz/pandora?style=for-the-badge
 [issues-url]: https://github.com/efchatz/pandora/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/efchatz/pandora/LICENSE
+[license-shield]: https://img.shields.io/github/license/efchatz/pandora?style=for-the-badge
+[license-url]: https://github.com/efchatz/pandora/blob/main/LICENSE
+[arsenal-shield]: https://img.shields.io/badge/BlackHat%20Europe%20Arsenal-2024-blue?style=for-the-badge
+[arsenal-url]: https://www.blackhat.com/eu-24/arsenal/schedule/index.html#pandora-exploit-password-management-software-to-obtain-credential-from-memory-42259
 [product-screenshot]: images/screenshot.png
 [C++]: https://img.shields.io/badge/C++-blue?style=for-the-badge&logo=c++&logoColor=white
 [C-url]: https://cplusplus.com/
